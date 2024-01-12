@@ -9,98 +9,81 @@ const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [signup, setSignup] = useState(false);
+  const [forgetPassword, setForgetPassword] = useState(false);
 
-  const handleLogin = async () => {
-    try {
-      const { data } = await axios.get(`${backend_url}/login`, {
-        params: {
-          username,
-          password
-        }
-      })
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', data.user);
-    } catch (error) {
-      console.log(error)
-    }
-  }
+    const handleSignUp = () => {
+      setSignup(true);
+    };
 
-  const handleSignUp = () => {
-    setSignup(true);
-  };
+    const handleForgetPassword = () => {
+      setForgetPassword(true);
+    };
 
-  const [menuItems, setMenuItems] = useState([
-    {
-      item: 'Admin',
-      onClick: () => {
-        console.log('Admin clicked')
-      }
-    },
-    {
-      item: 'TSE',
-      onClick: () => {
-        console.log('TSE clicked')
-      }
-    },
-    {
-      item: 'ASE',
-      onClick: () => {
-        console.log('ASE clicked')
-      }
-    },
-    {
-      item: 'BH',
-      onClick: () => {
-        console.log('BH clicked')
-      }
-    },
-  ])
-
-  const dropDownMenuStyle = {
-    container: {
-      width: '380px',
-
-    }
-  }
-
-
-  return (
-    <div className='Login-container'>
-      <div className="login-main-container">
-        <div className="logo">
-          <img src={Logo} alt="" />
-        </div>
-        <div className="login-inside-container">
-          <input type="text" onChange={(e) => setUsername(e.target.value)} value={username} placeholder='User Name' />
-          <input type="text" placeholder="Email" />
-          <input type="text" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password" />
-          {/* <input type="text" /> */}
-          {!signup ? (
-            <div ref={selectRoleRef} className="login-drop-down">
-              <div className="drop-down-button">
-                Select Role
+    const handleBack = () => {
+      setSignup(false);
+      setForgetPassword(false)
+    };
+  
+    return (
+      <div className='Login-container'>
+        <div className="login-main-container">
+          <div className="logo">
+            <img src={Logo} alt="" />
+          </div>
+          <div className="login-inside-container">
+            {!forgetPassword && !signup && (
+              <input type="text" placeholder='Username' />
+            )}
+              <input type="text" placeholder="Email" />
+            
+            <input type="text" placeholder="Enter new Password" />
+  
+            {forgetPassword && (
+              <input type="text" placeholder="Confirm new Password" />
+            )}
+  
+            {!signup && !forgetPassword && (
+              <select>
+                <option value="" disabled defaultValue>Role</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+                <option value="guest">Guest</option>
+              </select>
+            )}
+  
+            {!forgetPassword && !signup && (
+              <div className="forgot-password">
+                <p onClick={handleForgetPassword}>Forgot Password?</p>
               </div>
-              <DropDownMenu
-                menuItems={menuItems}
-                style={{
-                  container: {
-                    // width: '388px',
-                  },
-                }}
-                clickableRef={selectRoleRef}
-              />
+            )}
+  
+            <div className="buttons">
+              {forgetPassword && (
+                <>
+                  <button>Set Password</button>
+                  <button onClick={handleBack}>Cancel</button>
+                </>
+              )}
+  
+              {!signup && !forgetPassword && (
+                <>
+                  <button>Login</button>
+                  <button onClick={handleSignUp}>Sign Up</button>
+                </>
+              )}
+  
+              {signup && (
+                <>
+                  <button onClick={handleBack}>Cancel</button>
+                  <button>Signup</button>
+                </>
+              )}
             </div>
-          ) : (
-            <input type="text" placeholder="Additional Field for Signup" />
-          )}
-          <div className="buttons">
-            <button onClick={handleLogin}>Login</button>
-            <button onClick={handleSignUp}>Signup</button>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
+  
 
 export default Login;

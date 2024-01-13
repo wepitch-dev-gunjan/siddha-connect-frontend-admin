@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { AdminContext } from "./AdminContext";
 import axios from "axios";
 import { backend_url } from "../config";
+import { UserContext } from "./UserContext";
 
 export const NotificationContext = createContext();
 
@@ -11,7 +11,7 @@ export const NotificationProvider = ({ children }) => {
   const [notificationsEnable, setNotificationsEnable] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [allNotificationsFetched, setAllNotificationsFetched] = useState(false);
-  const { admin } = useContext(AdminContext);
+  const { user } = useContext(UserContext);
   const [notificationsLoading, setNotificationsLoading] = useState(false);
   const [fetchedNotificationIds, setFetchedNotificationIds] = useState(new Set()); // Track IDs of fetched notifications
 
@@ -20,7 +20,7 @@ export const NotificationProvider = ({ children }) => {
       setNotificationsLoading(true);
       const { data } = await axios.get(`${backend_url}/notification/`, {
         params: {
-          user_id: admin._id,
+          user_id: user._id,
           page,
           limit: 10,
         },
@@ -49,7 +49,7 @@ export const NotificationProvider = ({ children }) => {
     if (!allNotificationsFetched) {
       getNotifications(page);
     }
-  }, [admin, allNotificationsFetched]);
+  }, [user, allNotificationsFetched]);
   return (
     <NotificationContext.Provider
       value={{

@@ -5,11 +5,11 @@ import { NotificationContext } from "../../context/NotificationContext";
 import axios from "axios";
 import { backend_url } from "../../config";
 import { ImSpinner3 } from "react-icons/im";
-import { AdminContext } from "../../context/AdminContext";
+import { UserContext } from "../../context/UserContext";
 
 const Notifications = () => {
   const { notifications, setNotifications, notificationsRef, getNotifications, page, setPage, notificationsLoading, allNotificationsFetched } = useContext(NotificationContext);
-  const { admin } = useContext(AdminContext);
+  const { user } = useContext(UserContext);
 
   const handleScroll = (e) => {
     const element = e.target;
@@ -31,7 +31,7 @@ const Notifications = () => {
           null,
           {
             params: {
-              user_id: admin._id
+              user_id: user._id
             }
           }
         );

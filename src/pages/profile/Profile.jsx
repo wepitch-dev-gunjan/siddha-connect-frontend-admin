@@ -1,6 +1,5 @@
 import "./profile.scss";
 import { useContext, useState } from "react";
-import ProfilePic from "../../components/profilePic";
 import BasicInfo from "../../components/basicInfo";
 import { ProfileContext } from "../../context/ProfileContext";
 import { backend_url } from "../../config";
@@ -8,10 +7,10 @@ import axios from "axios";
 import { handleInput } from "../../utilities";
 
 import { toast } from "react-toastify";
-import { AdminContext } from "../../context/AdminContext";
+import { UserContext } from "../../context/UserContext";
 
 const Profile = () => {
-  const { admin } = useContext(AdminContext);
+  const { user } = useContext(UserContext);
   const { profile, setProfile } = useContext(ProfileContext);
   const [initialUserProfileBackup, setInitialUserProfileBackup] =
     useState(profile);
@@ -22,11 +21,11 @@ const Profile = () => {
   // Function to handle saving changes
   const handleSave = async () => {
     try {
-      const endpointUrl = `${backend_url}/admin/${admin._id}`; // Replace with your actual endpoint URL
+      const endpointUrl = `${backend_url}/admin/${user._id}`; // Replace with your actual endpoint URL
 
       const response = await axios.put(endpointUrl, profile, {
         headers: {
-          Authorization: admin.token
+          Authorization: user.token
         }
       });
       setProfile(response.data);
@@ -48,10 +47,6 @@ const Profile = () => {
   return (
     <div className="Profile-container">
       <div className="profile-body">
-        <div className="profile-pic">
-          <ProfilePic src={profile.profile_pic} />
-        </div>
-
         <div className="edit-profile">
           <div
             className="edit-profile-button"
@@ -64,15 +59,15 @@ const Profile = () => {
 
         <div className="profile-info">
           <div className="top">
-          {editProfileEnable ? (
-                <input
-                  type="text"
-                  value={profile.name}
-                  onChange={(e) => handleInput("name", e.target.value, setProfile)}
-                />
-              ) : (
-            <h1>{profile.name}</h1>
-              )}
+            {editProfileEnable ? (
+              <input
+                type="text"
+                value={profile.name}
+                onChange={(e) => handleInput("name", e.target.value, setProfile)}
+              />
+            ) : (
+              <h1>{profile.name}</h1>
+            )}
           </div>
           <div className="middle">
             <BasicInfo

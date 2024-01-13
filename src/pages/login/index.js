@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
 import "./style.scss";
 import Logo from "../../assets/logo.svg";
-import { TextField, InputAdornment, IconButton } from "@mui/material";
+import { TextField, InputAdornment, IconButton, Input } from "@mui/material";
 
 const Login = () => {
   const [isLoadingLogin, setIsLoadingLogin] = useState(false);
@@ -103,6 +103,10 @@ const Login = () => {
                 error={!!passwordError}
                 helperText={passwordError}
                 InputProps={{
+                  style: {
+                    borderColor: "rgba(255, 255, 255, 0.8) !important",
+                    background: "rgba(217, 217, 217, 0.20)", // Remove the semicolon at the end
+                  },
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
@@ -136,6 +140,10 @@ const Login = () => {
                 error={!!passwordError}
                 helperText={passwordError}
                 InputProps={{
+                  style: {
+                    borderColor: "rgba(255, 255, 255, 0.8) !important",
+                    background: "rgba(217, 217, 217, 0.20)", // Remove the semicolon at the end
+                  },
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
@@ -164,6 +172,17 @@ const Login = () => {
                 onBlur={() => !name && setNameError("Name is required.")}
                 error={!!nameError}
                 helperText={nameError}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "rgba(217, 217, 217, 0.20)", // Background color
+                  },
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#fff",
+                  },
+                  "& input::placeholder": {
+                    color: "rgba(255, 255, 255, 0.50) !important",
+                  },
+                }}
               />
             </>
           )}
@@ -180,6 +199,15 @@ const Login = () => {
               onBlur={handleEmailBlur}
               error={!!emailError}
               helperText={emailError}
+              InputProps={{
+                style: {
+                  borderColor: "#fff",
+                  background: "rgba(217, 217, 217, 0.20)", // Remove the semicolon at the end
+                },
+                placeholder: {
+                  color: "rgba(255, 255, 255, 0.50) !important",
+                },
+              }}
             />
           )}
           {!forgotPasswordEnable && (
@@ -200,6 +228,10 @@ const Login = () => {
               error={!!passwordError}
               helperText={passwordError}
               InputProps={{
+                style: {
+                  borderColor: "rgba(255, 255, 255, 0.8) !important",
+                  background: "rgba(217, 217, 217, 0.20)", // Remove the semicolon at the end
+                },
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
@@ -271,11 +303,11 @@ const Login = () => {
           )}
 
           {!signUpEnable && !forgotPasswordEnable && <p className="or">Or</p>}
-          {!signUpEnable && !forgotPasswordEnable && <hr />}
+          {/* {!signUpEnable && !forgotPasswordEnable && <hr />} */}
         </div>
         {!signUpEnable && !forgotPasswordEnable && (
           <>
-            <p>
+            <p className="dont">
               {`Don't have an account? `}
               <span className="signup" onClick={() => setSignUpEnable(true)}>
                 Sign Up

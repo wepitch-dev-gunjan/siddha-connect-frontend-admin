@@ -56,25 +56,30 @@
   gap: 20px;
   .or {
     display: flex;
+  color: rgba(255, 255, 255, 0.50);
     justify-content: center;
   }
 }
 
+.dont{
+  color: rgba(255, 255, 255, 0.50);
+  
+}
 hr {
   width: 100%;
 }
 
 .signup {
-  color: #3b06fd;
+  color: #fff;
   font-weight: 600;
   cursor: pointer;
 }
 
 .forgot :hover {
-  color: #3700ff;
+  color: #fff;
 }
 
 .forgot {
-  color: rgba(255, 255, 255, 0.50);;
+  color: rgba(255, 255, 255, 0.50);
   cursor: pointer;
 }

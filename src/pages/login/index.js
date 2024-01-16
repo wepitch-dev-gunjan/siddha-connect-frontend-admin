@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./style.scss";
 import Logo from "../../assets/logo.svg";
 import { TextField, InputAdornment, IconButton, Input } from "@mui/material";
+import DropDown from "../../components/dropDown";
 
 const Login = () => {
   const [isLoadingLogin, setIsLoadingLogin] = useState(false);
-  const [isLoadingLoginGoogle, setIsLoadingLoginGoogle] = useState(false);
   const [isLoadingSignup, setIsLoadingSignup] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [signUpEnable, setSignUpEnable] = useState(false);
@@ -17,6 +17,11 @@ const Login = () => {
   const [nameError, setNameError] = useState(null);
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
+
+  const inputStyle = {
+    borderColor: 'blue', // Replace with the color you want
+  };
+
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -172,25 +177,25 @@ const Login = () => {
                 onBlur={() => !name && setNameError("Name is required.")}
                 error={!!nameError}
                 helperText={nameError}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    backgroundColor: "rgba(217, 217, 217, 0.20)", // Background color
+                InputProps={{
+                  style: {
+                    borderColor: "rgba(255, 255, 255, 0.8) !important",
+                    background: "rgba(217, 217, 217, 0.20)", // Remove the semicolon at the end
+                    color: "#fff",
                   },
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#fff",
-                  },
-                  "& input::placeholder": {
-                    color: "rgba(255, 255, 255, 0.50) !important",
-                  },
+                  focused: {
+                    color: '#fff'
+                  }
                 }}
               />
             </>
           )}
+
+          {/* Email */}
           {!forgotPasswordEnable && (
             <TextField
               id="outlined-basic"
               label="Email"
-              variant="outlined"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -201,15 +206,15 @@ const Login = () => {
               helperText={emailError}
               InputProps={{
                 style: {
-                  borderColor: "#fff",
+                  borderColor: "rgba(255, 255, 255, 0.8) !important",
                   background: "rgba(217, 217, 217, 0.20)", // Remove the semicolon at the end
-                },
-                placeholder: {
-                  color: "rgba(255, 255, 255, 0.50) !important",
-                },
+                }
               }}
+              variant="outlined"
             />
           )}
+
+          {/* Password */}
           {!forgotPasswordEnable && (
             <TextField
               id="standard-password-input"
@@ -245,6 +250,8 @@ const Login = () => {
               }}
             />
           )}
+
+          {signUpEnable && <DropDown />}
 
           {forgotPasswordEnable && (
             <div className="buttons">
@@ -303,7 +310,6 @@ const Login = () => {
           )}
 
           {!signUpEnable && !forgotPasswordEnable && <p className="or">Or</p>}
-          {/* {!signUpEnable && !forgotPasswordEnable && <hr />} */}
         </div>
         {!signUpEnable && !forgotPasswordEnable && (
           <>

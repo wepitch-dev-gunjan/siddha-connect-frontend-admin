@@ -15,7 +15,7 @@
     background-color: var(--primary-light);
     padding: 0px 225px 160px 225px;
     border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.50);    
+    border: 1px solid rgba(255, 255, 255, 0.5);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     .img {
       padding: 32px 0 40px 0;
@@ -36,14 +36,14 @@
   border-radius: 10px;
   gap: 12px;
   background-color: var(--primary-color);
-  color: #fff;
+  color: var(--text-color);
   font-size: 20px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .Google-login-button:hover {
-  background-color: #3517a3;
+  background-color: #ffffffaf;
 }
 
 .Google-icon {
@@ -57,14 +57,13 @@
   gap: 20px;
   .or {
     display: flex;
-  color: rgba(255, 255, 255, 0.50);
+    color: rgba(255, 255, 255, 0.5);
     justify-content: center;
   }
 }
 
-.dont{
-  color: rgba(255, 255, 255, 0.50);
-  
+.dont {
+  color: rgba(255, 255, 255, 0.5);
 }
 hr {
   width: 100%;
@@ -81,6 +80,6 @@ hr {
 }
 
 .forgot {
-  color: rgba(255, 255, 255, 0.50);
+  color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
 }

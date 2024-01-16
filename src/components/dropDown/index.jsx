@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Dropdown } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
-import './style.less';
+import './style.scss';
 import { backend_url } from '../../config'
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
@@ -10,6 +10,7 @@ import axios from 'axios';
 
 const DropDown = () => {
   const [roles, setRoles] = useState([]);
+  const [activeKey, setActiveKey] = useState('Select Designation');
 
   const getRoles = async () => {
     try {
@@ -26,9 +27,15 @@ const DropDown = () => {
   }, [])
 
   return (
-    <Dropdown title="Dropdown" className="DropDown-container" >
+    <Dropdown title={activeKey} activeKey={activeKey} onSelect={(activeKey) => setActiveKey(activeKey)} toggleClassName='DropDown-container' menuStyle={{
+      height: '200px',
+      overflowY: 'auto',
+      width: '100%',
+    }}>
       {roles.map((role, i) => (
-        <Dropdown.Item key={i}>{role.name}</Dropdown.Item>
+        <Dropdown.Item key={i} eventKey={role.name}>
+          {role.name}
+        </Dropdown.Item>
       ))}
     </Dropdown>
   );

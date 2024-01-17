@@ -40,7 +40,25 @@ const Login = () => {
     }
   };
 
+  const verifyOtp = async () => {
+    try {
+      const { data } = await axios.post(`${backend_url}/auth/verifyOTPPhone`, {
+        phone_number: phone,
+        otp: data.otp,
+      });
+      toast(data.message);
+    } catch (error) {
+      console.log(error);
+      toast("Error sending otp");
+    }
+  };
+
   const handleOtpClick = () => {
+    setSendOtpEnable(true);
+    getOtp();
+  };
+
+  const handleVerifyOtp = () => {
     setSendOtpEnable(true);
     getOtp();
   };
@@ -80,6 +98,8 @@ const Login = () => {
               />
             </>
           )}
+
+          {sendOtpEnable && <div className="otp-head">Enter Otp</div>}
 
           {sendOtpEnable && (
             <div className="otp">

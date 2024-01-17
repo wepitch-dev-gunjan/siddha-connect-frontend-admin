@@ -14,10 +14,12 @@ import { NotificationContext } from "./context/NotificationContext";
 import useClickOutside from "./customHooks/useClickOutside";
 import "react-toastify/dist/ReactToastify.css";
 import Breadcrumb from "./components/breadcrumb";
+import Location from "./components/location";
 
 function App() {
   const { user, setUser } = useContext(UserContext);
   const { isLoggedIn } = user;
+  // const isLoggedIn = true;
 
   const { notificationsEnable, setNotificationsEnable, notificationsRef } =
     useContext(NotificationContext);
@@ -51,6 +53,7 @@ function App() {
           <Routes>
             {isLoggedIn ? (
               <>
+                <Route path="/location" element={<Location />} />
                 <Route path="/login" element={<Navigate replace to="/" />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/" element={<Dashboard />} />

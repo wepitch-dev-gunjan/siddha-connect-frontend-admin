@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./style.scss";
 import Logo from "../../assets/logo.svg";
-import { TextField, InputAdornment, IconButton, Input } from "@mui/material";
+import { TextField, InputAdornment, IconButton } from "@mui/material";
 import DropDown from "../../components/dropDown";
 
 const Login = () => {
@@ -17,11 +17,6 @@ const Login = () => {
   const [nameError, setNameError] = useState(null);
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
-
-  const inputStyle = {
-    borderColor: 'blue', // Replace with the color you want
-  };
-
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);

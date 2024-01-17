@@ -22,6 +22,7 @@ export const UserProvider = ({ children }) => {
         email: storedUser?.email,
         token: storedToken,
         isLoggedIn: !!storedToken,
+        // isLoggedIn: true,
       })
     }
   }, []);
@@ -30,7 +31,7 @@ export const UserProvider = ({ children }) => {
     if (!user.isLoggedIn) {
       navigate("/login");
     }
-  }, [user.isLoggedIn, navigate]);
+  }, [user]);
 
   return (
     <UserContext.Provider

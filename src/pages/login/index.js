@@ -1,79 +1,48 @@
 import React, { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./style.scss";
 import Logo from "../../assets/logo.svg";
-import { TextField, InputAdornment, IconButton } from "@mui/material";
-import DropDown from "../../components/dropDown";
+import { TextField } from "@mui/material";
+import OtpInput from "otp-input-react";
+import Otp from "../../components/otp";
+import { toast } from "react-toastify";
+import { backend_url } from "../../config";
+import axios from "axios";
 
 const Login = () => {
   const [isLoadingLogin, setIsLoadingLogin] = useState(false);
-  const [isLoadingSignup, setIsLoadingSignup] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const [signUpEnable, setSignUpEnable] = useState(false);
-  const [forgotPasswordEnable, setForgotPasswordEnable] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [nameError, setNameError] = useState(null);
-  const [emailError, setEmailError] = useState(null);
-  const [passwordError, setPasswordError] = useState(null);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  const [sendOtpEnable, setSendOtpEnable] = useState(false);
+  const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState(null);
 
   const validateSignUpFields = () => {
     let isValid = true;
 
-    if (!name) {
-      setNameError("Name is required.");
+    if (!phone) {
+      setPhoneError("Phone no. is required.");
       isValid = false;
     } else {
-      setNameError(null);
-    }
-
-    if (!email) {
-      setEmailError("Email is required.");
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      setEmailError("Invalid email format.");
-      isValid = false;
-    } else {
-      setEmailError(null);
-    }
-
-    if (!password) {
-      setPasswordError("Password is required.");
-      isValid = false;
-    } else {
-      setPasswordError(null);
+      setPhoneError(null);
     }
 
     return isValid;
   };
 
-  // const handleLogin = () => {
-  //   if (validateLoginFields()) {
-  //     setIsLoadingLogin(true);
-  //     // Perform login action
-  //   }
-  // };
-
-  const handleSignUp = () => {
-    if (validateSignUpFields()) {
-      setIsLoadingSignup(true);
-      // Perform sign-up action
+  const getOtp = async () => {
+    try {
+      const { data } = await axios.post(`${backend_url}/auth/sendOTPPhone`, {
+        phone_number: phone,
+      });
+      toast(data.message);
+    } catch (error) {
+      console.log(error);
+      toast("Error sending otp");
     }
   };
 
-  const handleEmailBlur = () => {
-    if (!email) {
-      setEmailError("Email is required.");
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      setEmailError("Invalid email format.");
-    } else {
-      setEmailError(null);
-    }
+  const handleOtpClick = () => {
+    setSendOtpEnable(true);
+    getOtp();
   };
 
   return (
@@ -84,94 +53,20 @@ const Login = () => {
         </div>
 
         <div className="login-inputs">
-          {forgotPasswordEnable && (
-            <>
-              <TextField
-                id="standard-password-input"
-                label="New Password"
-                type={showPassword ? "text" : "password"}
-                autoComplete="current-password"
-                variant="outlined"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  setPasswordError(null);
-                }}
-                onBlur={() =>
-                  !password && setPasswordError("New password is required.")
-                }
-                error={!!passwordError}
-                helperText={passwordError}
-                InputProps={{
-                  style: {
-                    borderColor: "rgba(255, 255, 255, 0.8) !important",
-                    background: "rgba(217, 217, 217, 0.20)", // Remove the semicolon at the end
-                  },
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={togglePasswordVisibility}
-                      >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </>
-          )}
-          {forgotPasswordEnable && (
-            <>
-              <TextField
-                id="standard-password-input"
-                label="Confirm New Password"
-                type={showPassword ? "text" : "password"}
-                autoComplete="current-password"
-                variant="outlined"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  setPasswordError(null);
-                }}
-                onBlur={() =>
-                  !password && setPasswordError("Confirm password is required.")
-                }
-                error={!!passwordError}
-                helperText={passwordError}
-                InputProps={{
-                  style: {
-                    borderColor: "rgba(255, 255, 255, 0.8) !important",
-                    background: "rgba(217, 217, 217, 0.20)", // Remove the semicolon at the end
-                  },
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={togglePasswordVisibility}
-                      >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </>
-          )}
-          {signUpEnable && (
+          {!sendOtpEnable && (
             <>
               <TextField
                 id="outlined-basic"
-                label="Name"
+                label="Phone no."
                 variant="outlined"
-                value={name}
+                value={phone}
                 onChange={(e) => {
-                  setName(e.target.value);
-                  setNameError(null);
+                  setPhone(e.target.value);
+                  setPhoneError(null);
                 }}
-                onBlur={() => !name && setNameError("Name is required.")}
-                error={!!nameError}
-                helperText={nameError}
+                onBlur={() => !phone && setPhoneError("Phone no. is required.")}
+                error={!!phoneError}
+                helperText={phoneError}
                 InputProps={{
                   style: {
                     borderColor: "rgba(255, 255, 255, 0.8) !important",
@@ -179,143 +74,27 @@ const Login = () => {
                     color: "#fff",
                   },
                   focused: {
-                    color: '#fff'
-                  }
+                    color: "#fff",
+                  },
                 }}
               />
             </>
           )}
 
-          {/* Email */}
-          {!forgotPasswordEnable && (
-            <TextField
-              id="outlined-basic"
-              label="Email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setEmailError(null);
-              }}
-              onBlur={handleEmailBlur}
-              error={!!emailError}
-              helperText={emailError}
-              InputProps={{
-                style: {
-                  borderColor: "rgba(255, 255, 255, 0.8) !important",
-                  background: "rgba(217, 217, 217, 0.20)", // Remove the semicolon at the end
-                }
-              }}
-              variant="outlined"
-            />
-          )}
-
-          {/* Password */}
-          {!forgotPasswordEnable && (
-            <TextField
-              id="standard-password-input"
-              label="Password"
-              type={showPassword ? "text" : "password"}
-              autoComplete="current-password"
-              variant="outlined"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setPasswordError(null);
-              }}
-              onBlur={() =>
-                !password && setPasswordError("Password is required.")
-              }
-              error={!!passwordError}
-              helperText={passwordError}
-              InputProps={{
-                style: {
-                  borderColor: "rgba(255, 255, 255, 0.8) !important",
-                  background: "rgba(217, 217, 217, 0.20)", // Remove the semicolon at the end
-                },
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={togglePasswordVisibility}
-                    >
-                      {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          )}
-
-          {signUpEnable && <DropDown />}
-
-          {forgotPasswordEnable && (
-            <div className="buttons">
-              <button
-                className="Google-login-button"
-                onClick={handleSignUp}
-                disabled={isLoadingSignup}
-              >
-                {isLoadingSignup ? "Saving Password" : "Change Password"}
-              </button>
-            </div>
-          )}
-          {signUpEnable && (
-            <div className="buttons">
-              <button
-                className="Google-login-button"
-                onClick={handleSignUp}
-                disabled={isLoadingSignup}
-              >
-                {isLoadingSignup ? "Signing up..." : "Sign Up"}
-              </button>
-            </div>
-          )}
-          {(signUpEnable || forgotPasswordEnable) && (
-            <div className="buttons">
-              <button
-                className="Google-login-button"
-                onClick={() => {
-                  setSignUpEnable(false);
-                  setForgotPasswordEnable(false);
-                }}
-                disabled={isLoadingSignup}
-              >
-                Cancel
-              </button>
-            </div>
-          )}
-          {!signUpEnable && !forgotPasswordEnable && (
-            <p className="forgot">
-              <div onClick={() => setForgotPasswordEnable(true)}>
-                {" "}
-                Forgot your password?
-              </div>
-            </p>
-          )}
-          {!signUpEnable && !forgotPasswordEnable && (
-            <div className="buttons">
-              <button
-                className="Google-login-button"
-                // onClick={handleLogin}
-                disabled={isLoadingLogin}
-              >
-                {isLoadingLogin ? "Logging in..." : "Login"}
-              </button>
+          {sendOtpEnable && (
+            <div className="otp">
+              <Otp />
             </div>
           )}
 
-          {!signUpEnable && !forgotPasswordEnable && <p className="or">Or</p>}
+          {!signUpEnable && (
+            <div className="buttons">
+              <button className="Google-login-button" onClick={handleOtpClick}>
+                Send OTP
+              </button>
+            </div>
+          )}
         </div>
-        {!signUpEnable && !forgotPasswordEnable && (
-          <>
-            <p className="dont">
-              {`Don't have an account? `}
-              <span className="signup" onClick={() => setSignUpEnable(true)}>
-                Sign Up
-              </span>
-            </p>
-          </>
-        )}
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ const Location = () => {
           const { latitude, longitude } = position.coords;
 
           // Store location coordinates
+
           setLocation({ latitude, longitude });
 
           // Fetch address based on coordinates

@@ -22,7 +22,7 @@ export const UserProvider = ({ children }) => {
         email: storedUser?.email,
         token: storedToken,
         isLoggedIn: !!storedToken,
-        // isLoggedIn: true,
+        isLoggedIn: true,
       })
     }
   }, []);

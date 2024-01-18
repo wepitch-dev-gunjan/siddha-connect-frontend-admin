@@ -59,7 +59,7 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       console.log(error);
-      toast("Error sending otp");
+      toast("OTP Verification failed");
     }
   };
 

@@ -15,8 +15,6 @@ export const UserProvider = ({ children }) => {
     if (storedToken && storedUser) {
       setUser({
         _id: storedUser?._id,
-        name: storedUser?.name,
-        email: storedUser?.email,
         token: storedToken,
         isLoggedIn: !!storedToken,
       })

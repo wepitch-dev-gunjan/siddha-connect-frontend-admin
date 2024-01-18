@@ -11,8 +11,8 @@ export const ProfileProvider = ({ children }) => {
 
   const fetchProfile = async () => {
     try {
-      const response = await axios.get(
-        `${backend_url}/admin/`,
+      const { data } = await axios.get(
+        `${backend_url}/user/profile`,
         // null,
         {
           headers: {
@@ -20,7 +20,8 @@ export const ProfileProvider = ({ children }) => {
           },
         }
       );
-      setProfile(response.data);
+      console.log('fetched data: ' + data)
+      setProfile(data);
     } catch (err) {
       console.error("Error fetching profile:", err);
     }

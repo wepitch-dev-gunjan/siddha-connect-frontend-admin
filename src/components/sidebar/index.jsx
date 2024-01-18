@@ -13,6 +13,7 @@ import HistoryIcon from '@rsuite/icons/History';
 import WechatTemplateIcon from '@rsuite/icons/WechatTemplate';
 import ToolsIcon from '@rsuite/icons/Tools';
 import ViewsAuthorizeIcon from '@rsuite/icons/ViewsAuthorize';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -24,6 +25,8 @@ const panelStyles = {
 const Sidebar = () => {
   const [expanded, setExpanded] = useState(true);
   const [activeKey, setActiveKey] = useState('1');
+
+  const navigate = useNavigate()
   return (
     <div style={{
       display: 'flex',
@@ -32,17 +35,18 @@ const Sidebar = () => {
       gap: '12px'
 
     }}>
-      <Sidenav expanded={expanded} defaultOpenKeys={['3', '4']}>
+      <Sidenav expanded={expanded} defaultOpenKeys={['3', '4']} appearance='subtle'>
+        <Sidenav.Toggle expanded={expanded} onToggle={expanded => setExpanded(expanded)} />
         <Sidenav.Body width='3200'>
           <Nav activeKey={activeKey} onSelect={setActiveKey}>
             {/* Data Visualization */}
             <Nav.Item panel style={panelStyles}>
               Data Visualization
             </Nav.Item>
-            <Nav.Item eventKey="1" icon={<BarLineChartIcon />}>
+            <Nav.Item eventKey="1" icon={<BarLineChartIcon />} onSelect={() => navigate('/')}>
               Charts & Graphs
             </Nav.Item>
-            <Nav.Item eventKey="2" icon={<AdvancedAnalyticsIcon />}>
+            <Nav.Item eventKey="2" icon={<AdvancedAnalyticsIcon />} onSelect={() => navigate('/analytics')}>
               Analytics Dashboard
             </Nav.Item>
 
@@ -81,7 +85,6 @@ const Sidebar = () => {
 
           </Nav>
         </Sidenav.Body>
-        <Sidenav.Toggle expanded={expanded} onToggle={expanded => setExpanded(expanded)} />
       </Sidenav>
     </div>
   );

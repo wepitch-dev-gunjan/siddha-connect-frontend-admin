@@ -7,6 +7,14 @@ import { useState } from 'react';
 import 'rsuite/dist/rsuite.min.css';
 import './style.scss';
 import BarLineChartIcon from '@rsuite/icons/BarLineChart';
+import AdvancedAnalyticsIcon from '@rsuite/icons/AdvancedAnalytics';
+import FileUploadIcon from '@rsuite/icons/FileUpload';
+import HistoryIcon from '@rsuite/icons/History';
+import WechatTemplateIcon from '@rsuite/icons/WechatTemplate';
+import ToolsIcon from '@rsuite/icons/Tools';
+import ViewsAuthorizeIcon from '@rsuite/icons/ViewsAuthorize';
+
+
 
 const panelStyles = {
   padding: '15px 20px',
@@ -47,7 +55,7 @@ const Sidebar = () => {
             <Nav.Item eventKey="1" icon={<BarLineChartIcon />}>
               Charts & Graphs
             </Nav.Item>
-            <Nav.Item eventKey="2" icon={<GroupIcon />}>
+            <Nav.Item eventKey="2" icon={<AdvancedAnalyticsIcon />}>
               Analytics Dashboard
             </Nav.Item>
 
@@ -55,10 +63,10 @@ const Sidebar = () => {
             <Nav.Item panel style={panelStyles}>
               Upload Data
             </Nav.Item>
-            <Nav.Item eventKey="3" icon={<DashboardIcon />}>
+            <Nav.Item eventKey="3" icon={<FileUploadIcon />}>
               File Upload
             </Nav.Item>
-            <Nav.Item eventKey="4" icon={<GroupIcon />}>
+            <Nav.Item eventKey="4" icon={<HistoryIcon />}>
               Upload History
             </Nav.Item>
 
@@ -66,21 +74,21 @@ const Sidebar = () => {
             <Nav.Item panel style={panelStyles}>
               Report Generation
             </Nav.Item>
-            <Nav.Item eventKey="5" icon={<DashboardIcon />}>
+            <Nav.Item eventKey="5" icon={<WechatTemplateIcon />}>
               Template Management
             </Nav.Item>
-            <Nav.Item eventKey="6" icon={<GroupIcon />}>
+            <Nav.Item eventKey="6" icon={<ToolsIcon />}>
               Customization Tools
             </Nav.Item>
 
             {/* Role Management */}
-            <Nav.Item panel style={panelStyles} icon={<GroupIcon />}>
+            <Nav.Item panel style={panelStyles}>
               Role Management
             </Nav.Item>
             <Nav.Item eventKey="7" icon={<DashboardIcon />}>
               Role Generation
             </Nav.Item>
-            <Nav.Item eventKey="8" icon={<GroupIcon />}>
+            <Nav.Item eventKey="8" icon={<ViewsAuthorizeIcon />}>
               View All Roles
             </Nav.Item>
 

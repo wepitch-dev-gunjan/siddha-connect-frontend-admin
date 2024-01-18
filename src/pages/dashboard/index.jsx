@@ -6,6 +6,7 @@ import BarChart from "../../components/dashboardComponents/BarChart";
 import { CounsellorData, UserData, EarningsData, ActivityData } from '../../components/dashboardComponents/Data';
 import LineChart from "../../components/dashboardComponents/lineChart";
 import GroupedBarChart from "../../components/dashboardComponents/groupedBarChart";
+import RecentActivityTable from "../../components/recentActivityTable";
 
 const Dashboard = () => {
   const [userData, setUserData] = useState({
@@ -71,19 +72,23 @@ const Dashboard = () => {
           </div>
           <div className="chart-row">
             <div className="col">
-            <GroupedBarChart data={activityData} />
+              <GroupedBarChart data={activityData} />
             </div>
             <div className="col">
-            <LineChart data={earningsData} />
+              <LineChart data={earningsData} />
             </div>
             <div className="col">
-            <LineChart data={earningsData} />
+              <LineChart data={earningsData} />
             </div>
           </div>
         </div>
 
         {/* recent payments */}
-        <RecentPayments />
+        {/* <RecentPayments /> */}
+        <div className="recent-activity">
+          <h1>Recent Activity</h1>
+          <RecentActivityTable />
+        </div>
       </div>
     </div>
   );

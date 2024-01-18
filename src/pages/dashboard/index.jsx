@@ -64,9 +64,10 @@ const Dashboard = () => {
         <div className="business-dashbaord">
           <h1>Business Dashboard</h1>
           <div className="widgets-container">
-            <Widget heading="INCOME" value="$10000" />
-            <Widget heading="USERS" value="1000" />
-            <Widget heading="COUNSELLORS" value="1000" />
+            <Widget heading="TOTAL SALES" value="$10000" />
+            <Widget heading="TOP PRODUCTS" value="1000" />
+            <Widget heading="TOP REGIONS" value="1000" />
+            <Widget heading="AVERAGE SALES" value="$5000" />
           </div>
           <div className="chart-row">
             <div className="col">

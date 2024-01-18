@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./style.scss";
 import Logo from "../../assets/logo.svg";
 import { TextField } from "@mui/material";
-import OtpInput from "otp-input-react";
 import Otp from "../../components/otp";
 import { toast } from "react-toastify";
 import { backend_url } from "../../config";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 
 const Login = () => {
-  const [isLoadingLogin, setIsLoadingLogin] = useState(false);
-  const [signUpEnable, setSignUpEnable] = useState(false);
   const [sendOtpEnable, setSendOtpEnable] = useState(false);
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState(null);
+  const [otp, setOtp] = useState('')
+  const { user, setUser } = useContext(UserContext)
+  const navigate = useNavigate();
 
   const validateSignUpFields = () => {
     let isValid = true;
@@ -44,9 +46,14 @@ const Login = () => {
     try {
       const { data } = await axios.post(`${backend_url}/auth/verifyOTPPhone`, {
         phone_number: phone,
-        otp: data.otp,
+        otp,
       });
       toast(data.message);
+      localStorage.setItem('token', data.token);
+      setUser(prev => ({
+        ...prev, token: data.token
+      }))
+      navigate('/')
     } catch (error) {
       console.log(error);
       toast("Error sending otp");
@@ -60,7 +67,7 @@ const Login = () => {
 
   const handleVerifyOtp = () => {
     setSendOtpEnable(true);
-    getOtp();
+    verifyOtp();
   };
 
   return (
@@ -103,14 +110,21 @@ const Login = () => {
 
           {sendOtpEnable && (
             <div className="otp">
-              <Otp />
+              <Otp otp={otp} setOtp={setOtp} />
             </div>
           )}
 
-          {!signUpEnable && (
+          {!sendOtpEnable && (
             <div className="buttons">
               <button className="Google-login-button" onClick={handleOtpClick}>
                 Send OTP
+              </button>
+            </div>
+          )}
+          {sendOtpEnable && (
+            <div className="buttons">
+              <button className="Google-login-button" onClick={handleVerifyOtp}>
+                Verify OTP
               </button>
             </div>
           )}

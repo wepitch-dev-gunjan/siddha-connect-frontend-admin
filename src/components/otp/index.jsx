@@ -2,9 +2,7 @@ import React from 'react'
 import './style.scss'
 import { MuiOtpInput } from 'mui-one-time-password-input'
 
-const Otp = () => {
-  const [otp, setOtp] = React.useState('')
-
+const Otp = ({ otp, setOtp }) => {
   const handleChange = (newValue) => {
     setOtp(newValue)
   }

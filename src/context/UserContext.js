@@ -5,10 +5,7 @@ import { useNavigate } from "react-router-dom/dist";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    token: '',
-    isLoggedIn: false,
-  });
+  const [user, setUser] = useState({});
   const navigate = useNavigate();
 
   const storedToken = localStorage.getItem('token') || '';
@@ -22,16 +19,16 @@ export const UserProvider = ({ children }) => {
         email: storedUser?.email,
         token: storedToken,
         isLoggedIn: !!storedToken,
-        isLoggedIn: true,
       })
+      navigate('/')
     }
-  }, []);
+  }, [navigate]); // Add setUser and navigate as dependencies
 
   useEffect(() => {
     if (!user.isLoggedIn) {
       navigate("/login");
     }
-  }, [user]);
+  }, [user.isLoggedIn, navigate]); // Add navigate as a dependency
 
   return (
     <UserContext.Provider

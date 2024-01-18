@@ -26,27 +26,14 @@ const Sidebar = () => {
   const [activeKey, setActiveKey] = useState('1');
   return (
     <div style={{
-      width: 320,
       display: 'flex',
       flexDirection: 'column',
       padding: '12px 0',
       gap: '12px'
 
     }}>
-      <Toggle
-        onChange={setExpanded}
-        checked={expanded}
-        checkedChildren="Expand"
-        unCheckedChildren="Collapse"
-        style={{
-          width: 100
-        }}
-        // size='lg'
-        size='10px'
-      />
-      <hr />
       <Sidenav expanded={expanded} defaultOpenKeys={['3', '4']}>
-        <Sidenav.Body width='320'>
+        <Sidenav.Body width='3200'>
           <Nav activeKey={activeKey} onSelect={setActiveKey}>
             {/* Data Visualization */}
             <Nav.Item panel style={panelStyles}>

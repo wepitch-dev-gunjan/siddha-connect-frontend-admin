@@ -44,7 +44,7 @@ const RecentPayments = () => {
   return (
     <div className='RecentPayments-container'>
       <div className="payments-top">
-        <h1>Recent Payments</h1>
+        <h1>Recent Activities</h1>
         <Link to='/payment'>
           <div className="see-all-button">SEE ALL</div>
         </Link>

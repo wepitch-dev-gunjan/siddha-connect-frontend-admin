@@ -57,6 +57,13 @@ function App() {
                 <Route path="/login" element={<Navigate replace to="/" />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/" element={<Dashboard />} />
+                <Route path="/analytics" element={<Dashboard />} />
+                <Route path="/file-upload" element={<Dashboard />} />
+                <Route path="/history" element={<Dashboard />} />
+                <Route path="/template" element={<Dashboard />} />
+                <Route path="/tools" element={<Dashboard />} />
+                <Route path="/role" element={<Dashboard />} />
+                <Route path="/view-roles" element={<Dashboard />} />
               </>
             ) : (
               <>

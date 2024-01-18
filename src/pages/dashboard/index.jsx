@@ -71,15 +71,15 @@ const Dashboard = () => {
           </div>
           <div className="chart-row">
             <div className="col">
-              <LineChart data={earningsData} />
+            <GroupedBarChart data={activityData} />
             </div>
             <div className="col">
-              <GroupedBarChart data={activityData} />
+            <LineChart data={earningsData} />
             </div>
-          </div>
-          <div className="chart-row">
-            <BarChart data={userData} text='Users' />
-            <BarChart data={counsellorData} text='Counsellors' />
+            <div className="col">
+            <LineChart data={earningsData} />
+              
+            </div>
           </div>
         </div>
 

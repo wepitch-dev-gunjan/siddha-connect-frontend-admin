@@ -1,8 +1,5 @@
-import { Sidenav, Nav, Toggle } from 'rsuite';
+import { Sidenav, Nav} from 'rsuite';
 import DashboardIcon from '@rsuite/icons/legacy/Dashboard';
-import GroupIcon from '@rsuite/icons/legacy/Group';
-import MagicIcon from '@rsuite/icons/legacy/Magic';
-import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
 import { useState } from 'react';
 import 'rsuite/dist/rsuite.min.css';
 import './style.scss';
@@ -54,10 +51,10 @@ const Sidebar = () => {
             <Nav.Item panel style={panelStyles}>
               Upload Data
             </Nav.Item>
-            <Nav.Item eventKey="3" icon={<FileUploadIcon />}>
+            <Nav.Item eventKey="3" icon={<FileUploadIcon />} onSelect={() => navigate('/file-upload')}>
               File Upload
             </Nav.Item>
-            <Nav.Item eventKey="4" icon={<HistoryIcon />}>
+            <Nav.Item eventKey="4" icon={<HistoryIcon />} onSelect={() => navigate('/history')}>
               Upload History
             </Nav.Item>
 
@@ -65,10 +62,10 @@ const Sidebar = () => {
             <Nav.Item panel style={panelStyles}>
               Report Generation
             </Nav.Item>
-            <Nav.Item eventKey="5" icon={<WechatTemplateIcon />}>
+            <Nav.Item eventKey="5" icon={<WechatTemplateIcon />} onSelect={() => navigate('/template')}>
               Template Management
             </Nav.Item>
-            <Nav.Item eventKey="6" icon={<ToolsIcon />}>
+            <Nav.Item eventKey="6" icon={<ToolsIcon />} onSelect={() => navigate('/tools')}>
               Customization Tools
             </Nav.Item>
 
@@ -76,10 +73,10 @@ const Sidebar = () => {
             <Nav.Item panel style={panelStyles}>
               Role Management
             </Nav.Item>
-            <Nav.Item eventKey="7" icon={<DashboardIcon />}>
+            <Nav.Item eventKey="7" icon={<DashboardIcon />} onSelect={() => navigate('/role')}>
               Role Generation
             </Nav.Item>
-            <Nav.Item eventKey="8" icon={<ViewsAuthorizeIcon />}>
+            <Nav.Item eventKey="8" icon={<ViewsAuthorizeIcon />} onSelect={() => navigate('/view-roles')}>
               View All Roles
             </Nav.Item>
 

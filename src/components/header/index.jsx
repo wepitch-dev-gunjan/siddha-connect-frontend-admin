@@ -27,7 +27,6 @@ const Header = ({ handleLogout }) => {
         />
         <ProfileDropDownMenu
           name={profile.name}
-          image={profile.profile_pic}
           onClick={handleLogout}
         />
       </div>

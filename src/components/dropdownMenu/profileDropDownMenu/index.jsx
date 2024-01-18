@@ -9,12 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { MdOutlineSummarize } from "react-icons/md";
 import { MediaQueryContext } from "../../../context/MediaQueryContext";
 
-const ProfileDropDownMenu = ({ name, image, onClick }) => {
+const ProfileDropDownMenu = ({ name, onClick }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const { smallScreen } = useContext(MediaQueryContext);
-
+  const [avatar, setAvatar] = useState('RK');
   useClickOutside(dropdownRef, () => {
     setIsDropdownOpen(false);
   });
@@ -25,7 +25,13 @@ const ProfileDropDownMenu = ({ name, image, onClick }) => {
   return (
     <div className="ProfileDropDownMenu-container" onClick={toggleDropdown}>
       <div className="left">
-        <img src={image} alt="" />
+        {/* <img src={image} alt="" /> */}
+        {/* avatar */}
+        <div>
+          <span>
+            {avatar}
+          </span>
+        </div>
       </div>
       <div className="mid">
         <p className="top">Hello</p>

@@ -78,7 +78,6 @@ const Dashboard = () => {
             </div>
             <div className="col">
             <LineChart data={earningsData} />
-              
             </div>
           </div>
         </div>

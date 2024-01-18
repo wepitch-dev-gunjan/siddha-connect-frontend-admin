@@ -55,8 +55,14 @@
   justify-content: center;
   flex-direction: column;
   gap: 20px;
+  .otp-head{
+    // display: flex;
+    // justify-content: center;
+    color: white;
+    font-size: 24px;
+  }
   .otp{
-    width: 400px;
+    width: 300px;
   }
   .or {
     display: flex;

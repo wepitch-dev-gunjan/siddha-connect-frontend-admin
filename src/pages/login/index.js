@@ -10,11 +10,13 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
 const Login = () => {
+  const [isLoadingLogin, setIsLoadingLogin] = useState(false);
+  const [signUpEnable, setSignUpEnable] = useState(false);
   const [sendOtpEnable, setSendOtpEnable] = useState(false);
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState(null);
-  const [otp, setOtp] = useState('')
-  const { user, setUser } = useContext(UserContext)
+  const [otp, setOtp] = useState("");
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const validateSignUpFields = () => {
@@ -49,11 +51,12 @@ const Login = () => {
         otp,
       });
       toast(data.message);
-      localStorage.setItem('token', data.token);
-      setUser(prev => ({
-        ...prev, token: data.token
-      }))
-      navigate('/')
+      localStorage.setItem("token", data.token);
+      setUser((prev) => ({
+        ...prev,
+        token: data.token,
+      }));
+      navigate("/");
     } catch (error) {
       console.log(error);
       toast("Error sending otp");

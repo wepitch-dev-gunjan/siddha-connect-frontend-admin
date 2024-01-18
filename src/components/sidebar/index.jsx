@@ -5,6 +5,7 @@ import DashboardIcon from '@rsuite/icons/legacy/Dashboard';
 import GroupIcon from '@rsuite/icons/legacy/Group';
 import MagicIcon from '@rsuite/icons/legacy/Magic';
 import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
+import { FaChartLine } from "react-icons/fa6";
 
 const panelStyles = {
   padding: '15px 20px',
@@ -20,40 +21,53 @@ const headerStyles = {
 
 const Sidebar = () => {
   return (
-    <div style={{ width: 240 }}>
+    <div style={{ width: 280 }}>
       <Sidenav defaultOpenKeys={['3', '4']}>
-        <Sidenav.Header>
-          <div style={headerStyles}>Custom Sidenav</div>
-        </Sidenav.Header>
-        <Sidenav.Body>
+       
+        <Sidenav.Body style={{ width: 280, height: 840 }}>
           <Nav>
-            <Nav.Item eventKey="1" active icon={<DashboardIcon />}>
+            {/* <Nav.Item eventKey="1" active icon={<DashboardIcon />}>
               Dashboard
-            </Nav.Item>
-            <Nav.Item eventKey="2" icon={<GroupIcon />}>
-              User Group
-            </Nav.Item>
-            <Nav.Menu eventKey="3" title="Advanced" icon={<MagicIcon />}>
+            </Nav.Item> */}
+
+              <Nav.Item panel style={panelStyles}>
+                Data Visualization
+              </Nav.Item>
+              <Nav.Item eventKey="2-1"  icon={<FaChartLine />}>Charts & Graphs</Nav.Item>
+              <Nav.Item eventKey="2-2">Analytics Dashboard</Nav.Item>
+              <Nav.Item divider />
+            
+            <Nav.Item panel style={panelStyles}>
+                Upload Data
+              </Nav.Item>
+              <Nav.Item eventKey="2-1">File Upload</Nav.Item>
+              <Nav.Item eventKey="2-2">Upload History</Nav.Item>
+              <Nav.Item divider />
+
+            {/* <Nav.Menu eventKey="3" title="Report Generation" icon={<MagicIcon />}> */}
               <Nav.Item divider />
               <Nav.Item panel style={panelStyles}>
-                Reports
+                Report Generation
               </Nav.Item>
-              <Nav.Item eventKey="3-1">Geo</Nav.Item>
-              <Nav.Item eventKey="3-2">Devices</Nav.Item>
-              <Nav.Item eventKey="3-3">Loyalty</Nav.Item>
-              <Nav.Item eventKey="3-4">Visit Depth</Nav.Item>
+              <Nav.Item eventKey="3-1">Template Management</Nav.Item>
+              <Nav.Item eventKey="3-2">Customization Tools</Nav.Item>
               <Nav.Item divider />
+              {/* </Nav.Menu> */}
+
               <Nav.Item panel style={panelStyles}>
-                Settings
+                User Settings
               </Nav.Item>
-              <Nav.Item eventKey="4-1">Applications</Nav.Item>
-              <Nav.Item eventKey="4-2">Channels</Nav.Item>
-              <Nav.Item eventKey="4-3">Versions</Nav.Item>
-              <Nav.Menu eventKey="4-5" title="Custom Action">
-                <Nav.Item eventKey="4-5-1">Action Name</Nav.Item>
-                <Nav.Item eventKey="4-5-2">Action Params</Nav.Item>
-              </Nav.Menu>
-            </Nav.Menu>
+              <Nav.Item eventKey="2-1">Profile</Nav.Item>
+              <Nav.Item eventKey="2-2">Security</Nav.Item>
+              <Nav.Item divider />
+
+              <Nav.Item panel style={panelStyles}>
+                Role Management
+              </Nav.Item>
+              <Nav.Item eventKey="2-1">Role Generation</Nav.Item>
+              <Nav.Item eventKey="2-2">View All Roles</Nav.Item>
+              <Nav.Item divider />
+
           </Nav>
         </Sidenav.Body>
       </Sidenav>

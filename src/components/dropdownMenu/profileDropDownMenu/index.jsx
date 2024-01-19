@@ -7,10 +7,12 @@ import { AiOutlineLogout } from "react-icons/ai";
 import DropDownMenuButton from "../dropDownMenuButton";
 import { useNavigate } from "react-router-dom";
 import { MediaQueryContext } from "../../../context/MediaQueryContext";
+import { UserContext } from "../../../context/UserContext";
 
 const ProfileDropDownMenu = ({ name, onClick }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const { user } = useContext(UserContext)
   const navigate = useNavigate();
   const { smallScreen } = useContext(MediaQueryContext);
   const [avatar, setAvatar] = useState('R');
@@ -41,16 +43,14 @@ const ProfileDropDownMenu = ({ name, onClick }) => {
     setIsDropdownOpen((prevState) => !prevState);    
   };
 
-  console.log(avatarFormatter(name));
 
   useEffect(() => {
     setAvatar(avatarFormatter(name))
-  }, [])
+  }, [user])
 
   return (
     <div className="ProfileDropDownMenu-container" onClick={toggleDropdown}>
       <div className="left">
-        {/* <img src={image} alt="" /> */}
         {/* avatar */}
         <div>
           <span>

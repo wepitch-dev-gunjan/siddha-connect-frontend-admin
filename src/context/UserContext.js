@@ -18,7 +18,6 @@ export const UserProvider = ({ children }) => {
         token: storedToken,
         isLoggedIn: !!storedToken,
       })
-      navigate('/')
     }
   }, [navigate]); // Add setUser and navigate as dependencies
 

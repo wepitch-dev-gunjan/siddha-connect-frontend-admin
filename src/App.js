@@ -15,6 +15,13 @@ import useClickOutside from "./customHooks/useClickOutside";
 import "react-toastify/dist/ReactToastify.css";
 import Breadcrumb from "./components/breadcrumb";
 import Location from "./components/location";
+import FileUpload from "./pages/fileUpload";
+import UploadHistory from "./pages/uploadHistory";
+import TemplateManagement from "./pages/templateManagement";
+import Tools from "./pages/tools";
+import Role from "./pages/role";
+import ViewRole from "./pages/viewRole";
+import Analytics from "./pages/analytics";
 
 function App() {
   const { user, setUser } = useContext(UserContext);
@@ -57,13 +64,13 @@ function App() {
                 <Route path="/login" element={<Navigate replace to="/" />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/" element={<Dashboard />} />
-                <Route path="/analytics" element={<Dashboard />} />
-                <Route path="/file-upload" element={<Dashboard />} />
-                <Route path="/history" element={<Dashboard />} />
-                <Route path="/template" element={<Dashboard />} />
-                <Route path="/tools" element={<Dashboard />} />
-                <Route path="/role" element={<Dashboard />} />
-                <Route path="/view-roles" element={<Dashboard />} />
+                <Route path="/analytics" element={<Analytics />} />
+                <Route path="/file-upload" element={<FileUpload />} />
+                <Route path="/upload-history" element={<UploadHistory />} />
+                <Route path="/template" element={<TemplateManagement />} />
+                <Route path="/tools" element={<Tools />} />
+                <Route path="/role" element={<Role />} />
+                <Route path="/view-roles" element={<ViewRole />} />
               </>
             ) : (
               <>

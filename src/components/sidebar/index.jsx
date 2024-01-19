@@ -12,8 +12,6 @@ import ToolsIcon from '@rsuite/icons/Tools';
 import ViewsAuthorizeIcon from '@rsuite/icons/ViewsAuthorize';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const panelStyles = {
   padding: '15px 20px',
   color: '#aaa'

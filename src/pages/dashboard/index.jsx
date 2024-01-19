@@ -1,8 +1,6 @@
 import { useState } from "react";
-import RecentPayments from "../../components/dashboardComponents/RecentPayments";
 import Widget from "../../components/dashboardComponents/widget";
 import "./style.scss";
-import BarChart from "../../components/dashboardComponents/BarChart";
 import { CounsellorData, UserData, EarningsData, ActivityData } from '../../components/dashboardComponents/Data';
 import LineChart from "../../components/dashboardComponents/lineChart";
 import GroupedBarChart from "../../components/dashboardComponents/groupedBarChart";

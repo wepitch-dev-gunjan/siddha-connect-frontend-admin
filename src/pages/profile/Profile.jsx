@@ -5,7 +5,6 @@ import { ProfileContext } from "../../context/ProfileContext";
 import { backend_url } from "../../config";
 import axios from "axios";
 import { handleInput } from "../../utilities";
-
 import { toast } from "react-toastify";
 import { UserContext } from "../../context/UserContext";
 

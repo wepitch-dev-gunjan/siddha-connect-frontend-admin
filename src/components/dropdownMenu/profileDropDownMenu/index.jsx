@@ -6,7 +6,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import { AiOutlineLogout } from "react-icons/ai";
 import DropDownMenuButton from "../dropDownMenuButton";
 import { useNavigate } from "react-router-dom";
-import { MdOutlineSummarize } from "react-icons/md";
 import { MediaQueryContext } from "../../../context/MediaQueryContext";
 
 const ProfileDropDownMenu = ({ name, onClick }) => {
@@ -20,7 +19,7 @@ const ProfileDropDownMenu = ({ name, onClick }) => {
   });
 
   const toggleDropdown = () => {
-    setIsDropdownOpen((prevState) => !prevState);
+    setIsDropdownOpen((prevState) => !prevState);    
   };
   return (
     <div className="ProfileDropDownMenu-container" onClick={toggleDropdown}>
@@ -47,13 +46,13 @@ const ProfileDropDownMenu = ({ name, onClick }) => {
             icon={PersonIcon}
             text="Profile"
           />
-          {smallScreen && (
+          {/* {smallScreen && (
             <DropDownMenuButton
               onClick={() => ""}
               icon={MdOutlineSummarize}
               text="Summary"
             />
-          )}
+          )} */}
           <DropDownMenuButton
             onClick={onClick}
             icon={AiOutlineLogout}

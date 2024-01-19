@@ -4,6 +4,7 @@ import "./style.scss";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { handleInput } from "../../utilities";
+import DropDown from "../dropDown";
 
 const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
   const handleDateChange = (date) => {
@@ -50,11 +51,8 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
             <div className="info-value">
               
             {editProfileEnable ? (
-                <input
-                  type="text"
-                  value={profile.role}
-                  onChange={(e) => handleInput("role", e.target.value, setProfile)}
-                />
+                
+                <DropDown />
               ) : (
                 <p>{profile.role}</p>
               )}

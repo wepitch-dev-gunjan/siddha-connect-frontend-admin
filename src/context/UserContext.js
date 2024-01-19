@@ -8,8 +8,8 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
 
-  const storedToken = localStorage.getItem('token') || '';
-  const storedUser = JSON.parse(localStorage.getItem('user')) || {}; // Parsing stored user data
+  const storedToken = localStorage.getItem("token") || "";
+  const storedUser = JSON.parse(localStorage.getItem("user")) || {}; // Parsing stored user data
 
   useEffect(() => {
     if (storedToken && storedUser) {
@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
         _id: storedUser?._id,
         token: storedToken,
         isLoggedIn: !!storedToken,
-      })
+      });
     }
   }, [navigate]); // Add setUser and navigate as dependencies
 
@@ -29,11 +29,10 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={
-        {
-          user, setUser
-        }
-      }
+      value={{
+        user,
+        setUser,
+      }}
     >
       {children}
     </UserContext.Provider>

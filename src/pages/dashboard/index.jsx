@@ -84,7 +84,7 @@ const Dashboard = () => {
         {/* recent payments */}
         {/* <RecentPayments /> */}
         <div className="recent-activity">
-          <h1>Recent Activity</h1>
+          <h1>Recent Activities</h1>
           <RecentActivityTable />
         </div>
       </div>

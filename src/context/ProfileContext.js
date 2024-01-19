@@ -20,7 +20,6 @@ export const ProfileProvider = ({ children }) => {
           },
         }
       );
-      console.log(data)
       setProfile(data);
     } catch (err) {
       console.error("Error fetching profile:", err);

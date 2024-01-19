@@ -26,83 +26,37 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
         <div className="row">
           <div className="col">
             <div className="info-field">
-              <p>Email</p>
+              <p>Phone no.</p>
             </div>
             <div className="info-value">
               {editProfileEnable ? (
                 <input
+                  type="number"
+                  value={profile.phone_number}
+                  onChange={(e) => handleInput("phone_number", e.target.value, setProfile)}
+                />
+              ) : (
+                <p>{profile.phone_number}</p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col">
+            <div className="info-field">
+              <p>Role</p>
+            </div>
+            <div className="info-value">
+              
+            {editProfileEnable ? (
+                <input
                   type="text"
-                  value={profile.email}
-                  onChange={(e) => handleInput("email", e.target.value, setProfile)}
+                  value={profile.role}
+                  onChange={(e) => handleInput("role", e.target.value, setProfile)}
                 />
               ) : (
-                <p>{profile.email}</p>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col">
-            <div className="info-field">
-              <p>Gender</p>
-            </div>
-            <div className="info-value">
-              {editProfileEnable ? (
-                <div className="gender-radio">
-                  <label className="gender-text">
-                    <input
-                      type="radio"
-                      value="Male"
-                      checked={profile.gender === "Male"}
-                      onChange={(e) => handleInput("gender", e.target.value, setProfile)}
-                    />
-                    Male
-                  </label>
-                  <label>
-                    <div className="gender-text">
-                      <input
-                        type="radio"
-                        value="Female"
-                        checked={profile.gender === "Female"}
-                        onChange={(e) => handleInput("gender", e.target.value, setProfile)}
-                      />
-                      Female
-                    </div>
-                  </label>
-                  <label>
-                    <div className="gender-text">
-                      <span><input
-                        type="radio"
-                        value="Other"
-                        checked={profile.gender === "Other"}
-                        onChange={(e) => handleInput("gender", e.target.value, setProfile)}
-                      />
-                      </span>
-                      Other
-                    </div>
-                  </label>
-                </div>
-              ) : (
-                <p>{profile.gender}</p>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col">
-            <div className="info-field">
-              <p>Date of birth</p>
-            </div>
-            <div className="info-value">
-              {editProfileEnable ? (
-                <DatePicker label="Date of birth"
-                  defaultValue={dayjs(profile.date_of_birth)}
-                  onChange={(date) => handleDateChange(date)}
-                />
-              ) : (
-                <p>{formatDate(profile.date_of_birth)}</p>
+                <p>{profile.role}</p>
               )}
             </div>
           </div>

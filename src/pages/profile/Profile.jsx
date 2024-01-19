@@ -22,13 +22,13 @@ const Profile = () => {
     try {
       const endpointUrl = `${backend_url}/admin/${user._id}`; // Replace with your actual endpoint URL
 
-      const response = await axios.put(endpointUrl, profile, {
+      const { data } = await axios.put(endpointUrl, profile, {
         headers: {
           Authorization: user.token
         }
       });
-      setProfile(response.data);
-      setInitialUserProfileBackup(response.data);
+      setProfile(data);
+      setInitialUserProfileBackup(data);
       setEditProfileEnable(false);
       toast('Profile successfully saved');
     } catch (error) {

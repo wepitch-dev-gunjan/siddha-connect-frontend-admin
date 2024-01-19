@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import "./style.scss";
 import useClickOutside from "../../../customHooks/useClickOutside";
@@ -13,14 +13,40 @@ const ProfileDropDownMenu = ({ name, onClick }) => {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const { smallScreen } = useContext(MediaQueryContext);
-  const [avatar, setAvatar] = useState('RK');
+  const [avatar, setAvatar] = useState('R');
   useClickOutside(dropdownRef, () => {
     setIsDropdownOpen(false);
   });
 
+  const avatarFormatter = (username) => {
+    let avatar = '';
+    if (typeof username === 'string' && username.trim() !== '') {
+      const arr = username.split(' ');
+
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].length > 0) {
+          avatar += arr[i][0].toUpperCase();
+        }
+      }
+    } else {
+      // Handle the case where username is not a valid string
+      console.error('Invalid username:', username);
+    }
+
+    return avatar;
+  }
+
+
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);    
   };
+
+  console.log(avatarFormatter(name));
+
+  useEffect(() => {
+    setAvatar(avatarFormatter(name))
+  }, [])
+
   return (
     <div className="ProfileDropDownMenu-container" onClick={toggleDropdown}>
       <div className="left">

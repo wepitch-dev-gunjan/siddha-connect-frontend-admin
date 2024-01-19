@@ -14,7 +14,7 @@ const ProfileDropDownMenu = ({ name, onClick }) => {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const { smallScreen } = useContext(MediaQueryContext);
-  const [avatar, setAvatar] = useState('A');
+  const [avatar, setAvatar] = useState('R');
   useClickOutside(dropdownRef, () => {
     setIsDropdownOpen(false);
   });

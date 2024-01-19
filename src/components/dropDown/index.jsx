@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-const DropDown = () => {
+const DropDown = ({ handleRoleChange }) => {
   const [roles, setRoles] = useState([]);
   const [activeKey, setActiveKey] = useState('Select Designation');
 
@@ -27,11 +27,15 @@ const DropDown = () => {
   }, [])
 
   return (
-    <Dropdown title={activeKey} activeKey={activeKey} onSelect={(activeKey) => setActiveKey(activeKey)} toggleClassName='DropDown-container' menuStyle={{
-      height: '200px',
-      overflowY: 'auto',
-      width: '100%',
-    }}>
+    <Dropdown title={activeKey} activeKey={activeKey} onSelect={(activeKey) => {
+      setActiveKey(activeKey)
+      handleRoleChange(activeKey)
+    }}
+      toggleClassName='DropDown-container' menuStyle={{
+        height: '200px',
+        overflowY: 'auto',
+        width: '100%',
+      }}>
       {roles.map((role, i) => (
         <Dropdown.Item key={i} eventKey={role.name}>
           {role.name}

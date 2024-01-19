@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.scss";
 import { handleInput } from "../../utilities";
@@ -6,6 +6,7 @@ import DropDown from "../dropDown";
 
 const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
 
+  const handleRoleChange = role => setProfile(prev => ({ ...prev, role }))
   return (
     <div className="BasicInfo-container">
       <div className="heading">
@@ -37,9 +38,9 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
               <p>Role</p>
             </div>
             <div className="info-value">
-              
-            {editProfileEnable ? (
-                <DropDown />
+
+              {editProfileEnable ? (
+                <DropDown handleRoleChange={handleRoleChange} />
               ) : (
                 <p>{profile.role}</p>
               )}

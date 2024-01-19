@@ -16,18 +16,16 @@ const Profile = () => {
   const { editProfileEnable, setEditProfileEnable } =
     useContext(ProfileContext);
 
-
   // Function to handle saving changes
   const handleSave = async () => {
     try {
-      const endpointUrl = `${backend_url}/user/register/${user._id}`; // Replace with your actual endpoint URL
-
-      const { data } = await axios.put(endpointUrl, profile, {
+      const { data } = await axios.put(`${backend_url}/user`, profile, {
         headers: {
           Authorization: user.token
         }
       });
       setProfile(data);
+      console.log(data)
       setInitialUserProfileBackup(data);
       setEditProfileEnable(false);
       toast('Profile successfully saved');

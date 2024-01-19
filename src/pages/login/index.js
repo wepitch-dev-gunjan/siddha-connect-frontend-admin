@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import "./style.scss";
 import Logo from "../../assets/logo.svg";
 import { TextField } from "@mui/material";
@@ -10,8 +10,6 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
 const Login = () => {
-  const [isLoadingLogin, setIsLoadingLogin] = useState(false);
-  const [signUpEnable, setSignUpEnable] = useState(false);
   const [sendOtpEnable, setSendOtpEnable] = useState(false);
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState(null);

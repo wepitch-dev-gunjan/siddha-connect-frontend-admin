@@ -1,22 +1,10 @@
 import React from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.scss";
-import { DatePicker } from "@mui/x-date-pickers";
-import dayjs from "dayjs";
 import { handleInput } from "../../utilities";
 import DropDown from "../dropDown";
 
 const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
-  const handleDateChange = (date) => {
-    setProfile((prev) => ({
-      ...prev,
-      date_of_birth: formatDate(date),
-    }));
-  };
-
-  const formatDate = (date) => {
-    return dayjs(date).format('YYYY-MM-DD');
-  };
 
   return (
     <div className="BasicInfo-container">
@@ -51,7 +39,6 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
             <div className="info-value">
               
             {editProfileEnable ? (
-                
                 <DropDown />
               ) : (
                 <p>{profile.role}</p>

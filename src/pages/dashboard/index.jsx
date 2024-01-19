@@ -61,7 +61,7 @@ const Dashboard = () => {
     <div className="all-dashboard">
       <div className="Dashboard-container">
         <div className="business-dashbaord">
-          <h1>Business Dashboard</h1>
+          <h1>CHARTS & GRAPHS</h1>
           <div className="widgets-container">
             <Widget heading="TOTAL SALES" value="$10000" />
             <Widget heading="TOP PRODUCTS" value="1000" />

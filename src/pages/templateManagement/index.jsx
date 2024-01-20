@@ -9,7 +9,7 @@ const data = [
   'Nancy',
   'Lloyd',
   'Alice',
- 
+
 ].map(item => ({ label: item, value: item }));
 
 const TemplateManagement = () => {
@@ -30,18 +30,21 @@ const TemplateManagement = () => {
   ]);
   return (
     <>
-    <div className="TemplateManagement-container">
-      <div className="heading">
-        <h2>Filters</h2>
+      <div className="TemplateManagement-container">
+        <div className="heading">
+          <h2>Filters</h2>
+        </div>
+
+        <div className="filters-container">
+          {filters.map((filter, i) => (
+            <div className="filter-container">
+              <span>{filter.field}</span>
+              <CheckPicker data={data} style={{ width: 224 }} />
+            </div>
+          ))}
+        </div>
+
       </div>
-
-<div className="filters-container">
-{filters.map((filter, i) => (
-  <CheckPicker data={data} style={{ width: 224 }} />
-))}
-</div>
-
-    </div>
     </>
   )
 }

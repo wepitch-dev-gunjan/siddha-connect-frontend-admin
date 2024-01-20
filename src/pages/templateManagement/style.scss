@@ -1,9 +1,16 @@
-.filter-container{
+.TemplateManagement-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  .filters-container {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    .position-dropdowns{
-        display: flex;
-        gap: 20px;
+    gap: 20px;
+    .filter-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-weight: 700;
+      font-size: 12px;
     }
+  }
 }

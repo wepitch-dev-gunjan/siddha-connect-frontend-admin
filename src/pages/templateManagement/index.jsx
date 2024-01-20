@@ -16,16 +16,34 @@ const TemplateManagement = () => {
 
   const [filters, setFilters] = useState([
     {
+      field: 'RSM',
+    },
+    {
+      field: 'ZSE',
+    },
+    {
+      field: 'SEC',
+    },
+    {
+      field: 'ZSM',
+    },
+    {
+      field: 'RSO',
+    },
+    {
+      field: 'ASE',
+    },
+    {
+      field: 'ABM',
+    },
+    {
+      field: 'BSM',
+    },
+    {
+      field: 'ASM',
+    },
+    {
       field: 'TSE',
-    },
-    {
-      field: 'TDE',
-    },
-    {
-      field: 'TSDFE',
-    },
-    {
-      field: 'TSEDS',
     },
   ]);
   return (

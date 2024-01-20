@@ -4,7 +4,8 @@
   gap: 8px;
   .filters-container {
     display: flex;
-    gap: 20px;
+    width: 100%;
+    gap: 8px;
     .filter-container {
       display: flex;
       flex-direction: column;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './style.scss'
-import { CheckPicker, Stack } from 'rsuite';
+import { CheckPicker } from 'rsuite';
+import { DateRangePicker, Stack } from 'rsuite';
 
 const data = [
   'Eugenia',
@@ -51,6 +52,7 @@ const TemplateManagement = () => {
       <div className="TemplateManagement-container">
         <div className="heading">
           <h2>Filters</h2>
+          <DateRangePicker />
         </div>
 
         <div className="filters-container">

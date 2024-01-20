@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  .heading{
+    display: flex;
+    justify-content: space-between;
+  }
   .filters-container {
     display: flex;
     width: 100%;

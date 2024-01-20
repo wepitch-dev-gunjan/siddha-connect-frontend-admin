@@ -45,6 +45,7 @@ const Upload = () => {
               <span>
                 <FileUploadIcon style={{ fontSize: 100 }} />
                 <p>Click and drag to upload files</p>
+                <p>Allowed extensions:</p>
                 <p>.xlsx, .xlsm, .xlsb, .xltx, .xltm, .xls, .xlt, .xls, .xml, .xlam, .xla</p>
               </span>
             </div>

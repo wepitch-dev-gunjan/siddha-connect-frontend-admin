@@ -1,0 +1,9 @@
+.filter-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    .position-dropdowns{
+        display: flex;
+        gap: 20px;
+    }
+}

@@ -24,6 +24,7 @@ import ViewRole from "./pages/viewRole";
 import Analytics from "./pages/analytics";
 import { Chart } from "chart.js";
 import User from "./pages/user";
+import EmployeeProfile from "./pages/employee-profile";
 
 function App() {
   const { user, setUser } = useContext(UserContext);
@@ -74,6 +75,10 @@ function App() {
                 <Route path="/role" element={<Role />} />
                 <Route path="/view-roles" element={<ViewRole />} />
                 <Route path="/user" element={<User />} />
+                <Route
+                  path="/users/employee-profile"
+                  element={<EmployeeProfile />}
+                />
               </>
             ) : (
               <>

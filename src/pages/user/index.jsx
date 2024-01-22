@@ -60,7 +60,7 @@ const [users, setUsers] = useState([
               <div className='col'>{user.role}</div>
               
               <div className='col'>
-                <Link to={`/counsellors/user-profile/${user._id}`}>
+                <Link to={`/users/employee-profile`}>
                   <p>View Profile</p>
                 </Link>
               </div>

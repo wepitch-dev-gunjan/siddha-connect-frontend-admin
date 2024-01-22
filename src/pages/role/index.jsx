@@ -3,9 +3,9 @@ import './style.scss'
 
 const Role = () => {
   return (
-    <div>
-role-generation      
-    </div>
+    <>
+    char
+    </>
   )
 }
 

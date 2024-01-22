@@ -78,6 +78,23 @@ const Sidebar = () => {
               View All Roles
             </Nav.Item>
 
+            {/* User Management */}
+            <Nav.Item panel style={panelStyles}>
+              User Management
+            </Nav.Item>
+            <Nav.Item eventKey="9" icon={<DashboardIcon />} onSelect={() => navigate('/user')}>
+            User Management
+            </Nav.Item>
+
+              {/* Attendence Management */}
+              <Nav.Item panel style={panelStyles}>
+              Attendence
+            </Nav.Item>
+            <Nav.Item eventKey="10" icon={<DashboardIcon />} onSelect={() => navigate('/user')}>
+            Attendence
+            </Nav.Item>
+            
+
           </Nav>
         </Sidenav.Body>
       </Sidenav>

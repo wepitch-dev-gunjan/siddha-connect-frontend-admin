@@ -6,7 +6,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import { AiOutlineLogout } from "react-icons/ai";
 import DropDownMenuButton from "../dropDownMenuButton";
 import { useNavigate } from "react-router-dom";
-import { MediaQueryContext } from "../../../context/MediaQueryContext";
 import { UserContext } from "../../../context/UserContext";
 
 const ProfileDropDownMenu = ({ name, onClick }) => {
@@ -14,7 +13,6 @@ const ProfileDropDownMenu = ({ name, onClick }) => {
   const dropdownRef = useRef(null);
   const { user } = useContext(UserContext)
   const navigate = useNavigate();
-  const { smallScreen } = useContext(MediaQueryContext);
   const [avatar, setAvatar] = useState('R');
   useClickOutside(dropdownRef, () => {
     setIsDropdownOpen(false);
@@ -40,7 +38,7 @@ const ProfileDropDownMenu = ({ name, onClick }) => {
 
 
   const toggleDropdown = () => {
-    setIsDropdownOpen((prevState) => !prevState);    
+    setIsDropdownOpen((prevState) => !prevState);
   };
 
 

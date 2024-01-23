@@ -1,9 +1,9 @@
-.header {
+.Header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 16px;
+  padding: 8px 16px;
   border-bottom: 1px solid #8686863f;
   background-color: var(--primary-light);
   .leftSide {

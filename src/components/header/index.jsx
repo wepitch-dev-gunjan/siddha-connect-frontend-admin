@@ -16,7 +16,7 @@ const Header = ({ handleLogout }) => {
   const { setNotificationsEnable } = useContext(NotificationContext);
 
   return (
-    <div className="header">
+    <div className="Header-container">
       <div className="leftSide">
         <img src={logo} alt="" />
       </div>

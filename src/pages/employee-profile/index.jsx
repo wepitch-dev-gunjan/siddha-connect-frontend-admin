@@ -1,23 +1,42 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import './style.scss'
-import { ProfileContext } from '../../context/ProfileContext';
-import BasicInfo from '../../components/basicInfo';
 
 const EmployeeProfile = () => {
-  const { profile, setProfile } = useContext(ProfileContext);
 
   return (
     <div className="EmployeeProfile-container">
         <div className="name">
-            <h2>{profile.name}</h2>
+            <h2>Naman</h2>
         </div>
-        <div className="profile-info">
-        <BasicInfo
-              profile={profile}
-              setProfile={setProfile}
-            />
+        <div className="EmployeeInfo-container">
+      <div className="heading">
+        <h2>Basic info</h2>
+      </div>
+      <div className="info">
+        <div className="row">
+          <div className="col">
+            <div className="info-field">
+              <p>Phone no.</p>
+            </div>
+            <div className="info-value">
+                <p>+91-78965896545</p>
+            </div>
+          </div>
         </div>
-    </div>
+
+        <div className="row">
+          <div className="col">
+            <div className="info-field">
+              <p>Role</p>
+            </div>
+            <div className="info-value">
+                <p>ADMIN</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div >
+  </div>
   )
 }
 

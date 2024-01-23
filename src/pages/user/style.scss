@@ -1,6 +1,7 @@
 .User-container {
     width: 100%;
     overflow-y: auto;
+
     .heading {
       background-color: var(--primary-light);
       padding: 20px 20px 0 20px;
@@ -47,6 +48,7 @@
       width: 100%;
     }
     .table {
+
       .row {
         display: flex;
         border-bottom: 1px solid rgba(24, 45, 107, 0.253);

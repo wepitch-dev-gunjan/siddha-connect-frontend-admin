@@ -1,0 +1,11 @@
+.EmployeeProfile-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px;
+    .profile-info{
+        width: 100%;
+        padding: 40px 200px 0px 200px;
+    }
+}

@@ -76,7 +76,7 @@ function App() {
                 <Route path="/view-roles" element={<ViewRole />} />
                 <Route path="/user" element={<User />} />
                 <Route
-                  path="/users/employee-profile"
+                  path="/user/employee-profile"
                   element={<EmployeeProfile />}
                 />
               </>

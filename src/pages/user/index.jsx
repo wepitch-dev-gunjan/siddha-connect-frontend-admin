@@ -3,10 +3,7 @@ import './style.scss'
 
 import { Link } from "react-router-dom";
 import "./style.scss"
-import { useContext, useEffect, useState } from 'react';
-import { UserContext } from "../../context/UserContext";
-import axios from "axios";
-import { backend_url } from "../../config";
+import { useState } from 'react';
 
 const User = () => {
 
@@ -113,13 +110,11 @@ const [users, setUsers] = useState([
         <div className="table">
           {users.map((user, i) => (
             <div className='row' key={i}>
-              
               <div className='col'>{user.name}</div>
               <div className='col'>{user.phone_number}</div>
               <div className='col'>{user.role}</div>
-              
               <div className='col'>
-                <Link to={`/users/employee-profile`}>
+                <Link to={`/user/employee-profile`}>
                   <p>View Profile</p>
                 </Link>
               </div>

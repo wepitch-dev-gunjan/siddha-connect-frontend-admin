@@ -1,15 +1,10 @@
 import React from 'react'
 import './style.scss'
-
 import { Link } from "react-router-dom";
 import "./style.scss"
 import { useState } from 'react';
 
 const User = () => {
-
- 
-//   const { user } = useContext(UserContext)
-
 const [users, setUsers] = useState([
     {
         name: 'anc',
@@ -36,17 +31,17 @@ const [users, setUsers] = useState([
         phone_number: '155545454545',
         role: 'admin'
     },
-    {
-        name: 'anc',
-        phone_number: '155545454545',
-        role: 'admin'
-    },
-    {
-        name: 'anc',
-        phone_number: '155545454545',
-        role: 'admin'
-    },
-    {
+    {     
+        name: 'anc',     
+        phone_number: '155545454545',     
+        role: 'admin'     
+    },     
+    {     
+        name: 'anc',     
+        phone_number: '155545454545',     
+        role: 'admin'     
+    },     
+    {     
         name: 'anc',
         phone_number: '155545454545',
         role: 'admin'
@@ -78,7 +73,6 @@ const [users, setUsers] = useState([
     },
 ])
 
-
 //   const getUsers = async () => {
 //     try {
 //       const { data } = await axios.get(`${backend_url}/user/user-for-admin`,
@@ -96,15 +90,15 @@ const [users, setUsers] = useState([
 //       // toast(error.message)
 //     }
 //   }
-  return (
-    <div className="User-container">
-      <div className="heading sticky">
-        <div className="row">
-          <div className="col"><h4>NAME</h4></div>
-          <div className="col"><h4>PHONE NUMBER</h4></div>
-          <div className="col"><h4>ROLE</h4></div>
-          <div className="col"><h4>PROFILE LINK</h4></div>
-        </div>
+  return (     
+    <div className="User-container">     
+      <div className="heading sticky">     
+        <div className="row">     
+          <div className="col"><h4>NAME</h4></div>     
+          <div className="col"><h4>PHONE NUMBER</h4></div>     
+          <div className="col"><h4>ROLE</h4></div>     
+          <div className="col"><h4>PROFILE LINK</h4></div>     
+        </div>     
       </div>
       <div className='user-table-container'>
         <div className="table">

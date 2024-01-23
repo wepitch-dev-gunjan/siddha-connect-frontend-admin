@@ -19,7 +19,7 @@ const EmployeeProfile = () => {
               <p>Phone no.</p>
             </div>
             <div className="info-value">
-                <p>+91-78965896545</p>
+                <p>+91-9898785457</p>
             </div>
           </div>
         </div>
@@ -34,6 +34,7 @@ const EmployeeProfile = () => {
             </div>
           </div>
         </div>
+        
       </div>
     </div >
   </div>

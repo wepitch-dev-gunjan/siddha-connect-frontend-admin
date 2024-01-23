@@ -22,7 +22,6 @@ import Tools from "./pages/tools";
 import Role from "./pages/role";
 import ViewRole from "./pages/viewRole";
 import Analytics from "./pages/analytics";
-import { Chart } from "chart.js";
 import User from "./pages/user";
 import EmployeeProfile from "./pages/employee-profile";
 

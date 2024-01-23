@@ -93,7 +93,6 @@ const Sidebar = () => {
             <Nav.Item eventKey="10" icon={<DashboardIcon />} onSelect={() => navigate('/user')}>
             Attendence
             </Nav.Item>
-            
 
           </Nav>
         </Sidenav.Body>

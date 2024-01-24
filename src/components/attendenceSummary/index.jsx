@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './style.scss'
+import { AttendenceContext } from '../../context/AttendenceContext'
 
 const AttendenceSummary = () => {
+    const {setPunchInEnable} = useContext(AttendenceContext)
     const [attendence,setAttendence] = useState([
         {
             date: "12 Jan",
@@ -63,7 +65,7 @@ const AttendenceSummary = () => {
                 </div>
             ))}
         </div>
-        <div className="punchIn-btn">
+        <div className="punchIn-btn" onClick={() => setPunchInEnable(true)}>
             Punch In
         </div>
     </div>

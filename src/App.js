@@ -25,10 +25,13 @@ import Analytics from "./pages/analytics";
 import User from "./pages/user";
 import EmployeeProfile from "./pages/employee-profile";
 import Attendence from "./pages/attendence";
+import PunchIn from "./pages/punchIn";
+import { AttendenceContext } from "./context/AttendenceContext";
 
 function App() {
   const { user, setUser } = useContext(UserContext);
   const { isLoggedIn } = user;
+  const { punchInEnable } = useContext(AttendenceContext);
   // const isLoggedIn = true;
 
   const { notificationsEnable, setNotificationsEnable, notificationsRef } =
@@ -49,10 +52,10 @@ function App() {
     <div>
       {isLoggedIn && <Header handleLogout={handleLogout} />}
 
+      {punchInEnable && <PunchIn />}
       <div className="main">
         <ToastContainer />
         {notificationsEnable && <Notifications />}
-
         {isLoggedIn && <Sidebar />}
         <div className={`${isLoggedIn && "main-content"}`}>
           {isLoggedIn && (

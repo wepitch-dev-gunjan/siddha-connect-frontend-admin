@@ -1,0 +1,47 @@
+.PunchIn-container{
+    width: 100%;
+    top: 0;
+    height: 100%;
+    z-index: 99999999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: rgba(45, 45, 45, 0.625);
+    .content{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+        background-color: white;
+        padding: 20px;
+        width: 400px;
+        height: 400px;
+        p{
+            font-size: 16px;
+            color: black;
+            font-weight: 600;
+        }
+        .location{
+            width: 100%;
+            padding: 20px;
+            background-color: whitesmoke;
+            height: 100%;
+            font-size: 16px;
+        }
+        .loc-submit{
+            background-color: var(--primary-dark);
+            width: 100%;
+            padding: 12px;
+            color: white;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+    }
+}

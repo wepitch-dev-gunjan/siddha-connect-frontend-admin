@@ -1,9 +1,11 @@
 import React, { useContext, useState } from 'react'
 import './style.scss'
 import { AttendenceContext } from '../../context/AttendenceContext'
+import useClickOutside from '../../customHooks/useClickOutside'
 
 const AttendenceSummary = () => {
     const {setPunchInEnable} = useContext(AttendenceContext)
+ 
     const [attendence,setAttendence] = useState([
         {
             date: "12 Jan",

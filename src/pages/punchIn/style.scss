@@ -31,16 +31,31 @@
             height: 100%;
             font-size: 16px;
         }
-        .loc-submit{
-            background-color: var(--primary-dark);
+        .loc-btns{
             width: 100%;
-            padding: 12px;
             color: white;
             font-size: 16px;
+            gap: 12px;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
+            .submit{
+                background-color: var(--primary-dark);
+                width: 100%;
+                padding: 12px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .cancel{
+                width: 100%;
+                padding: 12px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: var(--primary-dark);
+            }
         }
 
     }

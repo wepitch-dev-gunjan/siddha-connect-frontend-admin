@@ -24,6 +24,7 @@ import ViewRole from "./pages/viewRole";
 import Analytics from "./pages/analytics";
 import User from "./pages/user";
 import EmployeeProfile from "./pages/employee-profile";
+import Attendence from "./pages/attendence";
 
 function App() {
   const { user, setUser } = useContext(UserContext);
@@ -59,35 +60,38 @@ function App() {
               <Breadcrumb />
             </div>
           )}
-          <Routes>
-            {isLoggedIn ? (
-              <>
-                <Route path="/location" element={<Location />} />
-                <Route path="/login" element={<Navigate replace to="/" />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/analytics" element={<Analytics />} />
-                <Route path="/file-upload" element={<FileUpload />} />
-                <Route path="/upload-history" element={<UploadHistory />} />
-                <Route path="/template" element={<TemplateManagement />} />
-                <Route path="/tools" element={<Tools />} />
-                <Route path="/role" element={<Role />} />
-                <Route path="/view-roles" element={<ViewRole />} />
-                <Route path="/user" element={<User />} />
-                <Route
-                  path="/user/employee-profile"
-                  element={<EmployeeProfile />}
-                />
-              </>
-            ) : (
-              <>
-                <Route path="*" element={<Navigate replace to="/login" />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Login />} />
-                <Route path="/password-reset" element={<Login />} />
-              </>
-            )}
-          </Routes>
+          <div className="routes-container">
+            <Routes>
+              {isLoggedIn ? (
+                <>
+                  <Route path="/location" element={<Location />} />
+                  <Route path="/login" element={<Navigate replace to="/" />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/analytics" element={<Analytics />} />
+                  <Route path="/file-upload" element={<FileUpload />} />
+                  <Route path="/upload-history" element={<UploadHistory />} />
+                  <Route path="/template" element={<TemplateManagement />} />
+                  <Route path="/tools" element={<Tools />} />
+                  <Route path="/role" element={<Role />} />
+                  <Route path="/view-roles" element={<ViewRole />} />
+                  <Route path="/user" element={<User />} />
+                  <Route path="/attendence" element={<Attendence />} />
+                  <Route
+                    path="/user/employee-profile"
+                    element={<EmployeeProfile />}
+                  />
+                </>
+              ) : (
+                <>
+                  <Route path="*" element={<Navigate replace to="/login" />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/signup" element={<Login />} />
+                  <Route path="/password-reset" element={<Login />} />
+                </>
+              )}
+            </Routes>
+          </div>
         </div>
       </div>
     </div>

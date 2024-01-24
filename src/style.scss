@@ -109,7 +109,14 @@ input {
     display: flex;
     flex-direction: column;
     height: calc(100vh - 98px);
+    position: relative;
     width: 100%;
+    .routes-container{
+      display: flex;
+      overflow-y: auto;
+      flex-direction: column;
+      height: calc(100vh - 98px);
+    }
   }
 }
 

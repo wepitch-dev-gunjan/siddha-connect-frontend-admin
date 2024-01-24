@@ -1,0 +1,29 @@
+.Attendence-container{
+    width: 100%;
+    .attendence-info{
+        display: flex;
+        flex-direction: column;
+        // gap: 20px;
+        .row{
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+
+            padding: 40px 100px 28px 100px;
+            .col{
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                width: 100%;
+                background-color: whitesmoke;
+                padding: 50px;
+            }
+        }
+
+    }
+    .approval-pending{
+        padding: 12px 92px;
+    }
+   
+}

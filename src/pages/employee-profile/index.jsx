@@ -30,7 +30,7 @@ const EmployeeProfile = () => {
               <p>Role</p>
             </div>
             <div className="info-value">
-                <p>ADMIN</p>
+                <p>ADMIN</p> 
             </div>
           </div>
         </div>

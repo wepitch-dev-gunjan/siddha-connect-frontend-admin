@@ -90,7 +90,7 @@ const Sidebar = () => {
               <Nav.Item panel style={panelStyles}>
               Attendence
             </Nav.Item>
-            <Nav.Item eventKey="10" icon={<DashboardIcon />} onSelect={() => navigate('/user')}>
+            <Nav.Item eventKey="10" icon={<DashboardIcon />} onSelect={() => navigate('/attendence')}>
             Attendence
             </Nav.Item>
 

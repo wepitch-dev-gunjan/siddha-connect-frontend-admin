@@ -47,7 +47,7 @@ export const NotificationProvider = ({ children }) => {
 
   useEffect(() => {
     if (!allNotificationsFetched) {
-      getNotifications(page);
+      // getNotifications(page);
     }
   }, [user, allNotificationsFetched]);
   return (

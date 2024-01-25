@@ -10,6 +10,7 @@ const AttendenceSummary = () => {
         setPunchInEnable(true);
         setIsPunchInEnable(true);
     }
+
     const [attendence,setAttendence] = useState([
         {
             date: "12 Jan",
@@ -55,7 +56,7 @@ const AttendenceSummary = () => {
     </div>
     <div className="summary-info">
         {attendence.map((attend, i) => (
-            <div className="whole-info" key={i}>
+            <div className="whole-info" key={i} >
                 <div className="left-side">
                     <p>{attend.date}</p>
                     <p>{attend.day}</p>

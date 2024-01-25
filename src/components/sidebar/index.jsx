@@ -52,7 +52,7 @@ const Sidebar = () => {
             <Nav.Item eventKey="3" icon={<FileUploadIcon />} onSelect={() => navigate('/file-upload')}>
               File Upload
             </Nav.Item>
-            <Nav.Item eventKey="4" icon={<HistoryIcon />} onSelect={() => navigate('/history')}>
+            <Nav.Item eventKey="4" icon={<HistoryIcon />} onSelect={() => navigate('/upload-history')}>
               Upload History
             </Nav.Item>
 

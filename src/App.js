@@ -17,7 +17,7 @@ import Breadcrumb from "./components/breadcrumb";
 import Location from "./components/location";
 import FileUpload from "./pages/fileUpload";
 import UploadHistory from "./pages/uploadHistory";
-import TemplateManagement from "./pages/templateManagement2";
+import TemplateManagement from "./pages/templateManagement";
 import Tools from "./pages/tools";
 import Role from "./pages/role";
 import ViewRole from "./pages/viewRole";

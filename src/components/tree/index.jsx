@@ -50,13 +50,11 @@ const myTreeData = [
                     ]
                 }
             ]
-        
-        },
-          
-        ],
-      },
+        },  
     ],
-  },
+},
+],
+},
 ];
 
 const HierarchyChart = () => {

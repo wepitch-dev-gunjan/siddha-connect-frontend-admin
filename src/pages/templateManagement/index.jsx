@@ -8,60 +8,56 @@ import { UserContext } from '../../context/UserContext';
 import ChildFilter from './childFilter';
 
 const TemplateManagement = () => {
-  const [filters, setFilters] = useState({});
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
+  const user = {
+    name: "Gunjan Soral",
+    role: "65ae22f87c71f76cd5dc9f25"
+  }
+  const [role, setRole] = useState()
 
-  const getChildrenRoles = async () => {
+  const items = [
+    {
+      _id: "65a8fc8275af01aec9f142b6",
+      name: "Gunjan Soral"
+    },
+    {
+      _id: "65af6ecc9b63f4af81ef3418",
+      name: "Gunjan Soral 2"
+    },
+
+  ]
+
+
+
+
+  // const getItems = async () => {
+  //   try {
+  //     const { data } = await axios.get(`${backend_url}/user/children`, {
+  //       params: {
+  //         parents,
+  //       },
+  //     });
+  //     return data;
+  //   } catch (error) {
+  //     console.error(error);
+  //     toast.error('Error fetching children');
+  //     return [];
+  //   }
+  // };
+  const getRole = async () => {
     try {
-      const { data } = await axios.get(`${backend_url}/role/children-roles`, {
-        headers: {
-          Authorization: user.token,
-        },
-      });
-      setFilters(data);
+      const { data } = await axios.get(`${backend_url}/role/single-role/${user.role}`);
+      setRole(data);
     } catch (error) {
-      console.error(error);
-      toast.error('Error fetching filter roles');
+      console.log(error);
+      toast('Error fetching child role ' + role);
     }
-  };
-
-  const getChildren = async (parents) => {
-    try {
-      const { data } = await axios.get(`${backend_url}/user/children`, {
-        params: {
-          parents,
-        },
-      });
-      return data;
-    } catch (error) {
-      console.error(error);
-      toast.error('Error fetching children');
-      return [];
-    }
-  };
-
-  const renderChildrenFilters = (childRoles, parents) => {
-    if (!childRoles) return null;
-
-    try {
-      const children = getChildren(parents);
-      const nextParents = children.map((child) => child._id);
-      console.log(children)
-      return childRoles.map((role) => (
-        <React.Fragment key={role._id}>
-          <ChildFilter child={role} parents={children} />
-          {renderChildrenFilters(role.children, nextParents)}
-        </React.Fragment>
-      ));
-    } catch (error) {
-      console.error(error);
-      toast.error('Error rendering children filters');
-      return null;
-    }
-  };
+  }
 
   useEffect(() => {
-    getChildrenRoles();
+    if (!role)
+      getRole();
+    // getChildrenRoles();
   }, [user]);
 
   return (
@@ -73,7 +69,7 @@ const TemplateManagement = () => {
         </div>
 
         <div className="filters-container">
-          {filters && renderChildrenFilters(filters?.children, ['65a8fc8275af01aec9f142b6'])}
+          {role && <ChildFilter role={role} items={items} />}
         </div>
       </div>
     </>

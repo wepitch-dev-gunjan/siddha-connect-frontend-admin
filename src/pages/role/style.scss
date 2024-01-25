@@ -1,0 +1,59 @@
+.RoleGeneration-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+    align-items: center;
+    width: 100%;
+    padding: 40px 200px 40px 200px;
+    .role-container{
+        border: 1px solid rgb(146, 137, 137);
+        padding: 52px 160px 52px 160px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        border-radius: 20px;
+        .roleHeading{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .role-name{
+            display: flex; justify-content: center;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            input{
+                background-color: whitesmoke;
+                width: 224px;
+                padding: 12px;
+            }
+        }
+        .parent-roles{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+        }
+        .children-roles{
+            display: flex; justify-content: center;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+        }
+        .role-button{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--primary-dark);
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 12px 24px;
+        }
+    }
+    
+}

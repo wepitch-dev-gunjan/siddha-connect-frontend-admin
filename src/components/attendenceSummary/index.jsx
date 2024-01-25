@@ -1,11 +1,15 @@
 import React, { useContext, useState } from 'react'
 import './style.scss'
 import { AttendenceContext } from '../../context/AttendenceContext'
-import useClickOutside from '../../customHooks/useClickOutside'
 
 const AttendenceSummary = () => {
-    const {setPunchInEnable} = useContext(AttendenceContext)
- 
+    const { setPunchInEnable } = useContext(AttendenceContext);
+    const [isPunchInEnable, setIsPunchInEnable] = useState(false);
+
+    function punchIn() {
+        setPunchInEnable(true);
+        setIsPunchInEnable(true);
+    }
     const [attendence,setAttendence] = useState([
         {
             date: "12 Jan",
@@ -46,32 +50,29 @@ const AttendenceSummary = () => {
     ])
   return (
     <div className="attendence-summary">
-        <div className="summary-heading">
-         <h4>Attendence Summary</h4>
-        </div> 
-        <div className="summary-info">
-            {attendence.map((attend, i) => (
-                <div className="whole-info" key={i}>
-                    <div className="left-side">
-                        <p>
-                        {attend.date}
-                        </p>
-                        <p>
-                        {attend.day}
-                        </p>
-                    </div>
-                    <div className="right-side">
-                        <p>{attend.status}</p>
-                        <p>{attend.time}</p>
-                    </div>
-                </div>
-            ))}
-        </div>
-        <div className="punchIn-btn" onClick={() => setPunchInEnable(true)}>
-            Punch In
-        </div>
+    <div className="summary-heading">
+        <h4>Attendence Summary</h4>
     </div>
+    <div className="summary-info">
+        {attendence.map((attend, i) => (
+            <div className="whole-info" key={i}>
+                <div className="left-side">
+                    <p>{attend.date}</p>
+                    <p>{attend.day}</p>
+                </div>
+                <div className="right-side">
+                    <p>{attend.status}</p>
+                    <p>{attend.time}</p>
+                </div>
+            </div>
+        ))}
+    </div>
+
+    <div className="punchIn-btn" onClick={punchIn}>
+        {isPunchInEnable ? 'Punch Out' : 'Punch In'}
+    </div>
+</div>
   )
-}
+  }
 
 export default AttendenceSummary

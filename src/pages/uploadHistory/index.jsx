@@ -99,7 +99,6 @@ const UploadHistory = () => {
               <div className='col'>{file.name}</div>
               <div className='col'>{file.date}</div>
               <div className='col'>
-                
                   <p>Delete</p>
               </div>
             </div>

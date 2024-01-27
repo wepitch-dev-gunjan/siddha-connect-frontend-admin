@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 import { DateRangePicker } from 'rsuite';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { backend_url } from '../../config';
-import { UserContext } from '../../context/UserContext';
 import ChildFilter from './childFilter';
 
 const TemplateManagement = () => {

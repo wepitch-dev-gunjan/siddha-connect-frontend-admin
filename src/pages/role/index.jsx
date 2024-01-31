@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './style.scss'
-import { CheckPicker } from 'rsuite'
 import axios from 'axios';
 import { backend_url } from "../../config";
 import { toast } from 'react-toastify';

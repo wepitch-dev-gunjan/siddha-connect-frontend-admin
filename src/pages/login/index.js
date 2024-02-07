@@ -8,9 +8,12 @@ const Login = () => {
   const [signUpEnable, setSignUpEnable] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUserName] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
+  const [userNameError, setUserNameError] = useState(null);
 
   const setSignUp = () => {
     setSignUpEnable(true);
@@ -28,6 +31,13 @@ const Login = () => {
       isValid = false;
     } else {
       setEmailError(null);
+    }
+
+    if (!username) {
+      setUserNameError("User name id is required.");
+      isValid = false;
+    } else {
+      setUserNameError(null);
     }
 
     if (!password) {
@@ -102,16 +112,16 @@ const Login = () => {
                 id="outlined-basic"
                 label="Username"
                 variant="outlined"
-                value={password}
+                value={username}
                 onChange={(e) => {
-                  setPassword(e.target.value);
-                  setPasswordError(null);
+                  setUserName(e.target.value);
+                  setUserNameError(null);
                 }}
                 onBlur={() =>
-                  !password && setPasswordError("Password is required.")
+                  !username && setUserNameError("User name is required.")
                 }
-                error={!!passwordError}
-                helperText={passwordError}
+                error={!!userNameError}
+                helperText={userNameError}
                 InputProps={{
                   style: {
                     borderColor: "rgba(255, 255, 255, 0.8) !important",
@@ -158,7 +168,7 @@ const Login = () => {
                 variant="outlined"
                 value={newPassword}
                 onChange={(e) => {
-                  setEmail(e.target.value);
+                  setNewPassword(e.target.value);
                   setEmailError(null);
                 }}
                 onBlur={() =>
@@ -184,9 +194,9 @@ const Login = () => {
                 id="outlined-basic"
                 label="Confirm New Password"
                 variant="outlined"
-                value={newPassword}
+                value={confirmNewPassword}
                 onChange={(e) => {
-                  setEmail(e.target.value);
+                  setConfirmNewPassword(e.target.value);
                   setEmailError(null);
                 }}
                 onBlur={() =>
@@ -258,12 +268,6 @@ const Login = () => {
             </div>
           )}
 
-          {!forgotPasswordEnable && !signUpEnable && (
-            <span>
-              Don't have an account?
-              <p onClick={setSignUp}>Sign Up</p>
-            </span>
-          )}
           {!forgotPasswordEnable && !signUpEnable && (
             <span>
               Don't have an account?

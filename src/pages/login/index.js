@@ -264,6 +264,12 @@ const Login = () => {
               <p onClick={setSignUp}>Sign Up</p>
             </span>
           )}
+          {!forgotPasswordEnable && !signUpEnable && (
+            <span>
+              Don't have an account?
+              <p onClick={setSignUp}>Sign Up</p>
+            </span>
+          )}
         </div>
       </div>
     </div>

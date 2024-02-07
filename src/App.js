@@ -25,7 +25,7 @@ import Analytics from "./pages/analytics";
 import User from "./pages/user";
 import EmployeeProfile from "./pages/employee-profile";
 import Attendence from "./pages/attendence";
-import PunchIn from "./pages/punchIn";
+import PunchIn from "./components/punchIn";
 import { AttendenceContext } from "./context/AttendenceContext";
 
 function App() {

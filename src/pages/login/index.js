@@ -1,75 +1,92 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "./style.scss";
 import Logo from "../../assets/logo.svg";
 import { TextField } from "@mui/material";
-import Otp from "../../components/otp";
-import { toast } from "react-toastify";
-import { backend_url } from "../../config";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
 
 const Login = () => {
-  const [sendOtpEnable, setSendOtpEnable] = useState(false);
-  const [phone, setPhone] = useState("");
-  const [phoneError, setPhoneError] = useState(null);
-  const [otp, setOtp] = useState("");
-  const { user, setUser } = useContext(UserContext);
-  const navigate = useNavigate();
+  const [forgotPasswordEnable, setForgotPasswordEnable] = useState(false);
+  const [signUpEnable, setSignUpEnable] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [emailError, setEmailError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
+
+  const setSignUp = () => {
+    setSignUpEnable(true);
+  };
+
+  const setForgotPassword = () => {
+    setForgotPasswordEnable(true);
+  };
 
   const validateSignUpFields = () => {
     let isValid = true;
 
-    if (!phone) {
-      setPhoneError("Phone no. is required.");
+    if (!email) {
+      setEmailError("Email id is required.");
       isValid = false;
     } else {
-      setPhoneError(null);
+      setEmailError(null);
+    }
+
+    if (!password) {
+      setPasswordError("Email id is required.");
+      isValid = false;
+    } else {
+      setPasswordError(null);
+    }
+
+    if (!newPassword) {
+      setPasswordError("New Password is required.");
+      isValid = false;
+    } else {
+      setPasswordError(null);
     }
 
     return isValid;
   };
 
-  const getOtp = async () => {
-    try {
-      const { data } = await axios.post(`${backend_url}/auth/sendOTPPhone`, {
-        phone_number: phone,
-      });
-      toast(data.message);
-    } catch (error) {
-      console.log(error);
-      toast("Error sending otp");
-    }
-  };
+  // const getOtp = async () => {
+  //   try {
+  //     const { data } = await axios.post(`${backend_url}/auth/sendOTPPhone`, {
+  //       phone_number: phone,
+  //     });
+  //     toast(data.message);
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast("Error sending otp");
+  //   }
+  // };
 
-  const verifyOtp = async () => {
-    try {
-      const { data } = await axios.post(`${backend_url}/auth/verifyOTPPhone`, {
-        phone_number: phone,
-        otp,
-      });
-      toast(data.message);
-      localStorage.setItem("token", data.token);
-      setUser((prev) => ({
-        ...prev,
-        token: data.token,
-      }));
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-      toast("OTP Verification failed");
-    }
-  };
+  // const verifyOtp = async () => {
+  //   try {
+  //     const { data } = await axios.post(`${backend_url}/auth/verifyOTPPhone`, {
+  //       phone_number: phone,
+  //       otp,
+  //     });
+  //     toast(data.message);
+  //     localStorage.setItem("token", data.token);
+  //     setUser((prev) => ({
+  //       ...prev,
+  //       token: data.token,
+  //     }));
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast("OTP Verification failed");
+  //   }
+  // };
 
-  const handleOtpClick = () => {
-    setSendOtpEnable(true);
-    getOtp();
-  };
+  // const handleOtpClick = () => {
+  //   setSendOtpEnable(true);
+  //   getOtp();
+  // };
 
-  const handleVerifyOtp = () => {
-    setSendOtpEnable(true);
-    verifyOtp();
-  };
+  // const handleVerifyOtp = () => {
+  //   setSendOtpEnable(true);
+  //   verifyOtp();
+  // };
 
   return (
     <div className="container">
@@ -79,20 +96,22 @@ const Login = () => {
         </div>
 
         <div className="login-inputs">
-          {!sendOtpEnable && (
-            <>
+          <>
+            {signUpEnable && (
               <TextField
                 id="outlined-basic"
-                label="Phone no."
+                label="Username"
                 variant="outlined"
-                value={phone}
+                value={password}
                 onChange={(e) => {
-                  setPhone(e.target.value);
-                  setPhoneError(null);
+                  setPassword(e.target.value);
+                  setPasswordError(null);
                 }}
-                onBlur={() => !phone && setPhoneError("Phone no. is required.")}
-                error={!!phoneError}
-                helperText={phoneError}
+                onBlur={() =>
+                  !password && setPasswordError("Password is required.")
+                }
+                error={!!passwordError}
+                helperText={passwordError}
                 InputProps={{
                   style: {
                     borderColor: "rgba(255, 255, 255, 0.8) !important",
@@ -104,30 +123,146 @@ const Login = () => {
                   },
                 }}
               />
-            </>
-          )}
+            )}
 
-          {sendOtpEnable && <div className="otp-head">Enter Otp</div>}
+            {!forgotPasswordEnable && (
+              <TextField
+                id="outlined-basic"
+                label="Email"
+                variant="outlined"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setEmailError(null);
+                }}
+                onBlur={() => !email && setEmailError("Email id is required.")}
+                error={!!emailError}
+                helperText={emailError}
+                InputProps={{
+                  style: {
+                    borderColor: "rgba(255, 255, 255, 0.8) !important",
+                    background: "rgba(217, 217, 217, 0.20)", // Remove the semicolon at the end
+                    color: "#fff",
+                  },
+                  focused: {
+                    color: "#fff",
+                  },
+                }}
+              />
+            )}
 
-          {sendOtpEnable && (
-            <div className="otp">
-              <Otp otp={otp} setOtp={setOtp} />
-            </div>
-          )}
+            {forgotPasswordEnable && (
+              <TextField
+                id="outlined-basic"
+                label="New Password"
+                variant="outlined"
+                value={newPassword}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setEmailError(null);
+                }}
+                onBlur={() =>
+                  !password && setPasswordError("New Password is required.")
+                }
+                error={!!passwordError}
+                helperText={passwordError}
+                InputProps={{
+                  style: {
+                    borderColor: "rgba(255, 255, 255, 0.8) !important",
+                    background: "rgba(217, 217, 217, 0.20)", // Remove the semicolon at the end
+                    color: "#fff",
+                  },
+                  focused: {
+                    color: "#fff",
+                  },
+                }}
+              />
+            )}
 
-          {!sendOtpEnable && (
+            {forgotPasswordEnable && (
+              <TextField
+                id="outlined-basic"
+                label="Confirm New Password"
+                variant="outlined"
+                value={newPassword}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setEmailError(null);
+                }}
+                onBlur={() =>
+                  !password && setPasswordError("New Password is required.")
+                }
+                error={!!passwordError}
+                helperText={passwordError}
+                InputProps={{
+                  style: {
+                    borderColor: "rgba(255, 255, 255, 0.8) !important",
+                    background: "rgba(217, 217, 217, 0.20)", // Remove the semicolon at the end
+                    color: "#fff",
+                  },
+                  focused: {
+                    color: "#fff",
+                  },
+                }}
+              />
+            )}
+
+            {!forgotPasswordEnable && (
+              <TextField
+                id="outlined-basic"
+                label="Password"
+                variant="outlined"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setPasswordError(null);
+                }}
+                onBlur={() =>
+                  !password && setPasswordError("Password is required.")
+                }
+                error={!!passwordError}
+                helperText={passwordError}
+                InputProps={{
+                  style: {
+                    borderColor: "rgba(255, 255, 255, 0.8) !important",
+                    background: "rgba(217, 217, 217, 0.20)", // Remove the semicolon at the end
+                    color: "#fff",
+                  },
+                  focused: {
+                    color: "#fff",
+                  },
+                }}
+              />
+            )}
+
+            {!forgotPasswordEnable && !signUpEnable && (
+              <p onClick={setForgotPassword}>Forgot Password?</p>
+            )}
+          </>
+
+          {!forgotPasswordEnable && !signUpEnable && (
             <div className="buttons">
-              <button className="Google-login-button" onClick={handleOtpClick}>
-                Send OTP
-              </button>
+              <button className="Google-login-button">Login</button>
             </div>
           )}
-          {sendOtpEnable && (
+
+          {forgotPasswordEnable && !signUpEnable && (
             <div className="buttons">
-              <button className="Google-login-button" onClick={handleVerifyOtp}>
-                Verify OTP
-              </button>
+              <button className="Google-login-button">Reset Password</button>
             </div>
+          )}
+
+          {signUpEnable && (
+            <div className="buttons">
+              <button className="Google-login-button">Sign Up</button>
+            </div>
+          )}
+
+          {!forgotPasswordEnable && !signUpEnable && (
+            <span>
+              Don't have an account?
+              <p onClick={setSignUp}>Sign Up</p>
+            </span>
           )}
         </div>
       </div>

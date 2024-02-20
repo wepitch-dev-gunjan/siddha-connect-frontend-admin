@@ -181,8 +181,33 @@ const Login = () => {
                 }}
               />
             )}
-
             {forgotPasswordEnable && (
+              <TextField
+                id="outlined-basic"
+                label="Email"
+                variant="outlined"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setEmailError(null);
+                }}
+                onBlur={() => !email && setEmailError("Email id is required.")}
+                error={!!emailError}
+                helperText={emailError}
+                InputProps={{
+                  style: {
+                    borderColor: "rgba(255, 255, 255, 0.8) !important",
+                    background: "rgba(217, 217, 217, 0.20)", // Remove the semicolon at the end
+                    color: "#fff",
+                  },
+                  focused: {
+                    color: "#fff",
+                  },
+                }}
+              />
+            )}
+
+            {/* {forgotPasswordEnable && (
               <TextField
                 id="outlined-basic"
                 label="New Password"
@@ -236,7 +261,7 @@ const Login = () => {
                   },
                 }}
               />
-            )}
+            )} */}
 
             {!forgotPasswordEnable && (
               <TextField

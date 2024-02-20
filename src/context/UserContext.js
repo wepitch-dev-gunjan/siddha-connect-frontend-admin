@@ -19,7 +19,6 @@ export const UserProvider = ({ children }) => {
       });
     }
   }, [navigate]); // Add setUser and navigate as dependencies
-
   useEffect(() => {
     if (!user.isLoggedIn) {
       navigate("/login");

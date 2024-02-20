@@ -1,0 +1,32 @@
+.container {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ width: 100vw;
+ height: 100vh;
+ background-image: url(../../assets/bg.jpg);
+}
+
+.Reset-container {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ gap: 40px;
+ background-color: var(--primary-light);
+ padding: 0px 225px 160px 225px;
+ border-radius: 30px;
+ border: 1px solid rgba(255, 255, 255, 0.5);
+ box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.img {
+ padding: 32px 0 40px 0;
+}
+
+.reset-inputs {
+ display: flex;
+ justify-content: center;
+ flex-direction: column;
+ gap: 20px;
+}

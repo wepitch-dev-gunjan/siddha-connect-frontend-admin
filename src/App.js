@@ -27,6 +27,8 @@ import EmployeeProfile from "./pages/employee-profile";
 import Attendence from "./pages/attendence";
 import PunchIn from "./components/punchIn";
 import { AttendenceContext } from "./context/AttendenceContext";
+// import reset Password
+import ResetPassword from "./pages/reset_password";
 
 function App() {
   const { user, setUser } = useContext(UserContext);
@@ -65,10 +67,15 @@ function App() {
           )}
           <div className="routes-container">
             <Routes>
+          
+
               {isLoggedIn ? (
                 <>
                   <Route path="/location" element={<Location />} />
                   <Route path="/login" element={<Navigate replace to="/" />} />
+
+                  {/* Path to reset Password */}
+
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/analytics" element={<Analytics />} />
@@ -82,12 +89,12 @@ function App() {
                   <Route path="/attendence" element={<Attendence />} />
                   <Route
                     path="/user/employee-profile"
-                    element={<EmployeeProfile />}
-                  />
+                    element={<EmployeeProfile />}/>
                 </>
-              ) : (
+              ) :(
                 <>
                   <Route path="*" element={<Navigate replace to="/login" />} />
+                  <Route path = "/reset-password" element={<ResetPassword />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Login />} />
                   <Route path="/password-reset" element={<Login />} />

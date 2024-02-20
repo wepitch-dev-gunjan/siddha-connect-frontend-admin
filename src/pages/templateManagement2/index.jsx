@@ -27,9 +27,6 @@ const TemplateManagement = () => {
 
   ]
 
-
-
-
   const getItems = async () => {
     try {
       const { data } = await axios.get(`${backend_url}/user/children`, {

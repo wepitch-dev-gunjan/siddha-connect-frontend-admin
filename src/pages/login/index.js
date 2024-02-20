@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./style.scss";
 import Logo from "../../assets/logo.svg";
 import { TextField } from "@mui/material";
+import { CheckPicker, Stack } from "rsuite";
 
 const Login = () => {
   const [forgotPasswordEnable, setForgotPasswordEnable] = useState(false);
@@ -14,6 +15,26 @@ const Login = () => {
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
   const [userNameError, setUserNameError] = useState(null);
+  const data = [
+    "Eugenia",
+    "Bryan",
+    "Linda",
+    "Nancy",
+    "Lloyd",
+    "Alice",
+    "Julia",
+    "Albert",
+    "Louisa",
+    "Lester",
+    "Lola",
+    "Lydia",
+    "Hal",
+    "Hannah",
+    "Harriet",
+    "Hattie",
+    "Hazel",
+    "Hilda",
+  ].map((item) => ({ label: item, value: item }));
 
   const setSignUp = () => {
     setSignUpEnable(true);

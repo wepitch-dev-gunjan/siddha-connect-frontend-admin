@@ -1,10 +1,35 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import "./style.scss";
 import Logo from "../../assets/logo.svg";
 import { TextField } from "@mui/material";
+import axios from 'axios';
+import { backend_url } from '../../config';
 const ResetPassword = () => {
- const [newPassword, setNewPassword] = useState("");
- const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [ token, setToken ] = useState('')
+  const [ newPassword ,setNewPassword ] = useState('')
+  const [ confirmNewPassword ,setConfirmNewPassword ] = useState('')
+
+  const resetPassword = async () => {
+    try {
+      const {data} = await axios.post(`${backend_url}/user/resetPassword`, {
+        newPassword, confirmNewPassword
+      }, {
+        params: {
+          token
+        }
+      })
+      console.log(data.message)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+
+    const token = searchParams.get('token');
+    setToken(token)
+  }, [])
  return(
   <div className="container">
   <div className="Reset-container">
@@ -30,7 +55,7 @@ const ResetPassword = () => {
                
               />
                 <div className="buttons">
-              <button className="Google-login-button">Confirm</button>
+              <button  onClick={resetPassword} className="Google-login-button">Confirm</button>
             </div>
     </div>
     </div>

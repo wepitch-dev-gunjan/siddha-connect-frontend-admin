@@ -3,6 +3,8 @@ import "./style.scss";
 import Logo from "../../assets/logo.svg";
 import { TextField } from "@mui/material";
 import { CheckPicker, Stack } from "rsuite";
+import axios from "axios";
+import { backend_url } from "../../config";
 
 const Login = () => {
   const [forgotPasswordEnable, setForgotPasswordEnable] = useState(false);
@@ -35,6 +37,18 @@ const Login = () => {
     "Hazel",
     "Hilda",
   ].map((item) => ({ label: item, value: item }));
+
+  const login = async () => {
+    try{
+      const { data } = await axios.post(`${backend_url}/login`,{
+        email, password
+      })
+
+      console.log(data.message, data.token);
+    }catch(error){
+      console.log(error)
+    }
+  } 
 
   const setSignUp = () => {
     setSignUpEnable(true);
@@ -298,7 +312,7 @@ const Login = () => {
 
           {!forgotPasswordEnable && !signUpEnable && (
             <div className="buttons">
-              <button className="Google-login-button">Login</button>
+              <button onClick={login} className="Google-login-button">Login</button>
             </div>
           )}
 

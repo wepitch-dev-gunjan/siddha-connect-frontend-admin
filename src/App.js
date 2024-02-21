@@ -67,7 +67,7 @@ function App() {
           )}
           <div className="routes-container">
             <Routes>
-          
+              <Route path="/reset-password" element={<ResetPassword />} />
 
               {isLoggedIn ? (
                 <>
@@ -89,12 +89,12 @@ function App() {
                   <Route path="/attendence" element={<Attendence />} />
                   <Route
                     path="/user/employee-profile"
-                    element={<EmployeeProfile />}/>
+                    element={<EmployeeProfile />}
+                  />
                 </>
-              ) :(
+              ) : (
                 <>
                   <Route path="*" element={<Navigate replace to="/login" />} />
-                  <Route path = "/reset-password" element={<ResetPassword />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Login />} />
                   <Route path="/password-reset" element={<Login />} />

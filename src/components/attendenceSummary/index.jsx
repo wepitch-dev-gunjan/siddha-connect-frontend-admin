@@ -1,15 +1,18 @@
 import React, { useContext, useState } from 'react'
 import './style.scss'
 import { AttendenceContext } from '../../context/AttendenceContext'
+import axios from 'axios';
 
 const AttendenceSummary = () => {
     const { setPunchInEnable } = useContext(AttendenceContext);
     const [isPunchInEnable, setIsPunchInEnable] = useState(false);
 
-    function punchIn() {
-        setPunchInEnable(true);
-        setIsPunchInEnable(true);
-    }
+    // function punchIn() {
+    //     setPunchInEnable(true);
+    //     setIsPunchInEnable(true);
+    // }
+
+    const punchIn
 
     const [attendence,setAttendence] = useState([
         {

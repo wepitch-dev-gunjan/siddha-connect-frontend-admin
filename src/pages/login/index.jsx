@@ -1,22 +1,75 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./style.scss";
 import Logo from "../../assets/logo.svg";
-import { TextField } from "@mui/material";
+import { Box, FormControl, InputLabel, MenuItem,  Select,  TextField } from "@mui/material";
 import { CheckPicker, Stack } from "rsuite";
+<<<<<<< Updated upstream
 import axios from "axios";
 import { backend_url } from "../../config";
+=======
+import { UserContext } from "../../context/UserContext";
+import toast from "react-hot-toast";
+import { backend_url } from "../../config";
+import axios from "axios";
+
+>>>>>>> Stashed changes
 
 const Login = () => {
   const [forgotPasswordEnable, setForgotPasswordEnable] = useState(false);
+  const {user}=useContext(UserContext)
   const [signUpEnable, setSignUpEnable] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUserName] = useState("");
+  const [selectedRole, setSelectedRole] = useState({});
+  const [roles, setRoles] = useState([])
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
   const [userNameError, setUserNameError] = useState(null);
+  const [roleError, setRoleError] = useState(null);
+  const [parents, setParents] = useState([]);
+  const [parentsError,setParentsError]=useState(null)
+
+  useEffect(()=>{
+    const getRoles = async () => {
+      try {
+        const { data } = await axios.get(`${backend_url}/role`);
+        console.log(data)
+        setRoles(data)
+      } catch (error) {
+        console.log(error)
+        toast('error fetching roles')
+      }
+    }
+    getRoles()
+  },[user])
+  
+    const registerUser = async () => {
+      try {
+        let payload = {name: username,email, password, role: selectedRole, parents}
+        console.log(payload);
+      const { data } = await axios.post(`${backend_url}/user/register`,payload);
+          console.log(data);
+      } catch (error) {
+        console.log(error);  
+      }
+    }
+  
+    const loginUser = async ()=>{
+      try {
+        const payload ={email,password}
+        const {data}= await axios.post(`${backend_url}/login`,payload)
+        console.log(data);
+        
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+
+
   const data = [
     "Eugenia",
     "Bryan",
@@ -54,9 +107,20 @@ const Login = () => {
     setSignUpEnable(true);
   };
 
-  const setForgotPassword = () => {
-    setForgotPasswordEnable(true);
-  };
+  
+    
+    const setForgotPassword =async ()=> {
+      setForgotPasswordEnable(true);
+      try {
+        const {data} = await axios.post(`${backend_url}/user/forgotPassword`)
+        console.log(data);
+        
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+  
 
   const validateSignUpFields = () => {
     let isValid = true;
@@ -91,6 +155,30 @@ const Login = () => {
 
     return isValid;
   };
+  
+
+  const handleRoleChange = (event) => {
+    setSelectedRole(event.target.value);
+    setRoleError(false);
+    console.log(event.target.value)
+  };
+
+
+  const addParents = (newParents) => {
+    setParents((prevParents) => {
+      newParents.forEach((newParent) => {
+        if (!prevParents.includes(newParent)) {
+          prevParents.push(newParent);
+        }
+      });
+      return prevParents;
+    });  
+    console.log(parents);
+  };
+  
+  
+
+  
 
   // const getOtp = async () => {
   //   try {
@@ -144,8 +232,9 @@ const Login = () => {
           <>
             {signUpEnable && (
               <TextField
-                id="outlined-basic"
+                id="username"
                 label="Username"
+                name="username"
                 variant="outlined"
                 value={username}
                 onChange={(e) => {
@@ -169,11 +258,99 @@ const Login = () => {
                 }}
               />
             )}
+             {signUpEnable && (
+                <div className="checkpicker"> 
+
+                 <CheckPicker 
+                 data={data}
+                  id="patents"
+                  name="parents"
+                  value={parents}
+                  onChange={addParents}
+                  onBlur={()=> !parents && setParentsError ("Parent is Required")}
+                  error={!!parentsError}
+                  helperText={parentsError}
+                  style={{ width: 324,color: "black"}} 
+                  appearance="subtle"  />
+                </div>
+              )}
+           
+           {signUpEnable && (
+                <Box sx={{ minWidth: 120,backgroundColor:"rgba(217, 217, 217, 0.20)" }}>
+                <FormControl fullWidth>
+                  <InputLabel >Role</InputLabel>
+                  <Select
+                    id="role"
+                    label="Role"
+                    name="role"
+                    value={selectedRole}
+                    onChange={handleRoleChange}
+                    onBlur={() =>
+                      !selectedRole && setRoleError("Role is required.")
+                    }
+                    error={!!roleError}
+                helperText={roleError}
+                InputProps={{
+                  style: {
+                    borderColor: "rgba(255, 255, 255, 0.8) !important",
+                    background: "rgba(217, 217, 217, 0.20)", 
+                    color: "#fff",
+                  },
+                  focused: {
+                    color: "#fff",
+                  },
+                }}  
+                  >
+                    {roles.map((role, i)=>(
+                    <MenuItem key={i} value={role}>{role.name}</MenuItem>
+                    ))}
+                  </Select>
+                  </FormControl>
+                </Box>
+
+              )}
+             
+
+               {/* {signUpEnable && (
+                <Box sx={{ minWidth: 120,backgroundColor:"rgba(217, 217, 217, 0.20)" }}>
+                <FormControl fullWidth>
+                  <InputLabel >parentss</InputLabel>
+                  <Select
+                    id="parents"
+                    label="parents"
+                    name="parents"
+                    value={parents}
+                    onChange={handleparentsChange}
+                    onBlur={() =>
+                      !parents && setparentsError("parents is required.")
+                    }
+                    error={!!parentsError}
+                helperText={parentsError}
+                InputProps={{
+                  style: {
+                    borderColor: "rgba(255, 255, 255, 0.8) !important",
+                    background: "rgba(217, 217, 217, 0.20)", 
+                    color: "#fff",
+                  },
+                  focused: {
+                    color: "#fff",
+                  },
+                }}  
+                  >
+                    {roles.map((role, i)=>(
+                    <MenuItem key={i} value={role.name}>{role.name}</MenuItem>
+                    ))}
+                  </Select>
+                  </FormControl>
+                </Box> */}
+
+              {/* )} */}
 
             {!forgotPasswordEnable && (
               <TextField
-                id="outlined-basic"
+                id="email"
                 label="Email"
+                name="email"
                 variant="outlined"
                 value={email}
                 onChange={(e) => {
@@ -279,8 +456,9 @@ const Login = () => {
 
             {!forgotPasswordEnable && (
               <TextField
-                id="outlined-basic"
+                id="password"
                 label="Password"
+                name="password"
                 variant="outlined"
                 value={password}
                 onChange={(e) => {
@@ -306,13 +484,17 @@ const Login = () => {
             )}
 
             {!forgotPasswordEnable && !signUpEnable && (
-              <p onClick={setForgotPassword}>Forgot Password?</p>
+              <p onClick={setForgotPassword} >Forgot Password?</p>
             )}
           </>
 
           {!forgotPasswordEnable && !signUpEnable && (
             <div className="buttons">
+<<<<<<< Updated upstream
               <button onClick={login} className="Google-login-button">Login</button>
+=======
+              <button className="Google-login-button" onClick={loginUser}>Login</button>
+>>>>>>> Stashed changes
             </div>
           )}
 
@@ -324,7 +506,7 @@ const Login = () => {
 
           {signUpEnable && (
             <div className="buttons">
-              <button className="Google-login-button">Sign Up</button>
+              <button className="Google-login-button" onClick={registerUser}>Sign Up</button>
             </div>
           )}
 

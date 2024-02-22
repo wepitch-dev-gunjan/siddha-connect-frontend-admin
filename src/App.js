@@ -33,7 +33,7 @@ import ResetPassword from "./pages/reset_password";
 function App() {
   const { user, setUser } = useContext(UserContext);
   const { isLoggedIn } = user;
-  const { punchInEnable } = useContext(AttendenceContext);
+  const { punchInEnable, location } = useContext(AttendenceContext);
   // const isLoggedIn = true;
 
   const { notificationsEnable, setNotificationsEnable, notificationsRef } =
@@ -54,7 +54,7 @@ function App() {
     <div>
       {isLoggedIn && <Header handleLogout={handleLogout} />}
 
-      {punchInEnable && <PunchIn />}
+      {punchInEnable && <PunchIn location={location} />}
       <div className="main">
         <ToastContainer />
         {notificationsEnable && <Notifications />}

@@ -67,7 +67,6 @@ function App() {
           )}
           <div className="routes-container">
             <Routes>
-
               {isLoggedIn ? (
                 <>
                   <Route path="/location" element={<Location />} />
@@ -76,7 +75,7 @@ function App() {
                   {/* Path to reset Password */}
 
                   <Route path="/profile" element={<Profile />} />
-                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/analytics" element={<Analytics />} />
                   <Route path="/file-upload" element={<FileUpload />} />
                   <Route path="/upload-history" element={<UploadHistory />} />

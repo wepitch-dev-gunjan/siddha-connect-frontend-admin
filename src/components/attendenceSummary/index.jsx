@@ -49,13 +49,10 @@ const AttendenceSummary = ({setIsPunchInEnable,isPunchInEnable}) => {
     //     }
     //   }, []);
     
-   
     const punchIn= async()=>{
             setPunchInEnable(true);
             // setIsPunchInEnable(true);
             // setIsPunchInEnable(!isPunchInEnable)
-          
-
     }
     const punchOut= async()=>{
         setPunchInEnable(true);
@@ -74,12 +71,8 @@ const AttendenceSummary = ({setIsPunchInEnable,isPunchInEnable}) => {
             
         } catch (error) {
             console.log(error);
-            
         }
-
 }
- 
-
     // const punchIn = async () => {
     //     try {
             
@@ -93,7 +86,6 @@ const AttendenceSummary = ({setIsPunchInEnable,isPunchInEnable}) => {
     //     }
 
     // }
-
     const [attendence,setAttendence] = useState([
         {
             date: "12 Jan",
@@ -152,12 +144,9 @@ const AttendenceSummary = ({setIsPunchInEnable,isPunchInEnable}) => {
         ))}
     </div >
     <div className="punchIn-btn" onClick={punchIn}>
-
-
     {isPunchInEnable ? "Punch Out" :"Punch In"}
     </div>
     {/* <div>
-
     {showInButton &&<button className="punchIn-btn" onClick={punchIn}>Punch In</button>}
     {showOutButton &&<button className="punchIn-btn" onClick={punchOut}>Punch Out</button>}
     </div> */}

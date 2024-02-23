@@ -69,7 +69,6 @@ function App() {
           )}
           <div className="routes-container">
             <Routes>
-
               {isLoggedIn ? (
                 <>
                   <Route path="/location" element={<Location />} />

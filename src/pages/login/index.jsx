@@ -4,7 +4,7 @@ import Logo from "../../assets/logo.svg";
 import { Box, FormControl, InputLabel, MenuItem,  Select,  TextField } from "@mui/material";
 import { CheckPicker, Stack } from "rsuite";
 import { UserContext } from "../../context/UserContext";
-import toast from "react-hot-toast";
+import {toast} from "react-toastify";
 import { backend_url } from "../../config";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [forgotPasswordEnable, setForgotPasswordEnable] = useState(false);
-  const {user} = useContext(UserContext)
+  const {user}=useContext(UserContext)
   const [signUpEnable, setSignUpEnable] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +26,7 @@ const Login = () => {
   const [userNameError, setUserNameError] = useState(null);
   const [roleError, setRoleError] = useState(null);
   const [parents, setParents] = useState([]);
-  const [parentsError,setParentsError]=useState(null);
+  const [parentsError,setParentsError]=useState(null)
   const navigate = useNavigate();
 
   useEffect(()=>{
@@ -49,10 +49,26 @@ const Login = () => {
         console.log(payload);
       const { data } = await axios.post(`${backend_url}/user/register`,payload);
           console.log(data);
+          toast('User registered successfully');
+          navigate("/login")
       } catch (error) {
         console.log(error);  
       }
     }
+  
+    const loginUser = async ()=>{
+      try {
+        const payload ={email,password}
+        const {data}= await axios.post(`${backend_url}/login`,payload)
+        console.log(data);
+        toast('Logged in successfully')
+        navigate("/dashboard")
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+
 
   const data = [
     "Eugenia",
@@ -93,18 +109,15 @@ const Login = () => {
   const setSignUp = () => {
     setSignUpEnable(true);
   };
+
+  
     
-    const resetPassword =async ()=> {
+    const setForgotPassword =async ()=> {
       setForgotPasswordEnable(true);
       try {
-        const {data} = await axios.post(`${backend_url}/user/forgotPassword`, {
-          email
-        }, {
-          headers: {
-            Authorization: user.token
-          }
-        })
+        const {data} = await axios.post(`${backend_url}/user/forgotPassword`)
         console.log(data);
+        toast('Email sent Successfully')
         
       } catch (error) {
         console.log(error);
@@ -475,19 +488,19 @@ const Login = () => {
             )}
 
             {!forgotPasswordEnable && !signUpEnable && (
-              <p onClick={() => setForgotPasswordEnable(true)} >Forgot Password?</p>
+              <p onClick={setForgotPassword} >Forgot Password?</p>
             )}
           </>
 
           {!forgotPasswordEnable && !signUpEnable && (
             <div className="buttons">
-              <button className="Google-login-button" onClick={login}>Login</button>
+              <button className="Google-login-button" onClick={loginUser}>Login</button>
             </div>
           )}
 
           {forgotPasswordEnable && !signUpEnable && (
             <div className="buttons">
-              <button onClick={resetPassword} className="Google-login-button">Reset Password</button>
+              <button className="Google-login-button">Reset Password</button>
             </div>
           )}
 

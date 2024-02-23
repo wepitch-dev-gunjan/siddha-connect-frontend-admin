@@ -6,8 +6,10 @@ import axios from 'axios';
 import { backend_url } from '../../config';
 import { toast } from 'react-toastify';
 
-const PunchIn = ({location,}) => {
+const PunchIn = ({location}) => {
      const {setPunchInEnable} = useContext(AttendenceContext);
+     const{isPunchInEnable,setIsPunchInEnable}=useContext(AttendenceContext)
+
     const contentRef = useRef(null);
     const address=("abc")
     
@@ -18,6 +20,7 @@ const PunchIn = ({location,}) => {
     const token= localStorage.getItem("token")
     const handlePunchIn = async () => {
       setPunchInEnable(false)
+      setIsPunchInEnable(!isPunchInEnable)
       
       try {
         const payload ={location,address}

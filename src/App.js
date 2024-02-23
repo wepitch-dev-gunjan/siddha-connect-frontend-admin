@@ -29,11 +29,12 @@ import PunchIn from "./components/punchIn";
 import { AttendenceContext } from "./context/AttendenceContext";
 // import reset Password
 import ResetPassword from "./pages/reset_password";
+import AttendenceSummary from "./components/attendenceSummary";
 
 function App() {
   const { user, setUser } = useContext(UserContext);
   const { isLoggedIn } = user;
-  const { punchInEnable, location } = useContext(AttendenceContext);
+  const { punchInEnable, location,isPunchInEnable } = useContext(AttendenceContext);
   // const isLoggedIn = true;
 
   const { notificationsEnable, setNotificationsEnable, notificationsRef } =
@@ -53,8 +54,9 @@ function App() {
   return (
     <div>
       {isLoggedIn && <Header handleLogout={handleLogout} />}
+      {/* {!punchInEnable && <AttendenceSummary  setIsPunchInEnable={!isPunchInEnable} location={location} />} */}
 
-      {punchInEnable && <PunchIn location={location} />}
+      {punchInEnable && <PunchIn   location={location} />}
       <div className="main">
         <ToastContainer />
         {notificationsEnable && <Notifications />}
@@ -71,12 +73,12 @@ function App() {
               {isLoggedIn ? (
                 <>
                   <Route path="/location" element={<Location />} />
-                  <Route path="/login" element={<Navigate replace to="/" />} />
+                  <Route path="/" element={<Navigate replace to="/dashboard" />} />
 
                   {/* Path to reset Password */}
 
                   <Route path="/profile" element={<Profile />} />
-                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/analytics" element={<Analytics />} />
                   <Route path="/file-upload" element={<FileUpload />} />
                   <Route path="/upload-history" element={<UploadHistory />} />
@@ -94,7 +96,7 @@ function App() {
               ) : (
                 <>
                   {/* <Route path="*" element={<Navigate replace to="/login" />} /> */}
-                  <Route path="/login" element={<Login />} />
+                  <Route path="/" element={<Login />} />
                   <Route path="/signup" element={<Login />} />
                   <Route path="/reset-password" element={<ResetPassword />} />
                 </>

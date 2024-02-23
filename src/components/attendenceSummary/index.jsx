@@ -4,9 +4,8 @@ import { AttendenceContext } from '../../context/AttendenceContext'
 import axios from 'axios';
 import { backend_url } from '../../config';
 
-const AttendenceSummary = () => {
+const AttendenceSummary = ({setIsPunchInEnable,isPunchInEnable}) => {
     const { setPunchInEnable } = useContext(AttendenceContext);
-    const [isPunchInEnable, setIsPunchInEnable] = useState(false);
     const [exitLocation,setExitLocation]=useState("")
     const {location , setLocation}=useContext(AttendenceContext)
     const address=("abc")
@@ -53,8 +52,8 @@ const AttendenceSummary = () => {
    
     const punchIn= async()=>{
             setPunchInEnable(true);
-            setIsPunchInEnable(true);   
-            setIsPunchInEnable(!isPunchInEnable)
+            // setIsPunchInEnable(true);
+            // setIsPunchInEnable(!isPunchInEnable)
           
 
     }

@@ -83,7 +83,8 @@ const Login = () => {
 
       toast(data.message)
       localStorage.setItem('token', data.token);
-      navigate('/')
+      toast('User Logged in Successfully')
+      navigate('/dashboard')
     }catch(error){
       console.log(error)
     }

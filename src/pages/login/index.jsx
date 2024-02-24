@@ -55,19 +55,33 @@ const Login = () => {
         console.log(error);  
       }
     }
+
+    const login = async () => {
+      try{
+        const { data } = await axios.post(`${backend_url}/login`,{
+          email, password
+        })
   
-    const loginUser = async ()=>{
-      try {
-        const payload ={email,password}
-        const {data}= await axios.post(`${backend_url}/login`,payload)
-        console.log(data);
-        toast('Logged in successfully')
-        navigate("/")
-      } catch (error) {
-        console.log(error);
+        toast(data.message)
+        localStorage.setItem('token', data.token);
+        navigate('/')
+      }catch(error){
+        console.log(error)
+      }
+    }
+  
+    // const loginUser = async ()=>{
+    //   try {
+    //     const payload ={email,password}
+    //     const {data}= await axios.post(`${backend_url}/login`,payload)
+    //     console.log(data);
+    //     toast('Logged in successfully')
+    //     navigate("/")
+    //   } catch (error) {
+    //     console.log(error);
         
-      }
-    }
+    //   }
+    // }
 
 
   const data = [
@@ -91,20 +105,20 @@ const Login = () => {
     "Hilda",
   ].map((item) => ({ label: item, value: item }));
 
-  const login = async () => {
-    try{
-      const { data } = await axios.post(`${backend_url}/login`,{
-        email, password
-      })
+  // const login = async () => {
+  //   try{
+  //     const { data } = await axios.post(`${backend_url}/login`,{
+  //       email, password
+  //     })
 
-      toast(data.message)
-      localStorage.setItem('token', data.token);
-      // toast('User Logged in Successfully')
-      // navigate('/dashboard')
-    }catch(error){
-      console.log(error)
-    }
-  } 
+  //     toast(data.message)
+  //     localStorage.setItem('token', data.token);
+  //     // toast('User Logged in Successfully')
+  //     // navigate('/dashboard')
+  //   }catch(error){
+  //     console.log(error)
+  //   }
+  // } 
 
   const setSignUp = () => {
     setSignUpEnable(true);
@@ -494,7 +508,7 @@ const Login = () => {
 
           {!forgotPasswordEnable && !signUpEnable && (
             <div className="buttons">
-              <button className="Google-login-button" onClick={loginUser}>Login</button>
+              <button className="Google-login-button" onClick={login}>Login</button>
             </div>
           )}
 

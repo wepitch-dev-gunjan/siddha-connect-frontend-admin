@@ -59,8 +59,11 @@ const myTreeData = [
 
 const HierarchyChart = () => {
   return (
+    <div style={{display:"flex", justifyContent:"center",width: '100%', height: '100%'}}>
+
     <div style={{ width: '100%', height: '100%' }}>
       <Tree data={myTreeData} orientation="vertical" />
+    </div>
     </div>
   );
 };

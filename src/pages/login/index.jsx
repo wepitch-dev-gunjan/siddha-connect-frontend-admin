@@ -62,7 +62,7 @@ const Login = () => {
         const {data}= await axios.post(`${backend_url}/login`,payload)
         console.log(data);
         toast('Logged in successfully')
-        navigate("/dashboard")
+        navigate("/")
       } catch (error) {
         console.log(error);
         
@@ -99,8 +99,8 @@ const Login = () => {
 
       toast(data.message)
       localStorage.setItem('token', data.token);
-      toast('User Logged in Successfully')
-      navigate('/dashboard')
+      // toast('User Logged in Successfully')
+      // navigate('/dashboard')
     }catch(error){
       console.log(error)
     }

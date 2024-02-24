@@ -19,11 +19,11 @@ export const UserProvider = ({ children }) => {
       });
     }
   }, [navigate]); // Add setUser and navigate as dependencies
-  // useEffect(() => {
-  //   if (!user.isLoggedIn) {
-  //     navigate("/login");
-  //   }
-  // }, [user.isLoggedIn, navigate]); // Add navigate as a dependency
+  useEffect(() => {
+    if (!user.isLoggedIn) {
+      navigate("/login");
+    }
+  }, [user.isLoggedIn, navigate]); // Add navigate as a dependency
 
   return (
     <UserContext.Provider

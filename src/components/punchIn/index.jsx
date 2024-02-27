@@ -6,7 +6,7 @@ import axios from 'axios';
 import { backend_url } from '../../config';
 import { toast } from 'react-toastify';
 
-const PunchIn = ({location}) => {
+const   PunchIn = ({location}) => {
      const {setPunchInEnable} = useContext(AttendenceContext);
      const{isPunchInEnable,setIsPunchInEnable}=useContext(AttendenceContext)
 
@@ -24,14 +24,14 @@ const PunchIn = ({location}) => {
       
       try {
         const payload ={location,address}
-        console.log(location);
+        console.log( "our sdsdfsdf",location);
         
-        const { data } = await axios.post(`${backend_url}/attendance/`,payload,{
+        const { data } = await axios.post(`${backend_url}/attendance`,payload,{
             headers:{
                 Authorization:token
             }
         })
-        console.log(data);
+        console.log("punchin data",data);
 
         
     } catch (error) {

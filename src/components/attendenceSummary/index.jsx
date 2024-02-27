@@ -4,10 +4,11 @@ import { AttendenceContext } from '../../context/AttendenceContext'
 import axios from 'axios';
 import { backend_url } from '../../config';
 
-const AttendenceSummary = ({setIsPunchInEnable,isPunchInEnable}) => {
+const AttendenceSummary = () => {
     const { setPunchInEnable } = useContext(AttendenceContext);
     const [exitLocation,setExitLocation]=useState("")
     const {location , setLocation}=useContext(AttendenceContext)
+    const {isPunchInEnable,setIsPunchInEnable}=useContext(AttendenceContext)
     const address=("abc")
     useEffect(() => {
         const getLocation = () => {
@@ -55,14 +56,14 @@ const AttendenceSummary = ({setIsPunchInEnable,isPunchInEnable}) => {
             // setIsPunchInEnable(!isPunchInEnable)
     }
     const punchOut= async()=>{
-        setPunchInEnable(true);
-        setIsPunchInEnable(true);
+        setPunchInEnable(false);
+        setIsPunchInEnable(false);
     const token= localStorage.getItem("token")
         
         try {
             const payload ={location,address}
 
-            const { data } = await axios.post(`${backend_url}/attendance/`, payload,{
+            const { data } = await axios.put(`${backend_url}/attendance/`, payload,{
                 headers:{
                     Authorization:token
                 }
@@ -143,9 +144,15 @@ const AttendenceSummary = ({setIsPunchInEnable,isPunchInEnable}) => {
             </div>
         ))}
     </div >
-    <div className="punchIn-btn" onClick={punchIn}>
-    {isPunchInEnable ? "Punch Out" :"Punch In"}
+    {isPunchInEnable ? (
+        <div className="punchIn-btn" onClick={punchOut}>
+        Punch Out
     </div>
+    ) : (
+    <div className="punchIn-btn" onClick={punchIn}>
+        Punch In
+    </div>
+    )}
     {/* <div>
     {showInButton &&<button className="punchIn-btn" onClick={punchIn}>Punch In</button>}
     {showOutButton &&<button className="punchIn-btn" onClick={punchOut}>Punch Out</button>}

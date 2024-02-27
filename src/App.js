@@ -34,8 +34,7 @@ import AttendenceSummary from "./components/attendenceSummary";
 function App() {
   const { user, setUser } = useContext(UserContext);
   const { isLoggedIn } = user;
-  const { punchInEnable, location, isPunchInEnable } =
-    useContext(AttendenceContext);
+  const { punchInEnable, location, isPunchInEnable ,setIsPunchInEnable} =useContext(AttendenceContext);
   // const isLoggedIn = true;
 
   const { notificationsEnable, setNotificationsEnable, notificationsRef } =
@@ -57,7 +56,7 @@ function App() {
       {isLoggedIn && <Header handleLogout={handleLogout} />}
       {/* {!punchInEnable && <AttendenceSummary  setIsPunchInEnable={!isPunchInEnable} location={location} />} */}
 
-      {punchInEnable && <PunchIn location={location} />}
+      {punchInEnable && <PunchIn location={location}  isPunchInEnable={isPunchInEnable} setIsPunchInEnable={setIsPunchInEnable}  />}
       <div className="main">
         <ToastContainer />
         {notificationsEnable && <Notifications />}

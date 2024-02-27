@@ -17,7 +17,6 @@ const Upload = () => {
 
   const handleFileChange = (fileList) => {
     console.log(fileList)
-    return
     const invalidFiles = fileList.filter(file => !validExtensions.includes(file.name.slice(file.name.lastIndexOf('.'))));
     if (invalidFiles.length > 0) {
       toast(`Invalid file extension. Allowed extensions: ${validExtensions.join(', ')}`);

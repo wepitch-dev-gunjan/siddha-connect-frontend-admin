@@ -27,7 +27,7 @@ const Upload = () => {
     }
   };
 
-  const handleUploadClick = async (file) => {
+  const handleUploadClick = async () => {
     try {
       const formData = new FormData();
       formData.append('file', file);

@@ -27,15 +27,16 @@ const Sidebar = () => {
       display: 'flex',
       flexDirection: 'column',
       padding: '12px 0',
-      gap: '12px'
-
+      gap: '12px',
+      overflowY: 'auto',  // Add overflowY: 'auto' here
+      maxHeight: '100vh', // Set a maximum height to make the sidebar scrollable
     }}>
-      <Sidenav expanded={expanded} defaultOpenKeys={['3', '4']} appearance='subtle'>
+      <Sidenav expanded={expanded} defaultOpenKeys={['3', '4']} appearance='subtle'  className='custom-sidenav'>
         <Sidenav.Toggle expanded={expanded} onToggle={expanded => setExpanded(expanded)} />
-        <Sidenav.Body width='3200'>
+        <Sidenav.Body   width='3200' >
           <Nav activeKey={activeKey} onSelect={setActiveKey}>
             {/* Data Visualization */}
-            <Nav.Item panel style={panelStyles}>
+            <Nav.Item panel >
               Data Visualization
             </Nav.Item>
             <Nav.Item eventKey="1" icon={<BarLineChartIcon />} onSelect={() => navigate('/')}>

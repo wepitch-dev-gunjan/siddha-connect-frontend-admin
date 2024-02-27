@@ -514,7 +514,7 @@ const Login = () => {
 
           {forgotPasswordEnable && !signUpEnable && (
             <div className="buttons">
-              <button className="Google-login-button">Reset Password</button>
+              <button className="Google-login-button" onClick={setForgotPassword}>Reset Password</button>
             </div>
           )}
 

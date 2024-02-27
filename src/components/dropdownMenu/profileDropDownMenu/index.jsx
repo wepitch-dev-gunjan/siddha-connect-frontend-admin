@@ -78,7 +78,7 @@ const ProfileDropDownMenu = ({ name, onClick }) => {
             />
           )} */}
           <DropDownMenuButton
-            onClick={()=> navigate("/")}
+            onClick={onClick}
             icon={AiOutlineLogout}
             text="Log out"
           />

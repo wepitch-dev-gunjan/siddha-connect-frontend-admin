@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Uploader, Alert } from 'rsuite';
 import './style.scss';
 import FileUploadIcon from '@rsuite/icons/FileUpload';
 import {toast} from 'react-toastify';
+import { backend_url } from '../../config';
+import axios from 'axios';
+import { UserContext } from '../../context/UserContext';
 
 const validExtensions = ['.xlsx', '.xlsm', '.xlsb', '.xltx', '.xltm', '.xls', '.xlt', '.xls', '.xml', '.xlam', '.xla'];
 
 const Upload = () => {
   const [error, setError] = useState('');
   const [isButtonDisabled, setButtonDisabled] = useState(false);
+  const {user} = useContext(UserContext) 
 
   const handleFileChange = (fileList) => {
     const invalidFiles = fileList.filter(file => !validExtensions.includes(file.name.slice(file.name.lastIndexOf('.'))));
@@ -21,13 +25,29 @@ const Upload = () => {
     }
   };
 
-  const handleUploadClick = () => {
-    // Implement your file upload logic here
-    // You can use the Uploader's 'onUpload' or 'onSuccess' event to handle successful uploads
-    // and show a success toast, but for this example, we'll just clear the error.
-    setError('');
-    setButtonDisabled(false);
+  const handleUploadClick = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+  
+      const { data } = await axios.post(`${backend_url}/upload`, formData, {
+        headers: {
+          Authorization: `Bearer ${user.token}`
+          // 'Content-Type': 'multipart/form-data'
+        }
+      });
+  
+      console.log(data);
+      setError('');
+      setButtonDisabled(false);
+    } catch (error) {
+      // Handle error
+      console.error(error);
+      setError('Error uploading file');
+      setButtonDisabled(false);
+    }
   };
+  
 
   return (
     <>

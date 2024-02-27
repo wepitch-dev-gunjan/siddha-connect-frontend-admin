@@ -12,9 +12,12 @@ const validExtensions = ['.xlsx', '.xlsm', '.xlsb', '.xltx', '.xltm', '.xls', '.
 const Upload = () => {
   const [error, setError] = useState('');
   const [isButtonDisabled, setButtonDisabled] = useState(false);
+  const [file, setFile] = useState([])
   const {user} = useContext(UserContext) 
 
   const handleFileChange = (fileList) => {
+    console.log(fileList)
+    return
     const invalidFiles = fileList.filter(file => !validExtensions.includes(file.name.slice(file.name.lastIndexOf('.'))));
     if (invalidFiles.length > 0) {
       toast(`Invalid file extension. Allowed extensions: ${validExtensions.join(', ')}`);
@@ -34,7 +37,10 @@ const Upload = () => {
         headers: {
           Authorization: `Bearer ${user.token}`
           // 'Content-Type': 'multipart/form-data'
-        }
+        },
+        
+          withCredentials: true,
+        
       });
   
       console.log(data);
@@ -56,7 +62,6 @@ const Upload = () => {
           <h3>Upload files in the below area</h3>
         </div>
         <Uploader
-          action="//jsonplaceholder.typicode.com/posts/"
           draggable
           onChange={handleFileChange}
         >
@@ -71,6 +76,10 @@ const Upload = () => {
             </div>
           </div>
         </Uploader>
+        <input type="file" value={file} onChange={(e) => {
+          setFile(e.target.value)
+          console.log(e.target)
+          }} />
         <div className="buttons">
           <button className='file-buttons' onClick={handleUploadClick}  disabled={isButtonDisabled}>Upload</button>
         </div>

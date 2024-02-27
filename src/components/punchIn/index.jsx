@@ -12,8 +12,22 @@ const   PunchIn = ({location}) => {
 
     const contentRef = useRef(null);
     const address=("abc")
+    // let updateLocation =location.coords;
     
-
+    function wrapCoordinates(latitude, longitude) {
+      return {
+        location: {
+          latitude: latitude,
+          longitude: longitude,
+        }
+      };
+    }
+    
+   
+    const wrappedLocation = wrapCoordinates(location.coords.latitude, location.coords.longitude);
+    
+    console.log(wrappedLocation);
+    
     useClickOutside(contentRef, ()=> {
         setPunchInEnable(false);
     })
@@ -23,7 +37,7 @@ const   PunchIn = ({location}) => {
       setIsPunchInEnable(!isPunchInEnable)
       
       try {
-        const payload ={location,address}
+        const payload ={location:wrappedLocation,address}
         console.log( "our sdsdfsdf",location);
         
         const { data } = await axios.post(`${backend_url}/attendance`,payload,{

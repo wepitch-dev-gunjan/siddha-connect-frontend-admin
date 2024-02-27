@@ -41,6 +41,17 @@ const AttendenceSummary = () => {
     
         getLocation();
       }, []); 
+      function wrapCoordinates(latitude, longitude) {
+        return {
+          location: {
+            latitude: latitude,
+            longitude: longitude,
+          }
+        };
+      }
+      const wrappedLocation = wrapCoordinates(location.coords.latitude, location.coords.longitude);
+      
+      
 
     //   useEffect(() => {
     //     const items = JSON.parse(localStorage.getItem('items'));
@@ -61,7 +72,7 @@ const AttendenceSummary = () => {
     const token= localStorage.getItem("token")
         
         try {
-            const payload ={location,address}
+            const payload ={location:wrappedLocation,address}
 
             const { data } = await axios.put(`${backend_url}/attendance/`, payload,{
                 headers:{

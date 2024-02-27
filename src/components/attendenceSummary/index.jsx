@@ -41,18 +41,8 @@ const AttendenceSummary = () => {
     
         getLocation();
       }, []); 
-      function wrapCoordinates(latitude, longitude) {
-        return {
-          location: {
-            latitude: latitude,
-            longitude: longitude,
-          }
-        };
-      }
-      const wrappedLocation = wrapCoordinates(location.coords.latitude, location.coords.longitude);
+    
       
-      
-
     //   useEffect(() => {
     //     const items = JSON.parse(localStorage.getItem('items'));
     //     if (items) {
@@ -65,11 +55,22 @@ const AttendenceSummary = () => {
             setPunchInEnable(true);
             // setIsPunchInEnable(true);
             // setIsPunchInEnable(!isPunchInEnable)
+            console.log(location.coords);
     }
     const punchOut= async()=>{
         setPunchInEnable(false);
         setIsPunchInEnable(false);
     const token= localStorage.getItem("token")
+    function wrapCoordinates(latitude, longitude) {
+        return {
+          location: {
+            latitude: latitude,
+            longitude: longitude,
+          }
+        };
+      }
+      const wrappedLocation = wrapCoordinates(location.coords.latitude, location.coords.longitude);
+      console.log(location.coords.latitude);
         
         try {
             const payload ={location:wrappedLocation,address}

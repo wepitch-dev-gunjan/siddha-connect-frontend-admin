@@ -22,11 +22,8 @@ const   PunchIn = ({location}) => {
         }
       };
     }
-    
-   
     const wrappedLocation = wrapCoordinates(location.coords.latitude, location.coords.longitude);
     
-    console.log(wrappedLocation);
     
     useClickOutside(contentRef, ()=> {
         setPunchInEnable(false);

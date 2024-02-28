@@ -66,6 +66,7 @@ const Login = () => {
         localStorage.setItem('token', data.token);
         navigate('/')
       }catch(error){
+        toast.error(error.response.data.error)
         console.log(error)
       }
     }

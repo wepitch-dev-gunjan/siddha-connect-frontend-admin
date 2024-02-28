@@ -1,0 +1,40 @@
+.SalesDashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    
+    .filter-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+  
+    .sales-table {
+      overflow-y: auto;
+      border-collapse: collapse;
+      font-size: 12px;
+      height: 400px;
+      width: 100%;
+  
+      .table-headings {
+        font-weight: 700;
+        border-bottom: 1px solid #531db210;
+        position: sticky;
+        top: 0;
+        background-color: white;
+      }
+  
+      .row {
+        display: table-row;
+        //gap: 8px; // Remove gap as it's not supported
+  
+        .col {
+          display: table-cell;
+          text-align: left;
+          padding: 12px;
+          border-bottom: 1px solid #ddd; // Add border to separate rows
+        }
+      }
+    }
+  }
+  

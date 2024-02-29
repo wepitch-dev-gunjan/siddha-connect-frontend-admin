@@ -1,10 +1,5 @@
-import { useState } from "react";
-import Widget from "../../components/dashboardComponents/widget";
+
 import "./style.scss";
-import { CounsellorData, UserData, EarningsData, ActivityData } from '../../components/dashboardComponents/Data';
-import LineChart from "../../components/dashboardComponents/lineChart";
-import GroupedBarChart from "../../components/dashboardComponents/groupedBarChart";
-import RecentActivityTable from "../../components/recentActivityTable";
 import SalesDashboard from "../../components/salesDashboard";
 
 const Dashboard = () => {

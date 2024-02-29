@@ -125,8 +125,6 @@ const Login = () => {
     setSignUpEnable(true);
   };
 
-  
-    
     const setForgotPassword =async ()=> {
       setForgotPasswordEnable(true);
       try {
@@ -140,7 +138,6 @@ const Login = () => {
       }
     }
   
-
   const validateSignUpFields = () => {
     let isValid = true;
 
@@ -175,13 +172,11 @@ const Login = () => {
     return isValid;
   };
   
-
   const handleRoleChange = (event) => {
     setSelectedRole(event.target.value);
     setRoleError(false);
     console.log(event.target.value)
   };
-
 
   const addParents = (newParents) => {
     setParents((prevParents) => {
@@ -195,10 +190,6 @@ const Login = () => {
     console.log(parents);
   };
   
-  
-
-  
-
   // const getOtp = async () => {
   //   try {
   //     const { data } = await axios.post(`${backend_url}/auth/sendOTPPhone`, {

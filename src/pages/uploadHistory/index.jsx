@@ -1,85 +1,111 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './style.scss'
+import axios from 'axios'
+import { backend_url } from '../../config'
+import { UserContext } from '../../context/UserContext'
+import toast from 'react-hot-toast'
 
 const UploadHistory = () => {
 
+  const [data, setData] = useState([]);
+const { user } = useContext(UserContext)
+
   const [files, setFiles] = useState([
-    {
-        fileType: "asdas",
-        name: "abc",
-        date: "12 May 23"
-    },
-    {
-        fileType: "asdas",
-        name: "abc",
-        date: "12 May 23"
-    },
-    {
-        fileType: "asdas",
-        name: "abc",
-        date: "12 May 23"
-    },
-    {
-        fileType: "asdas",
-        name: "abc",
-        date: "12 May 23"
-    },
-    {
-        fileType: "asdas",
-        name: "abc",
-        date: "12 May 23"
-    },
-    {
-        fileType: "asdas",
-        name: "abc",
-        date: "12 May 23"
-    },
-    {
-        fileType: "asdas",
-        name: "abc",
-        date: "12 May 23"
-    },
-    {
-        fileType: "asdas",
-        name: "abc",
-        date: "12 May 23"
-    },
-    {
-        fileType: "asdas",
-        name: "abc",
-        date: "12 May 23"
-    },
-    {
-        fileType: "asdas",
-        name: "abc",
-        date: "12 May 23"
-    },
-    {
-        fileType: "asdas",
-        name: "abc",
-        date: "12 May 23"
-    },
-    {
-        fileType: "asdas",
-        name: "abc",
-        date: "12 May 23"
-    },
-    {
-        fileType: "asdas",
-        name: "abc",
-        date: "12 May 23"
-    },
-    {
-        fileType: "asdas",
-        name: "abc",
-        date: "12 May 23"
-    },
-    {
-        fileType: "asdas",
-        name: "abc",
-        date: "12 May 23"
-    },
+    // {
+    //     fileType: "asdas",
+    //     name: "abc",
+    //     date: "12 May 23"
+    // },
+    // {
+    //     fileType: "asdas",
+    //     name: "abc",
+    //     date: "12 May 23"
+    // },
+    // {
+    //     fileType: "asdas",
+    //     name: "abc",
+    //     date: "12 May 23"
+    // },
+    // {
+    //     fileType: "asdas",
+    //     name: "abc",
+    //     date: "12 May 23"
+    // },
+    // {
+    //     fileType: "asdas",
+    //     name: "abc",
+    //     date: "12 May 23"
+    // },
+    // {
+    //     fileType: "asdas",
+    //     name: "abc",
+    //     date: "12 May 23"
+    // },
+    // {
+    //     fileType: "asdas",
+    //     name: "abc",
+    //     date: "12 May 23"
+    // },
+    // {
+    //     fileType: "asdas",
+    //     name: "abc",
+    //     date: "12 May 23"
+    // },
+    // {
+    //     fileType: "asdas",
+    //     name: "abc",
+    //     date: "12 May 23"
+    // },
+    // {
+    //     fileType: "asdas",
+    //     name: "abc",
+    //     date: "12 May 23"
+    // },
+    // {
+    //     fileType: "asdas",
+    //     name: "abc",
+    //     date: "12 May 23"
+    // },
+    // {
+    //     fileType: "asdas",
+    //     name: "abc",
+    //     date: "12 May 23"
+    // },
+    // {
+    //     fileType: "asdas",
+    //     name: "abc",
+    //     date: "12 May 23"
+    // },
+    // {
+    //     fileType: "asdas",
+    //     name: "abc",
+    //     date: "12 May 23"
+    // },
+    // {
+    //     fileType: "asdas",
+    //     name: "abc",
+    //     date: "12 May 23"
+    // },
 ])
+
+const getFileData = async () => {
+  try {
+      const { data } = await axios.get(`${backend_url}/upload`, {
+          headers: {
+              Authorization: user.token
+          },
+      })
+      console.log(data)
+      setData(data)
+  } catch (error) {
+      console.log(error.message)
+      toast.error(error.message, "error");
+  }
+}
+
+ useEffect(() => {
+    getFileData()
+  }, [user]);
 
   return (
     <div className="Files-container">     

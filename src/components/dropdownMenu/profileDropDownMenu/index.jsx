@@ -36,11 +36,9 @@ const ProfileDropDownMenu = ({ name, onClick }) => {
     return avatar;
   }
 
-
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
   };
-
 
   useEffect(() => {
     setAvatar(avatarFormatter(name))
@@ -70,13 +68,6 @@ const ProfileDropDownMenu = ({ name, onClick }) => {
             icon={PersonIcon}
             text="Profile"
           />
-          {/* {smallScreen && (
-            <DropDownMenuButton
-              onClick={() => ""}
-              icon={MdOutlineSummarize}
-              text="Summary"
-            />
-          )} */}
           <DropDownMenuButton
             onClick={onClick}
             icon={AiOutlineLogout}

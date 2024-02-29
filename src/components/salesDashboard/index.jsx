@@ -1,4 +1,3 @@
-// UploadExcel.js
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { backend_url } from '../../config';
@@ -34,20 +33,11 @@ const [searchText, setSearchText] = useState("")
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      // Handle Enter key press here
       console.log('Enter key pressed');
       getSalesData(searchText)
     }
   };
   useEffect(() => {
-    // axios.get(`${backend_url}/upload`)
-    //   .then(response => {
-    //     setData(response.data.data);
-    //     setHeaders(Object.keys(response.data.data[0] || {}).map((header) => ({ key: header, name: header })));
-    //   })
-    //   .catch(error => {
-    //     console.error('Error fetching data: ', error);
-    //   });
     getSalesData()
   }, [user]);
 

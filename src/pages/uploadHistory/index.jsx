@@ -26,6 +26,7 @@ const UploadHistory = () => {
   useEffect(() => {
     getFileData();
   }, [user]);
+  
 
   return (
     <div className="Files-container">

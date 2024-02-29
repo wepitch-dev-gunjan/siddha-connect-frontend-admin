@@ -3,11 +3,19 @@
     flex-direction: column;
     gap: 24px;
     width: 100%;
+    p{
+      display: flex;
+      justify-content: flex-end;
+    }
     
     .filter-container {
       display: flex;
       flex-direction: column;
       gap: 8px;
+      .filter-data{
+        display: flex;
+        justify-content: space-between;
+      }
     }
   
     .sales-table {

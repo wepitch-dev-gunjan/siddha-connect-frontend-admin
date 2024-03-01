@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Uploader, Alert } from 'rsuite';
 import './style.scss';
 import FileUploadIcon from '@rsuite/icons/FileUpload';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import { backend_url } from '../../config';
 import axios from 'axios';
 import { UserContext } from '../../context/UserContext';
@@ -13,7 +13,7 @@ const Upload = () => {
   const [error, setError] = useState('');
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const [file, setFile] = useState([])
-  const {user} = useContext(UserContext) 
+  const { user } = useContext(UserContext)
 
   const handleFileChange = (fileList) => {
     console.log(fileList)
@@ -31,17 +31,17 @@ const Upload = () => {
     try {
       const formData = new FormData();
       formData.append('file', file);
-  
+
       const { data } = await axios.post(`${backend_url}/upload`, formData, {
         headers: {
           Authorization: `Bearer ${user.token}`
           // 'Content-Type': 'multipart/form-data'
         },
-        
-          withCredentials: true,
-        
+
+        withCredentials: true,
+
       });
-  
+
       console.log(data);
       setError('');
       setButtonDisabled(false);
@@ -52,7 +52,7 @@ const Upload = () => {
       setButtonDisabled(false);
     }
   };
-  
+
 
   return (
     <>
@@ -64,7 +64,7 @@ const Upload = () => {
           draggable
           onChange={handleFileChange}
         >
-          <div style={{ height: 500, width: 500, display: 'flex',cursor: 'pointer', alignItems: 'center', justifyContent: 'center', background: 'whitesmoke' }}>
+          <div style={{ height: 500, width: 500, display: 'flex', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', background: 'whitesmoke' }}>
             <div className="upload-area">
               <span>
                 <FileUploadIcon style={{ fontSize: 100 }} />
@@ -78,9 +78,9 @@ const Upload = () => {
         <input type="file" value={file} onChange={(e) => {
           setFile(e.target.value)
           console.log(e.target)
-          }} />
+        }} />
         <div className="buttons">
-          <button className='file-buttons' onClick={handleUploadClick}  disabled={isButtonDisabled}>Upload</button>
+          <button className='file-buttons' onClick={handleUploadClick} disabled={isButtonDisabled}>Upload</button>
         </div>
       </div>
       {error && (toast(error))}

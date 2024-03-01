@@ -1,0 +1,36 @@
+.Demographic_main {
+ // gap: 200px;
+ // background-color: rgb(180, 174, 174);
+ width: 300px;
+ // padding: 20px; // Adding padding for better spacing
+
+ .contact_details {
+  width: 200px;
+  border: 1px solid black;
+  .contact_details2{
+   padding: 10px;
+  }
+ h4{
+  background-color: 
+  rgb(2, 2, 102);  color: white;
+  padding: 5px;
+ }
+   p {
+     font-size: 20px;
+     // background-color: rgba(201, 196, 196, 0.752);
+     padding: 5px; // Adding padding for better spacing
+     margin-bottom: 10px; // Adding margin at the bottom of the paragraph
+   }
+   ul {
+     li {
+       list-style-type: none;
+       padding-top: 20px;
+
+       svg {
+         margin-right: 10px; // Adjust the margin between icon and text
+       }
+     }
+   }
+ }
+
+}

@@ -1,11 +1,21 @@
-import React from 'react'
+
+import "./style.scss";
+import SalesDashboard from "../../components/salesDashboard";
 
 const Analytics = () => {
   return (
-    <div>
-      analytics
-    </div>
-  )
-}
+    <div className="all-dashboard">
+      <div className="Dashboard-container">
+        <div className="business-dashbaord">
+          {/* <h1>Sales Dashboard</h1> */}
 
-export default Analytics
+          <SalesDashboard />
+
+         
+      </div>
+    </div>
+    </div>
+  );
+};
+
+export default Analytics;

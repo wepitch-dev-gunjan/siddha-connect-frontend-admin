@@ -1,6 +1,6 @@
 
 import "./style.scss";
-import SalesDashboard from "../../components/salesDashboard";
+// import SalesDashboard from "../../components/salesDashboard";
 
 const Dashboard = () => {
   // const [userData, setUserData] = useState({
@@ -57,6 +57,11 @@ const Dashboard = () => {
     <div className="all-dashboard">
       <div className="Dashboard-container">
         <div className="business-dashbaord">
+          {/* <h1>Sales Dashboard</h1> */}
+
+          {/* <SalesDashboard /> */}
+
+          {/* <div className="widgets-container">
           {/* <h1>Sales Dashboard</h1> */}
 
           {/* <SalesDashboard /> */}

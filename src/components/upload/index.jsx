@@ -37,13 +37,7 @@ const Upload = () => {
           Authorization: `Bearer ${user.token}`
           // 'Content-Type': 'multipart/form-data'
         },
-<<<<<<< HEAD
           withCredentials: true,
-=======
-
-        withCredentials: true,
-
->>>>>>> 074bcffd326520468939149699fd344bc09c82b7
       });
 
       console.log(data);
@@ -56,12 +50,7 @@ const Upload = () => {
       setButtonDisabled(false);
     }
   };
-<<<<<<< HEAD
   
-=======
-
-
->>>>>>> 074bcffd326520468939149699fd344bc09c82b7
   return (
     <>
       <div className="upload-container">

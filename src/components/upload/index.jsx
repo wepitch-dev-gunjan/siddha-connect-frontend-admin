@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Uploader, Alert } from 'rsuite';
+import { Uploader} from 'rsuite';
 import './style.scss';
 import FileUploadIcon from '@rsuite/icons/FileUpload';
 import {toast} from 'react-toastify';
@@ -37,9 +37,7 @@ const Upload = () => {
           Authorization: `Bearer ${user.token}`
           // 'Content-Type': 'multipart/form-data'
         },
-        
           withCredentials: true,
-        
       });
   
       console.log(data);
@@ -53,7 +51,6 @@ const Upload = () => {
     }
   };
   
-
   return (
     <>
       <div className="upload-container">

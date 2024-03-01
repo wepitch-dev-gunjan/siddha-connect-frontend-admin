@@ -29,7 +29,7 @@ import PunchIn from "./components/punchIn";
 import { AttendenceContext } from "./context/AttendenceContext";
 // import reset Password
 import ResetPassword from "./pages/reset_password";
-import AttendenceSummary from "./components/attendenceSummary";
+// import AttendenceSummary from "./components/attendenceSummary";
 
 function App() {
   const { user, setUser } = useContext(UserContext);
@@ -80,9 +80,6 @@ function App() {
                 <>
                   <Route path="/location" element={<Location />} />
                   <Route path="/login" element={<Navigate replace to="/" />} />
-
-                  {/* Path to reset Password */}
-
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/analytics" element={<Analytics />} />

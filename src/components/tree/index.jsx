@@ -1,5 +1,6 @@
 import React from 'react';
 import Tree from 'react-d3-tree';
+import './style.scss'
 
 const myTreeData = [
   {
@@ -59,10 +60,10 @@ const myTreeData = [
 
 const HierarchyChart = () => {
   return (
-    <div style={{display:"flex", justifyContent:"center",width: '100%', height: '100%'}}>
+    <div style={{display:"flex", justifyContent:"center",alignItems:"center",width: '100%', height: '100%'}}>
 
-    <div style={{ width: '100%', height: '100%' }}>
-      <Tree data={myTreeData} orientation="vertical" />
+    <div style={{ width: '100%', height: '100%'}} >
+      <Tree data={myTreeData} orientation="horizontal"/>
     </div>
     </div>
   );

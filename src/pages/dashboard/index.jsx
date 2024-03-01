@@ -59,7 +59,7 @@ const Dashboard = () => {
         <div className="business-dashbaord">
           {/* <h1>Sales Dashboard</h1> */}
 
-          <SalesDashboard />
+          {/* <SalesDashboard /> */}
 
           {/* <div className="widgets-container">
             <Widget heading="TOTAL SALES" value="$10000" />

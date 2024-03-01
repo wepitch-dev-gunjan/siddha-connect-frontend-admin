@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./style.scss";
 import Logo from "../../assets/logo.svg";
 import { Box, FormControl, InputLabel, MenuItem,  Select,  TextField } from "@mui/material";
-import { CheckPicker, Stack } from "rsuite";
+import { CheckPicker } from "rsuite";
 import { UserContext } from "../../context/UserContext";
 import {toast} from "react-toastify";
 import { backend_url } from "../../config";
@@ -20,7 +20,7 @@ const Login = () => {
   const [selectedRole, setSelectedRole] = useState({});
   const [roles, setRoles] = useState([])
   const [newPassword, setNewPassword] = useState("");
-  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  // const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
   const [userNameError, setUserNameError] = useState(null);

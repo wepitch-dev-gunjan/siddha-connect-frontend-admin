@@ -5,12 +5,14 @@
 }
 
 .TableDashboard-container {
-  width: 80%;
+  width: 100%;
+  display: flex;
   margin-top: 20px;
 }
 
 .business-dashbaord {
   // background-color: #f8f9fa;
+  width: 100%;
   padding: 20px;
   border-radius: 8px;
   .head {

@@ -8,11 +8,11 @@ import { IoMdMail } from "react-icons/io";
 
 const Demographic = () => {
   return (
-    <div className="Demographic_main">
+    <div className="Demographic-container">
       <div className="contact_details">
        <h4>Demographic</h4>
        <div className="contact_details2">
-       <p><IoMdContact />Contact Details</p>
+       <p><IoMdContact /> Contact Details</p>
         <ul>
           <li><RiContactsFill /><span className="contact-text">Mr. Naman</span></li>
           <li><IoPeople /><span className="contact-text">Properietor</span></li>
@@ -23,7 +23,6 @@ const Demographic = () => {
        </div>
       </div>
     </div>
-    
   )
 }
 

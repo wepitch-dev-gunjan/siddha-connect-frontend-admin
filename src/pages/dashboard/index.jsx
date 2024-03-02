@@ -5,8 +5,8 @@ const Dashboard = () => {
   return (
     <div className="table-dashboard">
       <div className="TableDashboard-container">
+        <Demographic />
         <div className="business-dashbaord">
-
           <div className="head">
             <p>Due date for filling TDS</p>
           </div>
@@ -48,33 +48,7 @@ const Dashboard = () => {
               </tbody>
             </table>
           </div>
-          {/* <h1>Sales Dashboard</h1> */}
-          {/* import Demographic */}
-<Demographic />
-          {/* <SalesDashboard /> */}
 
-          {/* <div className="widgets-container">
-          {/* <h1>Sales Dashboard</h1> */}
-
-          {/* <SalesDashboard /> */}
-
-          {/* <div className="widgets-container">
-            <Widget heading="TOTAL SALES" value="$10000" />
-            <Widget heading="TOP PRODUCTS" value="1000" />
-            <Widget heading="TOP REGIONS" value="1000" />
-            <Widget heading="AVERAGE SALES" value="$5000" />
-          </div> */}
-          {/* <div className="chart-row">
-            <div className="col">
-              <GroupedBarChart data={activityData} />
-            </div>
-            <div className="col">
-              <LineChart data={earningsData} />
-            </div>
-            <div className="col">
-              <LineChart data={earningsData} />
-            </div>
-          </div> */}
         </div>
       </div>
     </div>

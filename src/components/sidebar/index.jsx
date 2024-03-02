@@ -25,11 +25,13 @@ const Sidebar = () => {
   return (
     <div style={{
       display: 'flex',
+      width:"100%",
       flexDirection: 'column',
       padding: '12px 0',
       gap: '12px',
-      height: '100vh',
-      overflow: 'auto'
+      height: '88vh',
+      overflowY: 'auto',
+      // overflowX:"hidden"
     }}>
       <Sidenav expanded={expanded} defaultOpenKeys={['3', '4']} appearance='subtle'  className='custom-sidenav'>
         <Sidenav.Toggle expanded={expanded} onToggle={expanded => setExpanded(expanded)} />

@@ -11,7 +11,10 @@ const Demographic = () => {
   return (
     <div className="Demographic-container">
       <h6>Dempgraphic</h6>
+      <div className='data'>
       <ContactInfo/>
+
+      </div>
       
     </div>
   )

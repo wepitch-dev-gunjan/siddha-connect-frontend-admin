@@ -1,0 +1,39 @@
+.contact-head{
+    
+    border: black solid 2px;
+
+
+
+    .contact-details{
+        background-color: gray;
+        padding-left: 10px;
+        
+        color: black;
+
+        display: flex;
+        // justify-content: center;
+        align-items: center;
+
+        .h2{
+            font-size: 1rem;
+
+        }
+    }
+    .details{
+        padding: 5px 10px;
+
+        .list-details{
+            display: flex;
+            justify-content: start;
+            gap: 10px;
+            padding: 10px;
+            list-style-type: none;
+            .icon{
+                font-size: 1.2rem;
+                
+            }
+        }
+    }
+
+
+}

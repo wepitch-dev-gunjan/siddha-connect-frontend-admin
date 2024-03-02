@@ -5,11 +5,21 @@ import { IoPeople } from "react-icons/io5";
 import { FaMobileScreenButton } from "react-icons/fa6";
 import { CiMobile4 } from "react-icons/ci";
 import { IoMdMail } from "react-icons/io";
+import ContactInfo from './contact';
 
 const Demographic = () => {
   return (
     <div className="Demographic-container">
-      <div className="contact_details">
+      <h6>Dempgraphic</h6>
+      <ContactInfo/>
+      
+    </div>
+  )
+}
+
+export default Demographic
+
+{/* <div className="contact_details">
        <h4>Demographic</h4>
        <div className="contact_details2">
        <p><IoMdContact /> Contact Details</p>
@@ -21,9 +31,4 @@ const Demographic = () => {
           <li><IoMdMail /><span className="contact-text">Naman54@gmail.com</span></li>
         </ul>
        </div>
-      </div>
-    </div>
-  )
-}
-
-export default Demographic
+      </div> */}

@@ -1,0 +1,60 @@
+.table-dashboard {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .TableDashboard-container {
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+  }
+  
+  .business-dashbaord {
+    // background-color: #f8f9fa;
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    .head {
+      padding: 12px;
+      font-size: 20px;
+      background-color: rgb(2, 2, 102);
+      color: white;
+    }
+  }
+  
+  .dashboard-table {
+    overflow-x: auto;
+    table {
+      width: 100%;
+      padding: 12px;
+      border-collapse: collapse;
+      thead{
+        tr{
+          th{
+            padding: 12px;
+            padding: 8px; /* Change the padding value as needed */
+            text-align: left;
+            border: 1px solid #ddd;
+          }
+        }
+      }
+      
+      tbody{
+        tr{
+          td{
+            padding: 12px;
+            padding: 8px; /* Change the padding value as needed */
+            text-align: left;
+        border: 1px solid #ddd;
+          }
+        }
+      }
+    }
+  }
+  
+  
+  
+  
+  
+  

@@ -23,7 +23,7 @@ const ContactInfo = () => {
   return (
     <div className="contact-head">
         <div className='contact-details'>
-            <div> <IoMdContact style={{}}/></div> <h3 className='h2'>Contact Details</h3>
+            <div style={{fontSize:"1.2rem", lineHeight:"2px", paddingRight:"5px"}}> <IoMdContact style={{}}/></div> <h3 className='h2'>Contact Details</h3>
         </div>
         <div className='details'>
             <ul className='l'>

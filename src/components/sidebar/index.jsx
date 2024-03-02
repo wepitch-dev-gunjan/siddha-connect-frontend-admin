@@ -28,6 +28,8 @@ const Sidebar = () => {
       flexDirection: 'column',
       padding: '12px 0',
       gap: '12px',
+      height: '100vh',
+      overflow: 'auto'
     }}>
       <Sidenav expanded={expanded} defaultOpenKeys={['3', '4']} appearance='subtle'  className='custom-sidenav'>
         <Sidenav.Toggle expanded={expanded} onToggle={expanded => setExpanded(expanded)} />

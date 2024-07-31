@@ -33,19 +33,11 @@ const ContactInfo = () => {
 
                         <li className='icon'>{x.icon}</li>
                         <li>{x.data}</li>
-                       </div>
-                        
+                       </div>   
                     )
-                   
-
                 })}
-                
             </ul>
-
-
         </div>
-
-      
     </div>
   )
 }

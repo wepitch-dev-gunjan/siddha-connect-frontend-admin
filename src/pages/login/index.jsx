@@ -35,7 +35,7 @@ function Login() {
           type="text"
           value={code}
           onChange={(e) => setCode(e.target.value)}
-          placeholder="Code"
+          placeholder="Enter Code"
           className="input-field"
           required
         />

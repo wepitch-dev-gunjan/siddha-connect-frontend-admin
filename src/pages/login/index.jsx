@@ -1,22 +1,27 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import './style.scss';
+import config from "../../config";
+const { backend_url } = config;
 
 function Login() {
-  const [role, setRole] = useState("employee"); // Default role is employee
+  const [role, setRole] = useState("employee");
   const [code, setCode] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // Use useNavigate for redirection
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
     try {
-      const response = await axios.post("/login", { role, code, password });
-      // Handle success response (store token, redirect, etc.)
-      console.log("Login successful:", response.data);
+      const response = await axios.post(`${backend_url}/login`, { role, code, password });
+      // On success, store token and navigate to dashboard
+      localStorage.setItem("token", response.data.token);
+      navigate("/dashboard");
     } catch (err) {
       setError(err.response?.data?.error || "Something went wrong");
     }

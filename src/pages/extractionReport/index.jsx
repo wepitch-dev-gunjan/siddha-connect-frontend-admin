@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { TextField, MenuItem, Button, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow, Paper, Pagination } from '@mui/material';
+import { TextField, MenuItem, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow, Paper, Pagination, Button } from '@mui/material';
 import config from '../../config';
 import './style.scss';  // Include the custom CSS
 
@@ -28,7 +28,7 @@ function ExtractionReport() {
     const [segmentOptions, setSegmentOptions] = useState([]);
     const [dealerOptions, setDealerOptions] = useState([]);
 
-    // Fetch unique brands and dealer codes for the dropdowns
+    // Fetch unique brands, segments, and dealer codes for the dropdowns
     useEffect(() => {
         const fetchDropdownData = async () => {
             try {
@@ -52,17 +52,12 @@ function ExtractionReport() {
     const fetchData = async (filters = {}) => {
         setLoading(true);
         setError(null);
-    
+
         try {
             const response = await axios.get(`${backend_url}/extraction/filtered-data`, { 
                 params: { ...filters, page, limit: rowsPerPage } 
             });
-    
-            console.log('API Response:', response.data); // Log full response
-            if (response.data && response.data.data) {
-                console.log('Table Data:', response.data.data); // Log data
-            }
-    
+
             setData(response.data.data || []); // Set the fetched data
             setTotalRecords(response.data.totalRecords || 0); // Set total number of records
             setLoading(false);
@@ -72,13 +67,8 @@ function ExtractionReport() {
         }
     };
 
-    // On component mount, fetch all data
+    // Fetch data when filters change
     useEffect(() => {
-        fetchData();  // Fetch all data initially
-    }, [page]);
-
-    // Submit the filters and fetch data based on them
-    const handleFilterSubmit = () => {
         const filters = {};
         if (startDate) filters.startDate = startDate;
         if (endDate) filters.endDate = endDate;
@@ -86,9 +76,8 @@ function ExtractionReport() {
         if (segment) filters.segment = segment;
         if (dealerCode) filters.dealerCode = dealerCode;
 
-        setPage(1); // Reset to first page on filter change
-        fetchData(filters);
-    };
+        fetchData(filters);  // Fetch data based on current filters
+    }, [startDate, endDate, brand, segment, dealerCode, page]); // Dependencies include all filters and page
 
     // Clear filters and fetch all data
     const handleClearFilters = () => {
@@ -110,9 +99,6 @@ function ExtractionReport() {
     const columns = Array.isArray(data) && data.length > 0 ? data[0] : []; // The first row contains column names
     const rows = Array.isArray(data) && data.length > 1 ? data.slice(1) : []; // Subsequent rows contain data
 
-    console.log('Columns:', columns); // Log columns
-    console.log('Rows:', rows);  // Log rows to check their structure
-
     return (
         <div>
             <h2>Extraction Report</h2>
@@ -123,7 +109,7 @@ function ExtractionReport() {
                     label="Start Date"
                     type="date"
                     value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
+                    onChange={(e) => setStartDate(e.target.value)} // Fetch data when startDate changes
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -133,7 +119,7 @@ function ExtractionReport() {
                     label="End Date"
                     type="date"
                     value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
+                    onChange={(e) => setEndDate(e.target.value)} // Fetch data when endDate changes
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -143,7 +129,7 @@ function ExtractionReport() {
                     label="Brand"
                     select
                     value={brand}
-                    onChange={(e) => setBrand(e.target.value)}
+                    onChange={(e) => setBrand(e.target.value)} // Fetch data when brand changes
                     style={{ marginRight: '20px', width: '150px' }}
                 >
                     <MenuItem value="">
@@ -159,7 +145,7 @@ function ExtractionReport() {
                     label="Segment"
                     select
                     value={segment}
-                    onChange={(e) => setSegment(e.target.value)}
+                    onChange={(e) => setSegment(e.target.value)} // Fetch data when segment changes
                     style={{ marginRight: '20px', width: '150px' }}
                 >
                     <MenuItem value="">
@@ -175,7 +161,7 @@ function ExtractionReport() {
                     label="Dealer Code"
                     select
                     value={dealerCode}
-                    onChange={(e) => setDealerCode(e.target.value)}
+                    onChange={(e) => setDealerCode(e.target.value)} // Fetch data when dealerCode changes
                     style={{ marginRight: '20px', width: '150px' }}
                 >
                     <MenuItem value="">
@@ -188,9 +174,6 @@ function ExtractionReport() {
                     ))}
                 </TextField>
 
-                <Button variant="contained" color="primary" onClick={handleFilterSubmit}>
-                    Apply Filters
-                </Button>
                 <Button variant="outlined" color="secondary" onClick={handleClearFilters} style={{ marginLeft: '10px' }}>
                     Clear Filters
                 </Button>

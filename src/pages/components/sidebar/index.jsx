@@ -1,7 +1,7 @@
 import React from 'react';
 import { CSidebar, CSidebarBrand, CSidebarHeader, CSidebarNav, CNavItem, CNavTitle, CNavGroup, CBadge, CSidebarToggler } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
-import { cilSpeedometer, cilPuzzle, cilCloudDownload, cilLayers } from '@coreui/icons';
+import { cilSpeedometer, cilPuzzle, cilCloudDownload, cilLayers, cilBarChart, cilCreditCard, cilLineStyle, cilGraph, cilVector, cilViewQuilt } from '@coreui/icons';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import { Link } from 'react-router-dom';
 
@@ -9,24 +9,28 @@ function Sidebar({ isSidebarOpen, toggleSidebar }) {
     return (
         <CSidebar unfoldable className={`border-end ${isSidebarOpen ? '' : 'collapsed'}`}>
             <CSidebarHeader className="border-bottom">
-                <CSidebarBrand>CUI</CSidebarBrand>
+                <CSidebarBrand>SC</CSidebarBrand>
                 {/* Toggler Button */}
                 <CSidebarToggler onClick={toggleSidebar} />
             </CSidebarHeader>
             <CSidebarNav>
                 <CNavTitle>Reports</CNavTitle>
                 <CNavItem href="/brand-comparison">
-                    <CIcon customClassName="nav-icon" icon={cilSpeedometer} /> Brand Comparison
+                    <CIcon customClassName="nav-icon" icon={cilBarChart} /> Sales Dashboard
                 </CNavItem>
                 <CNavItem href="/dealer-performance">
-                    <CIcon customClassName="nav-icon" icon={cilSpeedometer} /> Dealer Performance
-                </CNavItem>
-                <CNavItem href="/segment-analysis">
-                    <CIcon customClassName="nav-icon" icon={cilSpeedometer} /> Segment Analysis
+                    <CIcon customClassName="nav-icon" icon={cilCreditCard} /> Finance Dashboard
                 </CNavItem>
                 <CNavItem href="/extraction-report">
-                    <CIcon customClassName="nav-icon" icon={cilSpeedometer} /> Extraction Report
+                    <CIcon customClassName="nav-icon" icon={cilVector} /> Extraction Report
                 </CNavItem>
+                <CNavItem href="/segment-analysis">
+                    <CIcon customClassName="nav-icon" icon={cilGraph} /> Pulse Dashboard
+                </CNavItem>
+                <CNavItem href="/segment-analysis">
+                    <CIcon customClassName="nav-icon" icon={cilViewQuilt} /> GFK Dashboard
+                </CNavItem>
+
                 
                 <CNavGroup
                     toggler={
@@ -43,12 +47,12 @@ function Sidebar({ isSidebarOpen, toggleSidebar }) {
                     </CNavItem>
                 </CNavGroup>
                 
-                <CNavItem href="https://coreui.io">
+                {/* <CNavItem href="https://coreui.io">
                     <CIcon customClassName="nav-icon" icon={cilCloudDownload} /> Download CoreUI
                 </CNavItem>
                 <CNavItem href="https://coreui.io/pro/">
                     <CIcon customClassName="nav-icon" icon={cilLayers} /> Try CoreUI PRO
-                </CNavItem>
+                </CNavItem> */}
             </CSidebarNav>
         </CSidebar>
     );

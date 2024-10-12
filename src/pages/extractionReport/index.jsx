@@ -20,10 +20,12 @@ function ExtractionReport() {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [brand, setBrand] = useState('');
+    const [segment, setSegment] = useState('');
     const [dealerCode, setDealerCode] = useState('');
 
     // Dropdown options
     const [brandOptions, setBrandOptions] = useState([]);
+    const [segmentOptions, setSegmentOptions] = useState([]);
     const [dealerOptions, setDealerOptions] = useState([]);
 
     // Fetch unique brands and dealer codes for the dropdowns
@@ -32,6 +34,9 @@ function ExtractionReport() {
             try {
                 const brandResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=productId.Brand`);
                 setBrandOptions(brandResponse.data.uniqueValues || []);
+
+                const segmentResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=productId.Segment`);
+                setSegmentOptions(segmentResponse.data.uniqueValues || []);
 
                 const dealerResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=dealerCode`);
                 setDealerOptions(dealerResponse.data.uniqueValues || []);
@@ -78,6 +83,7 @@ function ExtractionReport() {
         if (startDate) filters.startDate = startDate;
         if (endDate) filters.endDate = endDate;
         if (brand) filters.brand = brand;
+        if (segment) filters.segment = segment;
         if (dealerCode) filters.dealerCode = dealerCode;
 
         setPage(1); // Reset to first page on filter change
@@ -89,6 +95,7 @@ function ExtractionReport() {
         setStartDate('');
         setEndDate('');
         setBrand('');
+        setSegment('');
         setDealerCode('');
         setPage(1); // Reset to first page
         fetchData();  // Fetch all data when filters are cleared
@@ -143,6 +150,22 @@ function ExtractionReport() {
                         <em>None</em>
                     </MenuItem>
                     {brandOptions.map((option) => (
+                        <MenuItem key={option} value={option}>
+                            {option}
+                        </MenuItem>
+                    ))}
+                </TextField>
+                <TextField
+                    label="Segment"
+                    select
+                    value={segment}
+                    onChange={(e) => setSegment(e.target.value)}
+                    style={{ marginRight: '20px', width: '150px' }}
+                >
+                    <MenuItem value="">
+                        <em>None</em>
+                    </MenuItem>
+                    {segmentOptions.map((option) => (
                         <MenuItem key={option} value={option}>
                             {option}
                         </MenuItem>

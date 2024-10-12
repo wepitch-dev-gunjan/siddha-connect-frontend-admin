@@ -5,6 +5,7 @@ import Dashboard from './pages/dashboard';
 import BrandComparison from './pages/components/brandComparison';
 import DealerPerformance from './pages/components/dealerPerformance';
 import SegmentAnalysis from './pages/components/segmentAnalysis';
+import ExtractionReport from './pages/extractionReport';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                     <Route path="/brand-comparison" element={<BrandComparison />} />
                     <Route path="/dealer-performance" element={<DealerPerformance />} />
                     <Route path="/segment-analysis" element={<SegmentAnalysis />} />
+                    <Route path="/extraction-report" element={<ExtractionReport />} />
                     {/* Add more routes for other reports */}
                 </Routes>
             </Dashboard>

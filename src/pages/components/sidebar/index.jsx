@@ -24,6 +24,9 @@ function Sidebar({ isSidebarOpen, toggleSidebar }) {
                 <CNavItem href="/segment-analysis">
                     <CIcon customClassName="nav-icon" icon={cilSpeedometer} /> Segment Analysis
                 </CNavItem>
+                <CNavItem href="/extraction-report">
+                    <CIcon customClassName="nav-icon" icon={cilSpeedometer} /> Extraction Report
+                </CNavItem>
                 
                 <CNavGroup
                     toggler={

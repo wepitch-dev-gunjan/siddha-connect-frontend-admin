@@ -21,9 +21,22 @@ function Sidebar({ isSidebarOpen, toggleSidebar }) {
                 <CNavItem href="/dealer-performance">
                     <CIcon customClassName="nav-icon" icon={cilCreditCard} /> Finance Dashboard
                 </CNavItem>
-                <CNavItem href="/extraction-report">
-                    <CIcon customClassName="nav-icon" icon={cilVector} /> Extraction Report
-                </CNavItem>
+
+                <CNavGroup
+                    toggler={
+                        <>
+                            <CIcon customClassName="nav-icon" icon={cilVector} /> Extraction Dashboard
+                        </>
+                    }
+                >
+                    <CNavItem href="/extraction-overview">
+                        <span className="nav-icon"><span className="nav-icon-bullet"></span></span> Overview
+                    </CNavItem>
+                    <CNavItem href="/extraction-report">
+                        <span className="nav-icon"><span className="nav-icon-bullet"></span></span> Detailed report
+                    </CNavItem>
+                </CNavGroup>
+
                 <CNavItem href="/segment-analysis">
                     <CIcon customClassName="nav-icon" icon={cilGraph} /> Pulse Dashboard
                 </CNavItem>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { TextField, MenuItem, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow, Paper, Pagination, Button } from '@mui/material';
+import { Select, MenuItem, InputLabel, FormControl, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow, Paper, Pagination, Button, Chip, OutlinedInput, TextField } from '@mui/material';
 import config from '../../config';
 import './style.scss';  // Include the custom CSS
 
@@ -19,9 +19,9 @@ function ExtractionReport() {
     // Filters
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [brand, setBrand] = useState('');
-    const [segment, setSegment] = useState('');
-    const [dealerCode, setDealerCode] = useState('');
+    const [brand, setBrand] = useState([]); // Initialize as an array
+    const [segment, setSegment] = useState([]); // Initialize as an array
+    const [dealerCode, setDealerCode] = useState([]); // Initialize as an array
 
     // Dropdown options
     const [brandOptions, setBrandOptions] = useState([]);
@@ -72,20 +72,20 @@ function ExtractionReport() {
         const filters = {};
         if (startDate) filters.startDate = startDate;
         if (endDate) filters.endDate = endDate;
-        if (brand) filters.brand = brand;
-        if (segment) filters.segment = segment;
-        if (dealerCode) filters.dealerCode = dealerCode;
-
+        if (brand.length) filters.brand = brand; // Now an array of selected brands
+        if (segment.length) filters.segment = segment; // Now an array of selected segments
+        if (dealerCode.length) filters.dealerCode = dealerCode; // Now an array of selected dealer codes
+    
         fetchData(filters);  // Fetch data based on current filters
-    }, [startDate, endDate, brand, segment, dealerCode, page]); // Dependencies include all filters and page
-
+    }, [startDate, endDate, brand, segment, dealerCode, page]);
+    
     // Clear filters and fetch all data
     const handleClearFilters = () => {
         setStartDate('');
         setEndDate('');
-        setBrand('');
-        setSegment('');
-        setDealerCode('');
+        setBrand([]);
+        setSegment([]);
+        setDealerCode([]);
         setPage(1); // Reset to first page
         fetchData();  // Fetch all data when filters are cleared
     };
@@ -125,54 +125,84 @@ function ExtractionReport() {
                     }}
                     style={{ marginRight: '20px' }}
                 />
-                <TextField
-                    label="Brand"
-                    select
-                    value={brand}
-                    onChange={(e) => setBrand(e.target.value)} // Fetch data when brand changes
-                    style={{ marginRight: '20px', width: '150px' }}
-                >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    {brandOptions.map((option) => (
-                        <MenuItem key={option} value={option}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </TextField>
-                <TextField
-                    label="Segment"
-                    select
-                    value={segment}
-                    onChange={(e) => setSegment(e.target.value)} // Fetch data when segment changes
-                    style={{ marginRight: '20px', width: '150px' }}
-                >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    {segmentOptions.map((option) => (
-                        <MenuItem key={option} value={option}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </TextField>
-                <TextField
-                    label="Dealer Code"
-                    select
-                    value={dealerCode}
-                    onChange={(e) => setDealerCode(e.target.value)} // Fetch data when dealerCode changes
-                    style={{ marginRight: '20px', width: '150px' }}
-                >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    {dealerOptions.map((option) => (
-                        <MenuItem key={option} value={option}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </TextField>
+
+                {/* Multi-Select for Brand */}
+                <FormControl style={{ marginRight: '20px', width: '150px' }}>
+                    <InputLabel>Brand</InputLabel>
+                    <Select
+                        multiple
+                        value={brand || []} // Ensure value is always an array
+                        onChange={(e) => setBrand(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
+                        input={<OutlinedInput label="Brand" />}
+                        renderValue={(selected) => (
+                            Array.isArray(selected) && selected.length > 0 ? (
+                                <div>
+                                    {selected.map((value) => (
+                                        <Chip key={value} label={value} />
+                                    ))}
+                                </div>
+                            ) : <em>None</em>
+                        )}
+                    >
+                        {brandOptions.map((option) => (
+                            <MenuItem key={option} value={option}>
+                                {option}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+
+                {/* Multi-Select for Segment */}
+                <FormControl style={{ marginRight: '20px', width: '150px' }}>
+                    <InputLabel>Segment</InputLabel>
+                    <Select
+                        multiple
+                        value={segment || []} // Ensure value is always an array
+                        onChange={(e) => setSegment(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
+                        input={<OutlinedInput label="Segment" />}
+                        renderValue={(selected) => (
+                            Array.isArray(selected) && selected.length > 0 ? (
+                                <div>
+                                    {selected.map((value) => (
+                                        <Chip key={value} label={value} />
+                                    ))}
+                                </div>
+                            ) : <em>None</em>
+                        )}
+                    >
+                        {segmentOptions.map((option) => (
+                            <MenuItem key={option} value={option}>
+                                {option}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+
+                {/* Multi-Select for Dealer Code */}
+                <FormControl style={{ marginRight: '20px', width: '150px' }}>
+                    <InputLabel>Dealer Code</InputLabel>
+                    <Select
+                        multiple
+                        value={dealerCode || []} // Ensure value is always an array
+                        onChange={(e) => setDealerCode(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
+                        input={<OutlinedInput label="Dealer Code" />}
+                        renderValue={(selected) => (
+                            Array.isArray(selected) && selected.length > 0 ? (
+                                <div>
+                                    {selected.map((value) => (
+                                        <Chip key={value} label={value} />
+                                    ))}
+                                </div>
+                            ) : <em>None</em>
+                        )}
+                    >
+                        {dealerOptions.map((option) => (
+                            <MenuItem key={option} value={option}>
+                                {option}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
 
                 <Button variant="outlined" color="secondary" onClick={handleClearFilters} style={{ marginLeft: '10px' }}>
                     Clear Filters

@@ -23,14 +23,12 @@ function ExtractionOverview() {
     const [dealerCode, setDealerCode] = useState([]);
     const [tse, setTse] = useState([]);
     const [valueToggle, setValueToggle] = useState(true); // Value or Volume
+    const [showShare, setShowShare] = useState(false);  // Add this state for the new toggle
 
     // Dropdown options
     const [segmentOptions, setSegmentOptions] = useState([]);
     const [dealerOptions, setDealerOptions] = useState([]);
     const [tseOptions, setTseOptions] = useState([]);
-
-    const [showShare, setShowShare] = useState(false);  // Add this state for the new toggle
-
 
     // Fetch unique values for segments, dealer codes, and TSEs
     useEffect(() => {
@@ -62,7 +60,7 @@ function ExtractionOverview() {
             const valueVolume = valueToggle ? 'value' : 'volume';
 
             const response = await axios.get(`${backend_url}/extraction/overview-for-admins`, { 
-                params: { ...filters, valueVolume, page, limit: rowsPerPage, showShare: showShare ? 'true' : 'false' }  // Pass 'valueVolume' instead of 'valueToggle'
+                params: { ...filters, valueVolume, page, limit: rowsPerPage, showShare: showShare ? 'true' : 'false' }
             });
 
             setData(response.data.data || []); 
@@ -84,7 +82,7 @@ function ExtractionOverview() {
         if (tse.length) filters.tse = tse;
         filters.valueToggle = valueToggle; 
         filters.showShare = showShare;
-    
+
         fetchData(filters);
     }, [startDate, endDate, segment, dealerCode, tse, page, valueToggle, showShare]);
 
@@ -107,6 +105,28 @@ function ExtractionOverview() {
     // Function to format numbers in the Indian system
     const formatNumberIndian = (num) => {
         return num.toLocaleString('en-IN');
+    };
+
+    // Heatmap function for applying colors based on row-wise values
+    const getHeatmapColor = (value, minValue, maxValue) => {
+        if (maxValue === minValue) return 'rgba(255, 255, 255, 0.5)';  // Avoid division by zero if values are all the same
+
+        const normalizedValue = (value - minValue) / (maxValue - minValue);  // Normalize the value between 0 and 1
+
+        // Progressive color stops for enhanced contrast:
+        // 0-50%: Green -> Yellow
+        // 50-100%: Yellow -> Red
+        const r = normalizedValue < 0.5 ? Math.floor(normalizedValue * 510) : 255;  // Red intensifies in the second half
+        const g = normalizedValue < 0.5 ? 255 : Math.floor(255 - (normalizedValue - 0.5) * 510);  // Green decreases after mid-range
+        return `rgba(${r}, ${g}, 0, 0.6)`;  // Color gradient from green (low) to yellow (mid) to red (high)
+    };
+
+    // Function to handle rank coloring
+    const getRankColor = (rank) => {
+        if (rank === 1) return 'rgba(255, 8, 8, 0.6)'; // red for 1
+        if (rank === 2) return 'rgba(255, 165, 0, 0.6)';   // orange for rank 2
+        if (rank === 3) return 'rgba(255, 255, 102, 0.6)';  // Light yellow for rank 3
+        return 'rgba(102, 255, 10, 0.5)';                   // Light green for other ranks
     };
 
     // Ensure data is not empty and properly formatted
@@ -196,7 +216,7 @@ function ExtractionOverview() {
                     label={valueToggle ? 'Value' : 'Volume'}
                 />
 
-                {/* Show share toggle  */}
+                {/* Show share toggle */}
                 <FormControlLabel
                     control={<Switch checked={showShare} onChange={() => setShowShare(!showShare)} />}
                     label={showShare ? 'Show Actual Values' : 'Show Shares (%)'}
@@ -215,24 +235,41 @@ function ExtractionOverview() {
             {/* Data Table */}
             {!loading && rows.length > 0 && (
                 <Paper>
-                    <Table stickyHeader className="scrollable-table">
+                    <Table stickyHeader className="scrollable-table" style={{backgroundColor : '#F0EADE'}}>
                         <TableHead>
                             <TableRow className="sticky-header">
                                 {columns.map((column, index) => (
-                                    <TableCell key={index}>{column}</TableCell>
+                                    <TableCell key={index} style={{ fontWeight: 'bold', backgroundColor: '#F0EADE' }}>{column}</TableCell>
                                 ))}
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row, index) => (
-                                <TableRow key={index}>
-                                    {columns.map((col, i) => (
-                                        <TableCell key={i}>
-                                            {typeof row[col] === 'number' ? formatNumberIndian(row[col]) : row[col]}
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            ))}
+                            {rows.map((row, index) => {
+                                // Find the min and max values for this row (excluding Rank)
+                                const rowValues = columns
+                                    .filter(col => col !== 'Price Class' && col !== 'Rank of Samsung')
+                                    .map(col => row[col]);
+                                const minValue = Math.min(...rowValues);
+                                const maxValue = Math.max(...rowValues);
+
+                                return (
+                                    <TableRow key={index}>
+                                        {columns.map((col, i) => (
+                                            <TableCell
+                                                key={i}
+                                                style={{
+                                                    fontWeight: col === 'Price Class' ? 'bold' : 'normal',  // Bold for "Price Class" column
+                                                    backgroundColor: col === 'Rank of Samsung'
+                                                        ? getRankColor(row[col])
+                                                        : getHeatmapColor(row[col], minValue, maxValue)
+                                                }}
+                                            >
+                                                {typeof row[col] === 'number' ? formatNumberIndian(row[col]) : row[col]}
+                                            </TableCell>
+                                        ))}
+                                    </TableRow>
+                                );
+                            })}
                         </TableBody>
                     </Table>
                 </Paper>

@@ -29,6 +29,9 @@ function ExtractionOverview() {
     const [dealerOptions, setDealerOptions] = useState([]);
     const [tseOptions, setTseOptions] = useState([]);
 
+    const [showShare, setShowShare] = useState(false);  // Add this state for the new toggle
+
+
     // Fetch unique values for segments, dealer codes, and TSEs
     useEffect(() => {
         const fetchDropdownData = async () => {
@@ -59,7 +62,7 @@ function ExtractionOverview() {
             const valueVolume = valueToggle ? 'value' : 'volume';
 
             const response = await axios.get(`${backend_url}/extraction/overview-for-admins`, { 
-                params: { ...filters, valueVolume, page, limit: rowsPerPage }  // Pass 'valueVolume' instead of 'valueToggle'
+                params: { ...filters, valueVolume, page, limit: rowsPerPage, showShare: showShare ? 'true' : 'false' }  // Pass 'valueVolume' instead of 'valueToggle'
             });
 
             setData(response.data.data || []); 
@@ -80,9 +83,10 @@ function ExtractionOverview() {
         if (dealerCode.length) filters.dealerCode = dealerCode; 
         if (tse.length) filters.tse = tse;
         filters.valueToggle = valueToggle; 
+        filters.showShare = showShare;
     
         fetchData(filters);
-    }, [startDate, endDate, segment, dealerCode, tse, page, valueToggle]);
+    }, [startDate, endDate, segment, dealerCode, tse, page, valueToggle, showShare]);
 
     // Clear filters and fetch all data
     const handleClearFilters = () => {
@@ -111,10 +115,10 @@ function ExtractionOverview() {
 
     return (
         <div>
-            <h2>Extraction Overview for Admins</h2>
+            <h2>Extraction Overview</h2>
 
             {/* Filters Section */}
-            <div style={{ marginBottom: '20px' }}>
+            <div style={{ marginBottom: '20px', marginTop: '40px' }}>
                 <TextField
                     label="Start Date"
                     type="date"
@@ -190,6 +194,13 @@ function ExtractionOverview() {
                 <FormControlLabel
                     control={<Switch checked={valueToggle} onChange={() => setValueToggle(!valueToggle)} />}
                     label={valueToggle ? 'Value' : 'Volume'}
+                />
+
+                {/* Show share toggle  */}
+                <FormControlLabel
+                    control={<Switch checked={showShare} onChange={() => setShowShare(!showShare)} />}
+                    label={showShare ? 'Show Actual Values' : 'Show Shares (%)'}
+                    style={{ marginRight: '20px' }}
                 />
 
                 <Button variant="outlined" color="secondary" onClick={handleClearFilters} style={{ marginLeft: '10px' }}>

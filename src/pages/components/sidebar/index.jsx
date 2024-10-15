@@ -1,11 +1,14 @@
 import React from 'react';
-import { CSidebar, CSidebarBrand, CSidebarHeader, CSidebarNav, CNavItem, CNavTitle, CNavGroup, CBadge, CSidebarToggler } from '@coreui/react';
+import { CSidebar, CSidebarBrand, CSidebarHeader, CSidebarNav, CNavItem, CNavTitle, CNavGroup, CSidebarToggler } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
-import { cilSpeedometer, cilPuzzle, cilCloudDownload, cilLayers, cilBarChart, cilCreditCard, cilLineStyle, cilGraph, cilVector, cilViewQuilt } from '@coreui/icons';
+import { cilBarChart, cilCreditCard, cilGraph, cilVector, cilViewQuilt, cilLockLocked } from '@coreui/icons';
 import '@coreui/coreui/dist/css/coreui.min.css';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Sidebar({ isSidebarOpen, toggleSidebar }) {
+    const navigate = useNavigate(); // useNavigate hook for redirection
+
+
     return (
         <CSidebar unfoldable className={`border-end ${isSidebarOpen ? '' : 'collapsed'}`}>
             <CSidebarHeader className="border-bottom">
@@ -43,29 +46,11 @@ function Sidebar({ isSidebarOpen, toggleSidebar }) {
                 <CNavItem href="/segment-analysis">
                     <CIcon customClassName="nav-icon" icon={cilViewQuilt} /> GFK Dashboard
                 </CNavItem>
+                <CNavItem href="/logout">
+                    <CIcon customClassName="nav-icon" icon={cilLockLocked} /> Logout
+                </CNavItem>
 
                 
-                <CNavGroup
-                    toggler={
-                        <>
-                            <CIcon customClassName="nav-icon" icon={cilPuzzle} /> More Reports
-                        </>
-                    }
-                >
-                    <CNavItem href="/additional-report-1">
-                        <span className="nav-icon"><span className="nav-icon-bullet"></span></span> Additional Report 1
-                    </CNavItem>
-                    <CNavItem href="/additional-report-2">
-                        <span className="nav-icon"><span className="nav-icon-bullet"></span></span> Additional Report 2
-                    </CNavItem>
-                </CNavGroup>
-                
-                {/* <CNavItem href="https://coreui.io">
-                    <CIcon customClassName="nav-icon" icon={cilCloudDownload} /> Download CoreUI
-                </CNavItem>
-                <CNavItem href="https://coreui.io/pro/">
-                    <CIcon customClassName="nav-icon" icon={cilLayers} /> Try CoreUI PRO
-                </CNavItem> */}
             </CSidebarNav>
         </CSidebar>
     );

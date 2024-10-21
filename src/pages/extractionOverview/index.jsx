@@ -22,6 +22,15 @@ function ExtractionOverview() {
     const [segment, setSegment] = useState([]); 
     const [dealerCode, setDealerCode] = useState([]);
     const [tse, setTse] = useState([]);
+    const [type, setType] = useState([]);
+    const [area, setArea] = useState([]);
+    const [tlName, setTlName] = useState([]);
+    const [abm, setAbm] = useState([]);
+    const [ase, setAse] = useState([]);
+    const [asm, setAsm] = useState([]);
+    const [rso, setRso] = useState([]);
+    const [zsm, setZsm] = useState([]);
+
     const [valueToggle, setValueToggle] = useState(true); // Value or Volume
     const [showShare, setShowShare] = useState(false);  // Add this state for the new toggle
 
@@ -29,6 +38,14 @@ function ExtractionOverview() {
     const [segmentOptions, setSegmentOptions] = useState([]);
     const [dealerOptions, setDealerOptions] = useState([]);
     const [tseOptions, setTseOptions] = useState([]);
+    const [typeOptions, setTypeOptions] = useState([]);
+    const [areaOptions, setAreaOptions] = useState([]);
+    const [tlNameOptions, setTlNameOptions] = useState([]);
+    const [abmOptions, setAbmOptions] = useState([]);
+    const [aseOptions, setAseOptions] = useState([]);
+    const [asmOptions, setAsmOptions] = useState([]);
+    const [rsoOptions, setRsoOptions] = useState([]);
+    const [zsmOptions, setZsmOptions] = useState([]);
 
     // Fetch unique values for segments, dealer codes, and TSEs
     useEffect(() => {
@@ -42,6 +59,31 @@ function ExtractionOverview() {
 
                 const tseResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=uploadedBy`);
                 setTseOptions(tseResponse.data.uniqueValues || []);
+
+                const typeResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=TYPE`);
+                setTypeOptions(typeResponse.data.uniqueValues || []);
+                console.log("Type Optioms: ", typeOptions)
+
+                const areaResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=Area`);
+                setAreaOptions(areaResponse.data.uniqueValues || []);
+
+                const tlNameResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=TL NAME`);
+                setTlNameOptions(tlNameResponse.data.uniqueValues || []);
+
+                const abmResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=ABM`);
+                setAbmOptions(abmResponse.data.uniqueValues || []);
+
+                const aseResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=ASE`);
+                setAseOptions(aseResponse.data.uniqueValues || []);
+
+                const asmResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=ASM`);
+                setAsmOptions(asmResponse.data.uniqueValues || []);
+
+                const rsoResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=RSO`);
+                setRsoOptions(rsoResponse.data.uniqueValues || []);
+
+                const zsmResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=ZSM`);
+                setZsmOptions(zsmResponse.data.uniqueValues || []);
             } catch (err) {
                 console.error('Error fetching dropdown data:', err);
             }
@@ -80,11 +122,20 @@ function ExtractionOverview() {
         if (segment.length) filters.segment = segment; 
         if (dealerCode.length) filters.dealerCode = dealerCode; 
         if (tse.length) filters.tse = tse;
+        if (type.length) filters.type = type;
+        if (area.length) filters.area = area;
+        if (tlName.length) filters.tlName = tlName;
+        if (abm.length) filters.abm = abm;
+        if (ase.length) filters.ase = ase;
+        if (asm.length) filters.asm = asm;
+        if (rso.length) filters.rso = rso;
+        if (zsm.length) filters.zsm = zsm;
+
         filters.valueToggle = valueToggle; 
         filters.showShare = showShare;
 
         fetchData(filters);
-    }, [startDate, endDate, segment, dealerCode, tse, page, valueToggle, showShare]);
+    }, [startDate, endDate, segment, dealerCode, tse, type, area, tlName, abm, ase, asm, rso, zsm, page, valueToggle, showShare]);
 
     // Clear filters and fetch all data
     const handleClearFilters = () => {
@@ -223,7 +274,183 @@ function ExtractionOverview() {
                     style={{ marginRight: '20px' }}
                 />
 
-                <Button variant="outlined" color="secondary" onClick={handleClearFilters} style={{ marginLeft: '10px' }}>
+<div style={{ display: 'flex', marginTop: '20px' }}>
+                    <FormControl style={{ marginRight: '20px', width: '150px' }}>
+                        <InputLabel>Dealer Code</InputLabel>
+                        <Select
+                            multiple
+                            value={dealerCode}
+                            onChange={(e) => setDealerCode(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
+                            input={<OutlinedInput label="Dealer Code" />}
+                            renderValue={(selected) => selected.length > 0 ? (
+                                <div>{selected.map((value) => <Chip key={value} label={value} />)}</div>
+                            ) : <em>None</em>}
+                        >
+                            {dealerOptions.map((option) => (
+                                <MenuItem key={option} value={option}>{option}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
+                    <FormControl style={{ marginRight: '20px', width: '150px' }}>
+                        <InputLabel>TSE</InputLabel>
+                        <Select
+                            multiple
+                            value={tse}
+                            onChange={(e) => setTse(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
+                            input={<OutlinedInput label="TSE" />}
+                            renderValue={(selected) => selected.length > 0 ? (
+                                <div>{selected.map((value) => <Chip key={value} label={value} />)}</div>
+                            ) : <em>None</em>}
+                        >
+                            {tseOptions.map((option) => (
+                                <MenuItem key={option} value={option}>{option}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
+                    {/* Multi-Selects for Additional Filters */}
+                    <FormControl style={{ marginRight: '20px', width: '150px' }}>
+                        <InputLabel>Type</InputLabel>
+                        <Select
+                            multiple
+                            value={type}
+                            onChange={(e) => setType(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
+                            input={<OutlinedInput label="Type" />}
+                            renderValue={(selected) => selected.length > 0 ? (
+                                <div>{selected.map((value) => <Chip key={value} label={value} />)}</div>
+                            ) : <em>None</em>}
+                        >
+                            {typeOptions.map((option) => (
+                                <MenuItem key={option} value={option}>{option}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
+                    <FormControl style={{ marginRight: '20px', width: '150px' }}>
+                        <InputLabel>Area</InputLabel>
+                        <Select
+                            multiple
+                            value={area}
+                            onChange={(e) => setArea(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
+                            input={<OutlinedInput label="Area" />}
+                            renderValue={(selected) => selected.length > 0 ? (
+                                <div>{selected.map((value) => <Chip key={value} label={value} />)}</div>
+                            ) : <em>None</em>}
+                        >
+                            {areaOptions.map((option) => (
+                                <MenuItem key={option} value={option}>{option}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
+                    <FormControl style={{ marginRight: '20px', width: '150px' }}>
+                        <InputLabel>TL Name</InputLabel>
+                        <Select
+                            multiple
+                            value={tlName}
+                            onChange={(e) => setTlName(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
+                            input={<OutlinedInput label="TL Name" />}
+                            renderValue={(selected) => selected.length > 0 ? (
+                                <div>{selected.map((value) => <Chip key={value} label={value} />)}</div>
+                            ) : <em>None</em>}
+                        >
+                            {tlNameOptions.map((option) => (
+                                <MenuItem key={option} value={option}>{option}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
+                    <FormControl style={{ marginRight: '20px', width: '150px' }}>
+                        <InputLabel>ABM</InputLabel>
+                        <Select
+                            multiple
+                            value={abm}
+                            onChange={(e) => setAbm(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
+                            input={<OutlinedInput label="ABM" />}
+                            renderValue={(selected) => selected.length > 0 ? (
+                                <div>{selected.map((value) => <Chip key={value} label={value} />)}</div>
+                            ) : <em>None</em>}
+                        >
+                            {abmOptions.map((option) => (
+                                <MenuItem key={option} value={option}>{option}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
+                    <FormControl style={{ marginRight: '20px', width: '150px' }}>
+                        <InputLabel>ASE</InputLabel>
+                        <Select
+                            multiple
+                            value={ase}
+                            onChange={(e) => setAse(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
+                            input={<OutlinedInput label="ASE" />}
+                            renderValue={(selected) => selected.length > 0 ? (
+                                <div>{selected.map((value) => <Chip key={value} label={value} />)}</div>
+                            ) : <em>None</em>}
+                        >
+                            {aseOptions.map((option) => (
+                                <MenuItem key={option} value={option}>{option}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
+                    <FormControl style={{ marginRight: '20px', width: '150px' }}>
+                        <InputLabel>ASM</InputLabel>
+                        <Select
+                            multiple
+                            value={asm}
+                            onChange={(e) => setAsm(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
+                            input={<OutlinedInput label="ASM" />}
+                            renderValue={(selected) => selected.length > 0 ? (
+                                <div>{selected.map((value) => <Chip key={value} label={value} />)}</div>
+                            ) : <em>None</em>}
+                        >
+                            {asmOptions.map((option) => (
+                                <MenuItem key={option} value={option}>{option}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
+                    <FormControl style={{ marginRight: '20px', width: '150px' }}>
+                        <InputLabel>RSO</InputLabel>
+                        <Select
+                            multiple
+                            value={rso}
+                            onChange={(e) => setRso(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
+                            input={<OutlinedInput label="RSO" />}
+                            renderValue={(selected) => selected.length > 0 ? (
+                                <div>{selected.map((value) => <Chip key={value} label={value} />)}</div>
+                            ) : <em>None</em>}
+                        >
+                            {rsoOptions.map((option) => (
+                                <MenuItem key={option} value={option}>{option}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
+                    <FormControl style={{ marginRight: '20px', width: '150px' }}>
+                        <InputLabel>ZSM</InputLabel>
+                        <Select
+                            multiple
+                            value={zsm}
+                            onChange={(e) => setZsm(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
+                            input={<OutlinedInput label="ZSM" />}
+                            renderValue={(selected) => selected.length > 0 ? (
+                                <div>{selected.map((value) => <Chip key={value} label={value} />)}</div>
+                            ) : <em>None</em>}
+                        >
+                            {zsmOptions.map((option) => (
+                                <MenuItem key={option} value={option}>{option}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
+                    {/* Repeat similar blocks for Area, TL Name, ABM, ASE, ASM, RSO, and ZSM */}
+                </div>
+
+
+                <Button variant="outlined" color="secondary" onClick={handleClearFilters} style={{ marginTop: '20px' }}>
                     Clear Filters
                 </Button>
             </div>

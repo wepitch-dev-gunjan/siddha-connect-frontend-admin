@@ -104,8 +104,9 @@ function ExtractionOverview() {
             const response = await axios.get(`${backend_url}/extraction/overview-for-admins`, { 
                 params: { ...filters, valueVolume, page, limit: rowsPerPage, showShare: showShare ? 'true' : 'false' }
             });
-
+            console.log("REEs: ", response);
             setData(response.data.data || []); 
+            console.log("DaatA: ", response.data.data)
             setTotalRecords(response.data.totalRecords || 0); 
             setLoading(false);
         } catch (err) {
@@ -144,6 +145,14 @@ function ExtractionOverview() {
         setSegment([]);
         setDealerCode([]);
         setTse([]);
+        setType([]);
+        setArea([]);
+        setTlName([]);
+        setAbm([]);
+        setAse([]);
+        setAsm([]);
+        setRso([]);
+        setZsm([]);
         setPage(1);
         fetchData();
     };

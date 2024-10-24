@@ -35,6 +35,9 @@ function Sidebar({ isSidebarOpen, toggleSidebar }) {
                     <CNavItem href="/extraction-overview">
                         <span className="nav-icon"><span className="nav-icon-bullet"></span></span> Overview
                     </CNavItem>
+                    <CNavItem href="/extraction-graphs">
+                        <span className="nav-icon"><span className="nav-icon-bullet"></span></span> Graphs
+                    </CNavItem>
                     <CNavItem href="/extraction-report">
                         <span className="nav-icon"><span className="nav-icon-bullet"></span></span> Detailed report
                     </CNavItem>

@@ -20,6 +20,7 @@ function ExtractionModelWise() {
 
     // Filter states
     const [brand, setBrand] = useState([]);
+    const [model, setModel] = useState([]);
     const [segment, setSegment] = useState([]);
     const [area, setArea] = useState([]);
     const [zsm, setZsm] = useState([]);
@@ -36,6 +37,7 @@ function ExtractionModelWise() {
 
     // Options for each dropdown
     const [brandOptions, setBrandOptions] = useState([]);
+    const [modelOptions, setModelOptions] = useState([]);
     const [segmentOptions, setSegmentOptions] = useState([]);
     const [areaOptions, setAreaOptions] = useState([]);
     const [zsmOptions, setZsmOptions] = useState([]);
@@ -52,6 +54,9 @@ function ExtractionModelWise() {
             try {
                 const brandResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=productId.Brand`);
                 setBrandOptions(brandResponse.data.uniqueValues || []);
+
+                const modelResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=productId.Model`);
+                setModelOptions(modelResponse.data.uniqueValues || []);
 
                 const segmentResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=productId.Segment`);
                 setSegmentOptions(segmentResponse.data.uniqueValues || []);
@@ -115,6 +120,7 @@ function ExtractionModelWise() {
             startDate,
             endDate,
             brand,
+            model,
             segment,
             area,
             zsm,
@@ -129,12 +135,13 @@ function ExtractionModelWise() {
         };
         
         fetchData(filters);
-    }, [startDate, endDate, brand, segment, area, zsm, rso, asm, ase, abm, tse, dealerCode, type, page, valueToggle, showShare]);
+    }, [startDate, endDate, brand, model, segment, area, zsm, rso, asm, ase, abm, tse, dealerCode, type, page, valueToggle, showShare]);
 
     const handleClearFilters = () => {
         setStartDate('');
         setEndDate('');
         setBrand([]);
+        setModel([]);
         setSegment([]);
         setArea([]);
         setZsm([]);
@@ -153,19 +160,25 @@ function ExtractionModelWise() {
         setPage(value);
     };
 
+    // Function to format values with Indian number format
+    const formatNumberIndian = (num) => {
+        return num.toLocaleString('en-IN');
+    };
+
     const columns = ['Serial Number', 'Brand', 'Model', 'Value', 'Volume', 'Segment'];
     const rows = Array.isArray(data) && data.length > 0 ? data : [];
 
     return (
         <div>
-            <h2>Extraction Model Wise Overview</h2>
+            <h2>Extraction | Model Wise</h2>
 
             <div style={{ marginBottom: '20px', marginTop: '40px' }}>
-                <TextField label="Start Date" type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} InputLabelProps={{ shrink: true }} style={{ marginRight: '20px' }} />
-                <TextField label="End Date" type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} InputLabelProps={{ shrink: true }} style={{ marginRight: '20px' }} />
+                <TextField label="Start Date" type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} InputLabelProps={{ shrink: true }} style={{ marginRight: '20px', marginTop: '20px' }} />
+                <TextField label="End Date" type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} InputLabelProps={{ shrink: true }} style={{ marginRight: '20px', marginTop: '20px' }} />
 
                 {[
                     { label: "Brand", value: brand, setValue: setBrand, options: brandOptions },
+                    { label: "Model", value: model, setValue: setModel, options: modelOptions },
                     { label: "Segment", value: segment, setValue: setSegment, options: segmentOptions },
                     { label: "Area", value: area, setValue: setArea, options: areaOptions },
                     { label: "ZSM", value: zsm, setValue: setZsm, options: zsmOptions },
@@ -177,7 +190,7 @@ function ExtractionModelWise() {
                     { label: "Dealer Code", value: dealerCode, setValue: setDealerCode, options: dealerOptions },
                     { label: "Type", value: type, setValue: setType, options: typeOptions },
                 ].map(({ label, value, setValue, options }, idx) => (
-                    <FormControl key={idx} style={{ marginRight: '20px', minWidth: 150 }}>
+                    <FormControl key={idx} style={{ marginRight: '20px', minWidth: 150, marginTop: '20px' }}>
                         <InputLabel>{label}</InputLabel>
                         <Select
                             multiple
@@ -214,8 +227,8 @@ function ExtractionModelWise() {
                                     <TableCell>{row.serialNumber}</TableCell>
                                     <TableCell>{row.Brand}</TableCell>
                                     <TableCell>{row.Model}</TableCell>
-                                    <TableCell>{row.Value}</TableCell>
-                                    <TableCell>{row.Volume}</TableCell>
+                                    <TableCell>{formatNumberIndian(row.Value)}</TableCell>
+                                    <TableCell>{formatNumberIndian(row.Volume)}</TableCell>
                                     <TableCell>{row.Segment}</TableCell>
                                 </TableRow>
                             ))}

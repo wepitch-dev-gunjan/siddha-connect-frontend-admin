@@ -12,6 +12,7 @@ import Login from './pages/login';
 import PrivateRoute from './pages/components/privateRoute'; // Import the PrivateRoute component
 import Logout from './pages/logout';
 import ExtractionGraphs from './pages/extractionGraphs';
+import ExtractionModelWise from './pages/extractionModelWise';
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                         <Route path="/extraction-report" element={<PrivateRoute element={ExtractionReport} />} />
                         <Route path="/extraction-overview" element={<PrivateRoute element={ExtractionOverview} />} />
                         <Route path="/extraction-graphs" element={<PrivateRoute element={ExtractionGraphs} />} />
+                        <Route path="/extraction-model-wise" element={<PrivateRoute element={ExtractionModelWise} /> } />
 
                         <Route path="/logout" element={<Logout />} />
                     </Routes>

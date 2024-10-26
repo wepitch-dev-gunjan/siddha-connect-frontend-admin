@@ -79,7 +79,7 @@ function ExtractionModelWise() {
                 const abmResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=ABM`);
                 setAbmOptions(abmResponse.data.uniqueValues || []);
 
-                const tseResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=TSE`);
+                const tseResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=uploadedBy`);
                 setTseOptions(tseResponse.data.uniqueValues || []);
 
                 const dealerResponse = await axios.get(`${backend_url}/extraction/unique-column-values?column=dealerCode`);

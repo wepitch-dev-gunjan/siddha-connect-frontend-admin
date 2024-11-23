@@ -234,41 +234,6 @@ function ExtractionOverview() {
                     </Select>
                 </FormControl>
 
-                {/* Multi-Select for Dealer Code */}
-                <FormControl style={{ marginRight: '20px', width: '150px' }}>
-                    <InputLabel>Dealer Code</InputLabel>
-                    <Select
-                        multiple
-                        value={dealerCode}
-                        onChange={(e) => setDealerCode(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
-                        input={<OutlinedInput label="Dealer Code" />}
-                        renderValue={(selected) => selected.length > 0 ? (
-                            <div>{selected.map((value) => <Chip key={value} label={value} />)}</div>
-                        ) : <em>None</em>}
-                    >
-                        {dealerOptions.map((option) => (
-                            <MenuItem key={option} value={option}>{option}</MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-
-                {/* Multi-Select for TSE */}
-                <FormControl style={{ marginRight: '20px', width: '150px' }}>
-                    <InputLabel>TSE</InputLabel>
-                    <Select
-                        multiple
-                        value={tse}
-                        onChange={(e) => setTse(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
-                        input={<OutlinedInput label="TSE" />}
-                        renderValue={(selected) => selected.length > 0 ? (
-                            <div>{selected.map((value) => <Chip key={value} label={value} />)}</div>
-                        ) : <em>None</em>}
-                    >
-                        {tseOptions.map((option) => (
-                            <MenuItem key={option} value={option}>{option}</MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
 
                 {/* Value/Volume Toggle */}
                 <FormControlLabel

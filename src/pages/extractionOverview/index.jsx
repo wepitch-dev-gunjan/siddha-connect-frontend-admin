@@ -318,7 +318,7 @@ function ExtractionOverview() {
                         </Select>
                     </FormControl>
 
-                    <FormControl style={{ marginRight: '20px', width: '150px' }}>
+                    {/* <FormControl style={{ marginRight: '20px', width: '150px' }}>
                         <InputLabel>TL Name</InputLabel>
                         <Select
                             multiple
@@ -333,7 +333,7 @@ function ExtractionOverview() {
                                 <MenuItem key={option} value={option}>{option}</MenuItem>
                             ))}
                         </Select>
-                    </FormControl>
+                    </FormControl> */}
 
                     <FormControl style={{ marginRight: '20px', width: '150px' }}>
                         <InputLabel>ABM</InputLabel>

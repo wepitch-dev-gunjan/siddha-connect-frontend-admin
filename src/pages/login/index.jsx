@@ -29,7 +29,13 @@ function Login() {
     try {
       const response = await axios.post(`${backend_url}/login`, { role, code, password });
       localStorage.setItem("token", response.data.token);
-      navigate("/extraction-overview");
+      
+      if (role === "dealer"){
+        navigate("/dealer-dashboard/finance")
+      } else {
+        navigate("/extraction-overview")
+      }
+
     } catch (err) {
       setError(err.response?.data?.error || "Something went wrong");
     }
